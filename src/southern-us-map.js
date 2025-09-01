@@ -495,17 +495,23 @@ SouthernUSMap.prototype.loadMapData = function () {
 
             // Add lifting effect - move up and left with shadow
             if (layer._path) {
-              // Force reset to ensure clean animation start
+              // Temporarily disable transitions to reset without animation
+              const originalTransition = layer._path.style.transition;
+              layer._path.style.transition = "none";
+
+              // Reset to baseline immediately
               layer._path.style.transform = "translate(0px, 0px) scale(1)";
               layer._path.style.filter = "none";
 
-              // Use requestAnimationFrame to ensure the reset is applied before animation
-              requestAnimationFrame(() => {
-                layer._path.style.transform =
-                  "translate(-16px, -32px) scale(1.03)";
-                layer._path.style.filter =
-                  "drop-shadow(6px 8px 16px rgba(0, 67, 122, 0.4))";
-              });
+              // Force reflow to ensure reset is applied
+              layer._path.offsetHeight;
+
+              // Re-enable transitions and animate to hover state
+              layer._path.style.transition = originalTransition;
+              layer._path.style.transform =
+                "translate(-24px, -16px) scale(1.03)";
+              layer._path.style.filter =
+                "drop-shadow(6px 8px 16px rgba(0, 67, 122, 0.4))";
             }
           });
 
@@ -551,7 +557,7 @@ SouthernUSMap.prototype.loadMapData = function () {
           ) {
             // Set consistent, smooth transition for hover effects
             layer._path.style.transition =
-              "all 0.3s cubic-bezier(0.2, 0.65, 0.3, 0.9)";
+              "all 0.35s cubic-bezier(0.35, 0.65, 0.3, 0.9)";
             layer._path.style.transform = "translate(0px, 0px) scale(1)";
             layer._path.style.filter = "none";
           }
