@@ -94,7 +94,7 @@
       }
 
       .modal-header {
-        background: linear-gradient(135deg, #0078a8, #005a7a);
+        background: #00437a;
         color: white;
         padding: 20px;
         border-radius: 10px 10px 0 0;
@@ -177,20 +177,20 @@
       }
 
       .cta-button {
-        background: linear-gradient(135deg, #ff6b35, #f7931e);
+        background: #fbba00;
         color: white;
         border: none;
-        padding: 15px 30px;
+        padding: 14px 32px;
         font-size: 16px;
-        border-radius: 25px;
+        border-radius: 100px;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
-        font-weight: 700; /* Bold weight for button */
+        font-weight: 700;
+        text-transform: uppercase;
       }
 
       .cta-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
+        background: #fcc833;
       }
     </style>
   </head>
@@ -242,11 +242,11 @@
           [28, -95], // SW
           [37, -75], // NE
         ],
-      }).setView([33, -85], 7);
+      }).setView([33, -85], 6);
 
-      // Label-free base map
+      // Minimal base map - no roads, no labels
       L.tileLayer(
-        "https://{s}.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{r}.png",
+        "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
         {
           attribution: "&copy; OpenStreetMap contributors",
         }
