@@ -238,19 +238,15 @@ SouthernUSMap.prototype.injectCSS = function () {
       /* Mobile optimizations */
       @media (max-width: 768px) {
         .southern-us-modal-content {
-          margin: 0;
-          width: 100%;
-          height: 100vh;
+          margin: 3% auto;
+          width: 95%;
           max-width: none;
-          border-radius: 0;
-          display: flex;
-          flex-direction: column;
+          max-height: 90vh;
+          overflow-y: auto;
         }
 
         .southern-us-modal-header {
           padding: 15px 20px;
-          flex-shrink: 0;
-          border-radius: 0;
         }
 
         .southern-us-modal-header h2 {
@@ -264,10 +260,6 @@ SouthernUSMap.prototype.injectCSS = function () {
 
         .southern-us-modal-body {
           padding: 18px;
-          flex: 1;
-          overflow-y: auto;
-          display: flex;
-          flex-direction: column;
         }
 
         .southern-us-flag-section {
@@ -309,16 +301,9 @@ SouthernUSMap.prototype.injectCSS = function () {
           font-size: 13px;
         }
 
-        .southern-us-cta-section {
-          margin-top: auto;
-          padding-top: 18px;
-          flex-shrink: 0;
-        }
-
         .southern-us-cta-button {
           padding: 14px 28px;
           font-size: 16px;
-          width: 100%;
         }
       }
     `;
