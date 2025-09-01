@@ -43,7 +43,7 @@ SouthernUSMap.prototype.injectCSS = function () {
       .southern-us-map {
         height: 100%;
         width: 100%;
-        font-family: "Gotham", "Helvetica Neue", Arial, sans-serif;
+        font-family: "Gotham", sans-serif;
         font-weight: 400;
         perspective: 1000px;
         transform-style: preserve-3d;
@@ -80,7 +80,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.5);
-        font-family: "Gotham", "Helvetica Neue", Arial, sans-serif;
+        font-family: "Gotham", sans-serif;
         font-weight: 400;
       }
 
@@ -481,7 +481,7 @@ SouthernUSMap.prototype.loadMapData = function () {
           fillColor: "#00437a",
         },
         onEachFeature: (feature, layer) => {
-          // Add hover effects with 3D popout
+          // Add hover effects with lifting animation
           layer.on("mouseover", (e) => {
             const layer = e.target;
 
@@ -493,11 +493,12 @@ SouthernUSMap.prototype.loadMapData = function () {
             });
             layer.bringToFront();
 
-            // Add 3D effect - transitions are already set up
+            // Add lifting effect - move up and left with shadow
             if (layer._path) {
-              layer._path.style.transform = "translateZ(10px) scale(1.02)";
+              layer._path.style.transform =
+                "translate(-16px, -16px) scale(1.03)";
               layer._path.style.filter =
-                "drop-shadow(-6px -6px 12px rgba(0, 67, 122, 0.3))";
+                "drop-shadow(6px 8px 16px rgba(0, 67, 122, 0.4))";
             }
           });
 
@@ -510,21 +511,10 @@ SouthernUSMap.prototype.loadMapData = function () {
               fillColor: "#00437a",
             });
 
-            // Reset 3D effect with smooth ease-out
+            // Reset lifting effect
             if (layer._path) {
-              layer._path.style.transform = "translateZ(0px) scale(1)";
+              layer._path.style.transform = "translate(0px, 0px) scale(1)";
               layer._path.style.filter = "none";
-              // Set a slightly slower transition for mouseout only
-              layer._path.style.transition =
-                "all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)";
-
-              // Reset to normal transition after animation completes
-              setTimeout(() => {
-                if (layer._path) {
-                  layer._path.style.transition =
-                    "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-                }
-              }, 500);
             }
           });
 
@@ -544,7 +534,7 @@ SouthernUSMap.prototype.loadMapData = function () {
         },
       }).addTo(this.map);
 
-      // Initialize transitions for all states after they're added to the map
+      // Initialize smooth transitions for all states after they're added to the map
       setTimeout(() => {
         this.map.eachLayer((layer) => {
           if (
@@ -552,9 +542,10 @@ SouthernUSMap.prototype.loadMapData = function () {
             layer.feature &&
             this.stateNames[layer.feature.id]
           ) {
+            // Set consistent, smooth transition for hover effects
             layer._path.style.transition =
-              "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-            layer._path.style.transform = "translateZ(0px) scale(1)";
+              "all 0.3s cubic-bezier(0.2, 0.65, 0.3, 0.9)";
+            layer._path.style.transform = "translate(0px, 0px) scale(1)";
             layer._path.style.filter = "none";
           }
         });
