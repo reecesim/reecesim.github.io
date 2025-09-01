@@ -207,10 +207,10 @@
         boxZoom: false,
         keyboard: false,
         maxBounds: [
-          [24, -105], // SW
+          [28, -95], // SW
           [37, -75], // NE
         ],
-      }).setView([31, -87], 6);
+      }).setView([33, -85], 6);
 
       // Label-free base map
       L.tileLayer(
@@ -222,39 +222,23 @@
 
       // Define state data globally so modal functions can access it
       const stateNames = {
-        1: "Alabama",
-        12: "Florida",
-        13: "Georgia",
+        "01": "Alabama",
         22: "Louisiana",
+        28: "Mississippi",
+        37: "North Carolina",
         45: "South Carolina",
-        48: "Texas",
+        47: "Tennessee",
       };
 
       // Comprehensive state data for modal
       const stateData = {
-        1: {
+        "01": {
           name: "Alabama",
           flag: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Alabama.svg",
           description:
             "Known as the Heart of Dixie, Alabama is famous for its rich Civil Rights history, beautiful Gulf Coast beaches, and southern hospitality.",
           music:
             "Alabama is the birthplace of the legendary country group Alabama and has deep roots in country, blues, and gospel music, with cities like Muscle Shoals being iconic recording destinations that helped shape Southern rock and country music.",
-        },
-        12: {
-          name: "Florida",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Florida.svg",
-          description:
-            "The Sunshine State offers year-round warmth, world-famous theme parks, pristine beaches, and the unique culture of the Everglades.",
-          music:
-            "Florida's music scene blends country with Latin influences and is home to influential country artists like Jake Owen and Chris Young, while also fostering the development of Southern rock through bands like Lynyrd Skynyrd.",
-        },
-        13: {
-          name: "Georgia",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/5/54/Flag_of_Georgia_%28U.S._state%29.svg",
-          description:
-            "Georgia combines historic charm with modern innovation, featuring Atlanta's bustling culture, Savannah's antebellum architecture, and the scenic Blue Ridge Mountains.",
-          music:
-            "Georgia has produced legendary country music stars like Alan Jackson and Travis Tritt, and Atlanta has become a major hub for both country and Southern rock music, with a thriving live music scene.",
         },
         22: {
           name: "Louisiana",
@@ -264,6 +248,22 @@
           music:
             "While famous for jazz and blues, Louisiana has a rich country music heritage with zydeco influences and has produced country stars like Tim McGraw, blending traditional country with the state's unique cultural rhythms.",
         },
+        28: {
+          name: "Mississippi",
+          flag: "https://upload.wikimedia.org/wikipedia/commons/4/42/Flag_of_Mississippi.svg",
+          description:
+            "Mississippi is the birthplace of blues music, home to literary legends, and offers rich Delta culture along the mighty Mississippi River.",
+          music:
+            "Mississippi is the cradle of American music, producing country legends like Faith Hill, Tammy Wynette, and Charley Pride, while its Delta blues tradition deeply influenced country music's emotional storytelling and guitar styles.",
+        },
+        37: {
+          name: "North Carolina",
+          flag: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Flag_of_North_Carolina.svg",
+          description:
+            "North Carolina boasts stunning Blue Ridge Mountains, beautiful Outer Banks coastline, vibrant cities, and a perfect blend of mountain and coastal culture.",
+          music:
+            "North Carolina is home to legendary bluegrass and country artists like Doc Watson and Earl Scruggs, and the state's Appalachian mountain music traditions have profoundly shaped modern country and folk music.",
+        },
         45: {
           name: "South Carolina",
           flag: "https://upload.wikimedia.org/wikipedia/commons/6/69/Flag_of_South_Carolina.svg",
@@ -272,13 +272,13 @@
           music:
             "South Carolina has contributed significantly to country music with artists like Darius Rucker (formerly of Hootie & the Blowfish) and has a strong bluegrass tradition that influences modern country music throughout the region.",
         },
-        48: {
-          name: "Texas",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg",
+        47: {
+          name: "Tennessee",
+          flag: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Tennessee.svg",
           description:
-            "Everything's bigger in Texas, from its sprawling cities and vast landscapes to its rich cowboy heritage, barbecue culture, and independent spirit.",
+            "Tennessee is the heart of country music, home to Nashville and Memphis, offering rich musical heritage, stunning Smoky Mountains, and vibrant cultural attractions.",
           music:
-            "Texas is arguably the heart of country music, producing legends like Willie Nelson, George Strait, and Miranda Lambert, and fostering the distinctive Texas country and Red Dirt music scenes that continue to influence country music worldwide.",
+            "Tennessee is the undisputed capital of country music, home to the Grand Ole Opry, Country Music Hall of Fame, and countless legendary artists from Hank Williams to Dolly Parton, making Nashville the global center of country music production and performance.",
         },
       };
 
@@ -332,20 +332,22 @@
           const geojson = topojson.feature(topoData, topoData.objects.states);
 
           const stateCentroids = {
-            1: [32.5, -86.8],
-            12: [28.6, -82.5],
-            13: [32.6, -83.5],
-            22: [31.0, -92.0],
-            45: [33.8, -80.9],
-            48: [31.0, -99.0],
+            "01": [32.7396, -86.8435], // Alabama
+            22: [31.0, -92.0], // Louisiana
+            28: [32.6, -89.4], // Mississippi
+            37: [35.5, -79.0], // North Carolina
+            45: [33.8, -80.9], // South Carolina
+            47: [35.8, -86.4], // Tennessee
           };
 
           L.geoJSON(geojson, {
-            filter: (feature) => Object.keys(stateNames).includes(feature.id),
+            filter: (feature) =>
+              Object.keys(stateNames).includes(feature.id.toString()),
             style: {
               color: "#0078A8",
-              weight: 2,
-              fillOpacity: 0.1,
+              weight: 3,
+              fillOpacity: 0.15,
+              fillColor: "#0078A8",
             },
             onEachFeature: (feature, layer) => {
               layer.on("click", () => {
@@ -368,12 +370,12 @@
 
           // Add manually-specified cities
           const cities = [
-            { name: "Mobile, AL", coords: [30.6954, -88.0399] },
-            { name: "Savannah, GA", coords: [32.0809, -81.0912] },
+            { name: "Birmingham, AL", coords: [33.5186, -86.8104] },
             { name: "New Orleans, LA", coords: [29.9511, -90.0715] },
-            { name: "Tallahassee, FL", coords: [30.4383, -84.2807] },
+            { name: "Jackson, MS", coords: [32.2988, -90.1848] },
+            { name: "Charlotte, NC", coords: [35.2271, -80.8431] },
             { name: "Charleston, SC", coords: [32.7765, -79.9311] },
-            { name: "El Paso, TX", coords: [31.7619, -106.485] },
+            { name: "Nashville, TN", coords: [36.1627, -86.7816] },
           ];
 
           cities.forEach((city) => {
