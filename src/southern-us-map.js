@@ -238,25 +238,40 @@ SouthernUSMap.prototype.injectCSS = function () {
       /* Mobile optimizations */
       @media (max-width: 768px) {
         .southern-us-modal-content {
-          margin: 2% auto;
-          width: 95%;
+          margin: 0;
+          width: 100%;
+          height: 100vh;
           max-width: none;
+          border-radius: 0;
+          display: flex;
+          flex-direction: column;
         }
 
         .southern-us-modal-header {
-          padding: 15px;
+          padding: 15px 20px;
+          flex-shrink: 0;
+          border-radius: 0;
         }
 
         .southern-us-modal-header h2 {
           font-size: 20px;
         }
 
+        .southern-us-modal-close {
+          right: 20px;
+          top: 15px;
+        }
+
         .southern-us-modal-body {
-          padding: 20px;
+          padding: 18px;
+          flex: 1;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
         }
 
         .southern-us-flag-section {
-          margin-bottom: 15px;
+          margin-bottom: 12px;
         }
 
         .southern-us-state-flag {
@@ -265,27 +280,28 @@ SouthernUSMap.prototype.injectCSS = function () {
         }
 
         .southern-us-description-section {
-          margin-bottom: 15px;
+          margin-bottom: 12px;
         }
 
         .southern-us-description-section h3,
         .southern-us-music-section h3,
         .southern-us-artists-section h3 {
-          font-size: 16px;
+          font-size: 17px;
           margin-bottom: 8px;
         }
 
         .southern-us-description-section p {
           font-size: 14px;
           line-height: 1.5;
+          margin-bottom: 0;
         }
 
         .southern-us-music-section {
-          margin-bottom: 20px;
+          margin-bottom: 18px;
         }
 
         .southern-us-artists-section {
-          margin-bottom: 20px;
+          margin-bottom: 18px;
         }
 
         .southern-us-artist-pill {
@@ -293,9 +309,16 @@ SouthernUSMap.prototype.injectCSS = function () {
           font-size: 13px;
         }
 
+        .southern-us-cta-section {
+          margin-top: auto;
+          padding-top: 18px;
+          flex-shrink: 0;
+        }
+
         .southern-us-cta-button {
-          padding: 12px 24px;
+          padding: 14px 28px;
           font-size: 16px;
+          width: 100%;
         }
       }
     `;
