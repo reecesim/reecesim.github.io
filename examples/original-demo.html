@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Southern US Map - Original Demo</title>
+
+    <!-- Leaflet CSS (required) -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .map-container {
+        width: 100%;
+        height: 500px;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        background: white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .page-footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #666;
+      }
+
+      @media (max-width: 768px) {
+        .map-container {
+          height: 400px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1>Southern US Interactive Map - Original Demo</h1>
+      <p>This version uses the full index.html file</p>
+    </div>
+
+    <!-- This is the full original implementation -->
+    <iframe
+      src="../index.html"
+      class="map-container"
+      style="border: none"
+    ></iframe>
+
+    <div class="page-footer">
+      <p>Original full-page version embedded in iframe</p>
+    </div>
+  </body>
+</html>
