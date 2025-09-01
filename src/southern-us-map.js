@@ -160,7 +160,7 @@ SouthernUSMap.prototype.injectCSS = function () {
       .southern-us-description-section h3 {
         color: #00437a;
         margin-bottom: 10px;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 700;
         text-transform: none;
       }
@@ -178,7 +178,7 @@ SouthernUSMap.prototype.injectCSS = function () {
       .southern-us-music-section h3 {
         color: #00437a;
         margin-bottom: 10px;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 700;
         text-transform: none;
       }
@@ -190,7 +190,7 @@ SouthernUSMap.prototype.injectCSS = function () {
       .southern-us-artists-section h3 {
         color: #00437a;
         margin-bottom: 15px;
-        font-size: 22px;
+        font-size: 18px;
         font-weight: 700;
         text-transform: none;
       }
@@ -223,7 +223,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         color: #00437a;
         border: none;
         padding: 14px 32px;
-        font-size: 16px;
+        font-size: 18px;
         border-radius: 100px;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -495,10 +495,17 @@ SouthernUSMap.prototype.loadMapData = function () {
 
             // Add lifting effect - move up and left with shadow
             if (layer._path) {
-              layer._path.style.transform =
-                "translate(-16px, -16px) scale(1.03)";
-              layer._path.style.filter =
-                "drop-shadow(6px 8px 16px rgba(0, 67, 122, 0.4))";
+              // Force reset to ensure clean animation start
+              layer._path.style.transform = "translate(0px, 0px) scale(1)";
+              layer._path.style.filter = "none";
+
+              // Use requestAnimationFrame to ensure the reset is applied before animation
+              requestAnimationFrame(() => {
+                layer._path.style.transform =
+                  "translate(-16px, -32px) scale(1.03)";
+                layer._path.style.filter =
+                  "drop-shadow(6px 8px 16px rgba(0, 67, 122, 0.4))";
+              });
             }
           });
 
