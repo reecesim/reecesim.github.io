@@ -7,25 +7,54 @@
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <style>
+      @font-face {
+        font-family: "Gotham";
+        src: url("./fonts/Gotham-book.woff2") format("woff2"),
+          url("./fonts/Gotham-book.woff") format("woff");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Gotham";
+        src: url("./fonts/Gotham-bold.woff2") format("woff2"),
+          url("./fonts/Gotham-bold.woff") format("woff");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      * {
+        font-family: "Gotham", "Helvetica Neue", Arial, sans-serif;
+        font-weight: 400; /* Book weight */
+      }
       #map {
         height: 100vh;
       }
 
       .state-label {
-        font-size: 16px;
-        font-weight: bold;
-        color: #333;
+        font-size: 14px;
+        font-weight: 700; /* Bold weight for state names */
+        color: #001b31;
         background: transparent;
         text-align: center;
+        transition: color 0.3s ease;
       }
 
       .city-label {
-        font-size: 13px;
+        font-size: 11px;
         background: white;
         padding: 2px 5px;
         border-radius: 3px;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
         color: #222;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .city-label:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
       }
 
       /* Modal Styles */
@@ -74,6 +103,7 @@
       .modal-header h2 {
         margin: 0;
         font-size: 24px;
+        font-weight: 700; /* Bold weight for modal state names */
       }
 
       .close {
@@ -153,7 +183,7 @@
         border-radius: 25px;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
-        font-weight: bold;
+        font-weight: 700; /* Bold weight for button */
       }
 
       .cta-button:hover {
@@ -344,15 +374,66 @@
             filter: (feature) =>
               Object.keys(stateNames).includes(feature.id.toString()),
             style: {
-              color: "#0078A8",
-              weight: 3,
+              color: "#00437a",
+              weight: 1,
               fillOpacity: 0.15,
-              fillColor: "#0078A8",
+              fillColor: "#00437a",
             },
             onEachFeature: (feature, layer) => {
-              layer.on("click", () => {
+              // Add hover effects
+              layer.on("mouseover", function (e) {
+                const layer = e.target;
+                layer.setStyle({
+                  weight: 3,
+                  color: "#fbba00",
+                  fillOpacity: 0.3,
+                  fillColor: "#fbba00",
+                });
+                layer.bringToFront();
+              });
+
+              layer.on("mouseout", function (e) {
+                const layer = e.target;
+                layer.setStyle({
+                  weight: 1,
+                  color: "#00437a",
+                  fillOpacity: 0.15,
+                  fillColor: "#00437a",
+                });
+              });
+
+              // Add click effect with animation
+              layer.on("click", function (e) {
+                const layer = e.target;
+                // Brief highlight animation
+                layer.setStyle({
+                  weight: 4,
+                  color: "#f7931e",
+                  fillOpacity: 0.4,
+                  fillColor: "#f7931e",
+                });
+
+                setTimeout(() => {
+                  layer.setStyle({
+                    weight: 1,
+                    color: "#00437a",
+                    fillOpacity: 0.15,
+                    fillColor: "#00437a",
+                  });
+                }, 200);
+
                 openStateModal(feature.id);
               });
+
+              // Add cursor pointer on hover
+              layer.on("mouseover", function () {
+                map.getContainer().style.cursor = "pointer";
+              });
+
+              layer.on("mouseout", function () {
+                map.getContainer().style.cursor = "";
+              });
+
               layer.bindPopup(stateNames[feature.id]);
             },
           }).addTo(map);
