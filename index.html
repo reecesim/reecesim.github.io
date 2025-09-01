@@ -31,6 +31,13 @@
       }
       #map {
         height: 100vh;
+        perspective: 1000px;
+        transform-style: preserve-3d;
+      }
+
+      .leaflet-container svg {
+        perspective: 1000px;
+        transform-style: preserve-3d;
       }
 
       .state-label {
@@ -470,16 +477,24 @@
               fillColor: "#00437a",
             },
             onEachFeature: (feature, layer) => {
-              // Add hover effects
+              // Add hover effects with 3D popout
               layer.on("mouseover", function (e) {
                 const layer = e.target;
+
                 layer.setStyle({
-                  weight: 3,
-                  color: "#fbba00",
-                  fillOpacity: 0.3,
-                  fillColor: "#fbba00",
+                  weight: 4,
+                  color: "#00437a",
+                  fillOpacity: 0.25,
+                  fillColor: "#00437a",
                 });
                 layer.bringToFront();
+
+                // Add 3D effect - transitions are already set up
+                if (layer._path) {
+                  layer._path.style.transform = "translateZ(10px) scale(1.02)";
+                  layer._path.style.filter =
+                    "drop-shadow(-6px -6px 12px rgba(0, 67, 122, 0.3))";
+                }
               });
 
               layer.on("mouseout", function (e) {
@@ -490,6 +505,23 @@
                   fillOpacity: 0.15,
                   fillColor: "#00437a",
                 });
+
+                // Reset 3D effect with smooth ease-out
+                if (layer._path) {
+                  layer._path.style.transform = "translateZ(0px) scale(1)";
+                  layer._path.style.filter = "none";
+                  // Set a slightly slower transition for mouseout only
+                  layer._path.style.transition =
+                    "all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)";
+
+                  // Reset to normal transition after animation completes
+                  setTimeout(() => {
+                    if (layer._path) {
+                      layer._path.style.transition =
+                        "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+                    }
+                  }, 500);
+                }
               });
 
               // Add click effect with animation
@@ -525,6 +557,22 @@
               });
             },
           }).addTo(map);
+
+          // Initialize transitions for all states after they're added to the map
+          setTimeout(() => {
+            map.eachLayer((layer) => {
+              if (
+                layer._path &&
+                layer.feature &&
+                stateNames[layer.feature.id]
+              ) {
+                layer._path.style.transition =
+                  "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+                layer._path.style.transform = "translateZ(0px) scale(1)";
+                layer._path.style.filter = "none";
+              }
+            });
+          }, 100);
 
           // Add state labels
           for (const id in stateCentroids) {
