@@ -142,19 +142,19 @@ SouthernUSMap.prototype.injectCSS = function () {
 
       .southern-us-flag-section {
         text-align: center;
-        margin-bottom: 25px;
+        margin-bottom: 20px;
       }
 
       .southern-us-state-flag {
-        width: 120px;
-        height: 80px;
+        width: 100px;
+        height: 67px;
         border: 2px solid #ddd;
         border-radius: 5px;
         object-fit: cover;
       }
 
       .southern-us-description-section {
-        margin-bottom: 25px;
+        margin-bottom: 20px;
       }
 
       .southern-us-description-section h3 {
@@ -233,6 +233,70 @@ SouthernUSMap.prototype.injectCSS = function () {
 
       .southern-us-cta-button:hover {
         background: #fcc833;
+      }
+
+      /* Mobile optimizations */
+      @media (max-width: 768px) {
+        .southern-us-modal-content {
+          margin: 2% auto;
+          width: 95%;
+          max-width: none;
+        }
+
+        .southern-us-modal-header {
+          padding: 15px;
+        }
+
+        .southern-us-modal-header h2 {
+          font-size: 20px;
+        }
+
+        .southern-us-modal-body {
+          padding: 20px;
+        }
+
+        .southern-us-flag-section {
+          margin-bottom: 15px;
+        }
+
+        .southern-us-state-flag {
+          width: 80px;
+          height: 53px;
+        }
+
+        .southern-us-description-section {
+          margin-bottom: 15px;
+        }
+
+        .southern-us-description-section h3,
+        .southern-us-music-section h3,
+        .southern-us-artists-section h3 {
+          font-size: 16px;
+          margin-bottom: 8px;
+        }
+
+        .southern-us-description-section p {
+          font-size: 14px;
+          line-height: 1.5;
+        }
+
+        .southern-us-music-section {
+          margin-bottom: 20px;
+        }
+
+        .southern-us-artists-section {
+          margin-bottom: 20px;
+        }
+
+        .southern-us-artist-pill {
+          padding: 6px 12px;
+          font-size: 13px;
+        }
+
+        .southern-us-cta-button {
+          padding: 12px 24px;
+          font-size: 16px;
+        }
       }
     `;
   document.head.appendChild(style);
