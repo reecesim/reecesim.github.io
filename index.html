@@ -145,9 +145,11 @@
       }
 
       .description-section h3 {
-        color: #0078a8;
+        color: #00437a;
         margin-bottom: 10px;
         font-size: 18px;
+        font-weight: 700;
+        text-transform: none;
       }
 
       .description-section p {
@@ -161,9 +163,11 @@
       }
 
       .music-section h3 {
-        color: #0078a8;
+        color: #00437a;
         margin-bottom: 10px;
         font-size: 18px;
+        font-weight: 700;
+        text-transform: none;
       }
 
       .music-section p {
@@ -178,7 +182,7 @@
 
       .cta-button {
         background: #fbba00;
-        color: white;
+        color: #00437a;
         border: none;
         padding: 14px 32px;
         font-size: 16px;
@@ -191,6 +195,38 @@
 
       .cta-button:hover {
         background: #fcc833;
+      }
+
+      .artists-section {
+        margin-bottom: 25px;
+      }
+
+      .artists-section h3 {
+        color: #00437a;
+        margin-bottom: 15px;
+        font-size: 18px;
+        font-weight: 700;
+        text-transform: none;
+      }
+
+      .artists-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: flex-start;
+      }
+
+      .artist-pill {
+        background: transparent;
+        color: #00437a;
+        border: 1px solid #00437a;
+        padding: 8px 16px;
+        border-radius: 100px;
+        font-size: 14px;
+        font-weight: 400;
+        text-align: center;
+        display: inline-block;
+        opacity: 0.8;
       }
     </style>
   </head>
@@ -214,7 +250,11 @@
           </div>
           <div class="music-section">
             <h3>Musical Heritage</h3>
-            <p id="stateMusic"></p>
+            <div id="stateArtists" class="artists-container"></div>
+          </div>
+          <div class="artists-section">
+            <h3>Must-Visit Attractions</h3>
+            <div id="stateAttractions" class="artists-container"></div>
           </div>
           <div class="cta-section">
             <button id="ctaButton" class="cta-button">Plan Your Visit</button>
@@ -271,6 +311,16 @@
             "Known as the Heart of Dixie, Alabama is famous for its rich Civil Rights history, beautiful Gulf Coast beaches, and southern hospitality.",
           music:
             "Alabama is the birthplace of the legendary country group Alabama and has deep roots in country, blues, and gospel music, with cities like Muscle Shoals being iconic recording destinations that helped shape Southern rock and country music.",
+          artists: [
+            "The Red Clay Strays",
+            "Muscadine Bloodline",
+            "Jason Isbell",
+          ],
+          attractions: [
+            "Gulf State Park",
+            "U.S. Space & Rocket Center",
+            "Historic Selma",
+          ],
         },
         22: {
           name: "Louisiana",
@@ -279,6 +329,8 @@
             "Louisiana captivates visitors with its unique Creole and Cajun culture, world-renowned cuisine, vibrant festivals, and the historic charm of New Orleans.",
           music:
             "While famous for jazz and blues, Louisiana has a rich country music heritage with zydeco influences and has produced country stars like Tim McGraw, blending traditional country with the state's unique cultural rhythms.",
+          artists: ["Lucky Daye", "Jon Batiste", "Aaron Neville"],
+          attractions: ["French Quarter", "Garden District", "Bourbon Street"],
         },
         28: {
           name: "Mississippi",
@@ -287,6 +339,12 @@
             "Mississippi is the birthplace of blues music, home to literary legends, and offers rich Delta culture along the mighty Mississippi River.",
           music:
             "Mississippi is the cradle of American music, producing country legends like Faith Hill, Tammy Wynette, and Charley Pride, while its Delta blues tradition deeply influenced country music's emotional storytelling and guitar styles.",
+          artists: ['Christone "Kingfish" Ingram', "Charlie Worsham", "KIRBY"],
+          attractions: [
+            "Blues Trail",
+            "Vicksburg Battlefield",
+            "Natchez Trace",
+          ],
         },
         37: {
           name: "North Carolina",
@@ -295,6 +353,12 @@
             "North Carolina boasts stunning Blue Ridge Mountains, beautiful Outer Banks coastline, vibrant cities, and a perfect blend of mountain and coastal culture.",
           music:
             "North Carolina is home to legendary bluegrass and country artists like Doc Watson and Earl Scruggs, and the state's Appalachian mountain music traditions have profoundly shaped modern country and folk music.",
+          artists: ["Rhiannon Giddens", "Chatham County Line", "MJ Lenderman"],
+          attractions: [
+            "Blue Ridge Parkway",
+            "Outer Banks",
+            "Great Smoky Mountains",
+          ],
         },
         45: {
           name: "South Carolina",
@@ -303,6 +367,12 @@
             "South Carolina offers stunning coastal beauty, historic Charleston, beautiful plantations, and a perfect blend of Southern tradition and coastal living.",
           music:
             "South Carolina has contributed significantly to country music with artists like Darius Rucker (formerly of Hootie & the Blowfish) and has a strong bluegrass tradition that influences modern country music throughout the region.",
+          artists: ["Darius Rucker", "Edwin McCain", "Ranky Tanky"],
+          attractions: [
+            "Historic Charleston",
+            "Myrtle Beach",
+            "Magnolia Plantation",
+          ],
         },
         47: {
           name: "Tennessee",
@@ -311,6 +381,12 @@
             "Tennessee is the heart of country music, home to Nashville and Memphis, offering rich musical heritage, stunning Smoky Mountains, and vibrant cultural attractions.",
           music:
             "Tennessee is the undisputed capital of country music, home to the Grand Ole Opry, Country Music Hall of Fame, and countless legendary artists from Hank Williams to Dolly Parton, making Nashville the global center of country music production and performance.",
+          artists: ["Damien Horne", "David Tolliver", "Maura Streppa"],
+          attractions: [
+            "Nashville Music Row",
+            "Graceland",
+            "Great Smoky Mountains",
+          ],
         },
       };
 
@@ -328,7 +404,28 @@
         document.getElementById("stateFlag").alt = `Flag of ${state.name}`;
         document.getElementById("stateDescription").textContent =
           state.description;
-        document.getElementById("stateMusic").textContent = state.music;
+
+        // Populate artists pills
+        const artistsContainer = document.getElementById("stateArtists");
+        artistsContainer.innerHTML = "";
+        state.artists.forEach((artist) => {
+          const pill = document.createElement("div");
+          pill.className = "artist-pill";
+          pill.textContent = artist;
+          artistsContainer.appendChild(pill);
+        });
+
+        // Populate attractions pills
+        const attractionsContainer =
+          document.getElementById("stateAttractions");
+        attractionsContainer.innerHTML = "";
+        state.attractions.forEach((attraction) => {
+          const pill = document.createElement("div");
+          pill.className = "artist-pill";
+          pill.textContent = attraction;
+          attractionsContainer.appendChild(pill);
+        });
+
         document.getElementById(
           "ctaButton"
         ).textContent = `Plan Your Visit to ${state.name}`;
