@@ -11,6 +11,12 @@ function SouthernUSMap(containerId, options = {}) {
       defaultZoom: 6,
       minZoom: 5,
       maxZoom: 7,
+      // Mobile performance options
+      updateWhenIdle: false, // Load tiles continuously during panning (better UX, more network requests)
+      keepBuffer: 2, // Number of tile rows/columns to keep around the viewport
+      updateWhenZooming: true, // Update map during zoom animation
+      // Alternative performance mode for slower devices
+      performanceMode: false, // When true, uses more conservative settings
     },
     options
   );
@@ -314,8 +320,8 @@ SouthernUSMap.prototype.initMap = function () {
   // Set up container - add our class without removing existing ones
   this.container.classList.add("southern-us-map");
 
-  // Create map
-  this.map = L.map(this.container, {
+  // Create map with performance options
+  const mapOptions = {
     minZoom: this.options.minZoom,
     maxZoom: this.options.maxZoom,
     zoomControl: false,
@@ -329,14 +335,35 @@ SouthernUSMap.prototype.initMap = function () {
       [28, -95], // SW
       [37, -75], // NE
     ],
-  }).setView([33, -85], this.options.defaultZoom);
+    // Performance settings - adjust based on performanceMode
+    updateWhenIdle: this.options.performanceMode
+      ? true
+      : this.options.updateWhenIdle,
+    updateWhenZooming: this.options.updateWhenZooming,
+  };
 
-  // Add base map
+  this.map = L.map(this.container, mapOptions).setView(
+    [33, -85],
+    this.options.defaultZoom
+  );
+
+  // Add base map with performance optimizations
+  const tileOptions = {
+    attribution: "&copy; OpenStreetMap contributors",
+    // Performance settings for better mobile experience
+    keepBuffer: this.options.keepBuffer,
+    updateWhenIdle: this.options.performanceMode
+      ? true
+      : this.options.updateWhenIdle,
+    updateWhenZooming: this.options.updateWhenZooming,
+    // Additional tile loading optimizations
+    reuseTiles: true,
+    unloadInvisibleTiles: !this.options.performanceMode, // Keep tiles in memory for faster panning unless in performance mode
+  };
+
   L.tileLayer(
     "https://{s}.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{r}.png",
-    {
-      attribution: "&copy; OpenStreetMap contributors",
-    }
+    tileOptions
   ).addTo(this.map);
 };
 
@@ -543,6 +570,9 @@ SouthernUSMap.prototype.loadMapData = function () {
         47: [35.8, -86.4], // Tennessee
       };
 
+      // Create custom SVG renderer with padding for better state line visibility
+      const svgRenderer = L.svg({ padding: 0.5 });
+
       L.geoJSON(geojson, {
         filter: (feature) =>
           Object.keys(this.stateNames).includes(feature.id.toString()),
@@ -552,6 +582,10 @@ SouthernUSMap.prototype.loadMapData = function () {
           fillOpacity: 0.15,
           fillColor: "#00437a",
         },
+        // Performance optimization for vector layers
+        renderer: svgRenderer, // Use custom renderer with padding
+        pane: "overlayPane", // Use a specific pane for better rendering control
+        interactive: true,
         onEachFeature: (feature, layer) => {
           // Add hover effects with lifting animation
           layer.on("mouseover", (e) => {
@@ -667,6 +701,44 @@ SouthernUSMap.prototype.loadMapData = function () {
         }).addTo(this.map);
       });
     });
+};
+
+// Method to toggle performance mode
+SouthernUSMap.prototype.setPerformanceMode = function (enabled) {
+  this.options.performanceMode = enabled;
+
+  // Update map options
+  const newUpdateWhenIdle = enabled ? true : this.options.updateWhenIdle;
+
+  // Update map settings
+  this.map.options.updateWhenIdle = newUpdateWhenIdle;
+
+  // Update tile layer settings if needed
+  this.map.eachLayer((layer) => {
+    if (layer._url) {
+      // This is a tile layer
+      layer.options.updateWhenIdle = newUpdateWhenIdle;
+      layer.options.unloadInvisibleTiles = !enabled;
+    }
+  });
+
+  console.log(
+    `Performance mode ${enabled ? "enabled" : "disabled"}. ${
+      enabled
+        ? "More conservative tile loading for slower devices."
+        : "Optimized for smooth panning experience."
+    }`
+  );
+};
+
+// Method to get current performance settings
+SouthernUSMap.prototype.getPerformanceSettings = function () {
+  return {
+    performanceMode: this.options.performanceMode,
+    updateWhenIdle: this.options.updateWhenIdle,
+    keepBuffer: this.options.keepBuffer,
+    updateWhenZooming: this.options.updateWhenZooming,
+  };
 };
 
 SouthernUSMap.prototype.destroy = function () {

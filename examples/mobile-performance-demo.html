@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Southern US Map Widget - Mobile Performance Demo</title>
+
+    <style>
+      @font-face {
+        font-family: "Gotham";
+        src: url("fonts/Gotham-book.woff2") format("woff2"),
+          url("fonts/Gotham-book.woff") format("woff");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Gotham";
+        src: url("fonts/Gotham-bold.woff2") format("woff2"),
+          url("fonts/Gotham-bold.woff") format("woff");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      body {
+        font-family: "Gotham", sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+
+      .page-header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .controls {
+        text-align: center;
+        margin-bottom: 20px;
+        padding: 15px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .controls button {
+        margin: 0 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background: #00437a;
+        color: white;
+        cursor: pointer;
+        font-family: "Gotham", sans-serif;
+      }
+
+      .controls button:hover {
+        background: #005a9e;
+      }
+
+      .controls button.active {
+        background: #fbba00;
+        color: #00437a;
+      }
+
+      .info {
+        background: #e8f4f8;
+        padding: 15px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        border-left: 4px solid #00437a;
+      }
+
+      .page-footer {
+        text-align: center;
+        margin-top: 30px;
+        color: #666;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 10px;
+        }
+
+        .map-container {
+          height: 400px;
+        }
+
+        .controls button {
+          margin: 5px;
+          padding: 8px 16px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-header">
+      <h1>Mobile Performance Demo</h1>
+      <p>
+        Test different performance modes while panning around the map on mobile
+        devices
+      </p>
+    </div>
+
+    <div class="info">
+      <h3>Performance Modes:</h3>
+      <p>
+        <strong>Smooth Mode (Default):</strong> Tiles load continuously while
+        panning for the smoothest experience. Uses more bandwidth but provides
+        better UX.
+      </p>
+      <p>
+        <strong>Performance Mode:</strong> More conservative tile loading -
+        better for slower devices or limited bandwidth. Tiles load after panning
+        stops.
+      </p>
+    </div>
+
+    <div class="controls">
+      <button id="smooth-mode" class="active">Smooth Mode</button>
+      <button id="performance-mode">Performance Mode</button>
+      <button id="show-settings">Show Current Settings</button>
+    </div>
+
+    <!-- Map container - the widget will be inserted here -->
+    <div
+      id="my-southern-map"
+      style="height: 500px; border: 2px solid #ddd; border-radius: 10px"
+      class="map-container"
+    ></div>
+
+    <div class="page-footer">
+      <p>
+        Try panning around the map in different modes to see how tile loading
+        behavior changes. On mobile devices, the smooth mode will prevent empty
+        tiles during panning.
+      </p>
+    </div>
+
+    <!-- Single bundled script with all dependencies -->
+    <script src="../build/southern-us-map-bundle.js"></script>
+
+    <!-- Initialize the map with mobile optimizations -->
+    <script>
+      // Initialize map with default smooth settings
+      const map = new SouthernUSMap("my-southern-map", {
+        defaultZoom: 6,
+        minZoom: 5,
+        maxZoom: 7,
+        // Mobile performance optimizations (default smooth mode)
+        updateWhenIdle: false, // Load tiles during panning
+        keepBuffer: 2, // Keep extra tiles around viewport
+        updateWhenZooming: true, // Update during zoom
+        performanceMode: false, // Start in smooth mode
+      });
+
+      // Control buttons
+      const smoothBtn = document.getElementById("smooth-mode");
+      const performanceBtn = document.getElementById("performance-mode");
+      const settingsBtn = document.getElementById("show-settings");
+
+      // Toggle smooth mode (default)
+      smoothBtn.addEventListener("click", () => {
+        map.setPerformanceMode(false);
+        smoothBtn.classList.add("active");
+        performanceBtn.classList.remove("active");
+      });
+
+      // Toggle performance mode
+      performanceBtn.addEventListener("click", () => {
+        map.setPerformanceMode(true);
+        performanceBtn.classList.add("active");
+        smoothBtn.classList.remove("active");
+      });
+
+      // Show current settings
+      settingsBtn.addEventListener("click", () => {
+        const settings = map.getPerformanceSettings();
+        alert(
+          `Current Settings:\n\nPerformance Mode: ${settings.performanceMode}\nUpdate When Idle: ${settings.updateWhenIdle}\nKeep Buffer: ${settings.keepBuffer}\nUpdate When Zooming: ${settings.updateWhenZooming}`
+        );
+      });
+    </script>
+  </body>
+</html>
