@@ -86,9 +86,13 @@ SouthernUSMap.prototype.injectCSS = function () {
         background: transparent;
         text-align: center;
         line-height: 1.2;
-        transition: color 0.3s ease, font-size 0.3s ease;
+        transition: color 0.3s ease;
         pointer-events: none;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .southern-us-map .state-label span {
+        transition: font-size 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
       }
 
       .southern-us-map .city-label {
