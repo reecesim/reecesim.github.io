@@ -43,6 +43,9 @@ function SouthernUSMap(containerId, options = {}) {
   // Create modal
   this.createModal();
 
+  // Initialize city markers array
+  this.cityMarkers = [];
+
   // Load data
   this.loadMapData();
 
@@ -83,7 +86,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         background: transparent;
         text-align: center;
         line-height: 1.2;
-        transition: color 0.3s ease;
+        transition: color 0.3s ease, font-size 0.3s ease;
         pointer-events: none;
         text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
       }
@@ -353,7 +356,7 @@ SouthernUSMap.prototype.initMap = function () {
     zoomControl: false,
     attributionControl: false,
     dragging: true,
-    scrollWheelZoom: false,
+    scrollWheelZoom: true,
     doubleClickZoom: false,
     boxZoom: false,
     keyboard: false,
@@ -381,6 +384,12 @@ SouthernUSMap.prototype.initMap = function () {
       "Pan/Move Event - Performance mode:",
       this.options.performanceMode
     );
+  });
+
+  // Add zoom event listener for dynamic state label sizing and city marker visibility
+  this.map.on("zoomend", () => {
+    this.updateStateLabelSizes();
+    this.updateCityMarkerVisibility();
   });
 
   // Add base map
@@ -705,16 +714,21 @@ SouthernUSMap.prototype.loadMapData = function () {
         });
       }, 100);
 
-      // Add state labels
+      // Add state labels with correct initial font size
+      const initialFontSize = this.calculateFontSize(this.map.getZoom());
       for (const id in stateCentroids) {
         L.marker(stateCentroids[id], {
           icon: L.divIcon({
             className: "southern-us-map state-label",
-            html: this.stateNames[id],
+            html: `<span style="font-size: ${initialFontSize}rem">${this.stateNames[id]}</span>`,
             iconSize: [100, 20],
           }),
         }).addTo(this.map);
       }
+
+      console.log(
+        `Initial state labels created with font size: ${initialFontSize}rem`
+      );
 
       // Add manually-specified cities with data
       const cities = [
@@ -783,7 +797,7 @@ SouthernUSMap.prototype.loadMapData = function () {
           weight: 1,
           opacity: 1,
           fillOpacity: 1,
-        }).addTo(this.map);
+        });
 
         // Add offset label marker
         const labelMarker = L.marker(city.coords, {
@@ -793,7 +807,7 @@ SouthernUSMap.prototype.loadMapData = function () {
             iconSize: [null, null], // Let it size dynamically
             iconAnchor: [-15, 8], // Offset to top-right: left by -15px, up by 8px
           }),
-        }).addTo(this.map);
+        });
 
         // Add click events to both markers
         dotMarker.on("click", () => {
@@ -803,8 +817,81 @@ SouthernUSMap.prototype.loadMapData = function () {
         labelMarker.on("click", () => {
           this.openCityModal(city);
         });
+
+        // Store markers for visibility control
+        this.cityMarkers.push({
+          dot: dotMarker,
+          label: labelMarker,
+          city: city,
+        });
       });
+
+      // Set initial city marker visibility based on zoom level
+      this.updateCityMarkerVisibility();
     });
+};
+
+// Method to update city marker visibility based on zoom level
+SouthernUSMap.prototype.updateCityMarkerVisibility = function () {
+  const currentZoom = this.map.getZoom();
+  const shouldShowCities = currentZoom >= 7;
+
+  this.cityMarkers.forEach((markerGroup) => {
+    if (shouldShowCities) {
+      // Add markers to map if not already added
+      if (!this.map.hasLayer(markerGroup.dot)) {
+        markerGroup.dot.addTo(this.map);
+      }
+      if (!this.map.hasLayer(markerGroup.label)) {
+        markerGroup.label.addTo(this.map);
+      }
+    } else {
+      // Remove markers from map
+      if (this.map.hasLayer(markerGroup.dot)) {
+        this.map.removeLayer(markerGroup.dot);
+      }
+      if (this.map.hasLayer(markerGroup.label)) {
+        this.map.removeLayer(markerGroup.label);
+      }
+    }
+  });
+
+  console.log(
+    `City markers ${
+      shouldShowCities ? "shown" : "hidden"
+    } at zoom level ${currentZoom}`
+  );
+};
+
+// Helper method to calculate font size based on zoom level
+SouthernUSMap.prototype.calculateFontSize = function (zoomLevel) {
+  // Calculate font size based on zoom level
+  // Zoom 4-5: 0.7rem, Zoom 6: 1rem, Zoom 7-8: 1.2rem
+  if (zoomLevel <= 5) {
+    return 0.7; // Smaller for zoomed out view
+  } else if (zoomLevel <= 6) {
+    return 1.0; // Default size
+  } else {
+    return 1.2; // Larger for zoomed in view
+  }
+};
+
+// Method to update state label sizes based on zoom level
+SouthernUSMap.prototype.updateStateLabelSizes = function () {
+  const currentZoom = this.map.getZoom();
+  const fontSize = this.calculateFontSize(currentZoom);
+
+  // Update all state label spans
+  const stateLabelSpans = document.querySelectorAll(
+    ".southern-us-map .state-label span"
+  );
+  stateLabelSpans.forEach((span) => {
+    span.style.fontSize = fontSize + "rem";
+  });
+
+  console.log(
+    `Updated state label font size to ${fontSize}rem for zoom level ${currentZoom}`
+  );
 };
 
 // Method to toggle performance mode
