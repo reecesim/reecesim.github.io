@@ -6,17 +6,25 @@ import * as topojson from "topojson-client";
 function SouthernUSMap(containerId, options = {}) {
   this.containerId = containerId;
   this.container = document.getElementById(containerId);
+  // Detect mobile device
+  const isMobile =
+    window.innerWidth <= 768 ||
+    /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+
+  console.log("Mobile Detection Debug:");
+  console.log("- window.innerWidth:", window.innerWidth);
+  console.log("- isMobile:", isMobile);
+  console.log("- User Agent:", navigator.userAgent);
+
+  // Clean options setup with mobile detection
   this.options = Object.assign(
     {
-      defaultZoom: 6,
-      minZoom: 5,
-      maxZoom: 7,
-      // Mobile performance options
-      updateWhenIdle: false, // Load tiles continuously during panning (better UX, more network requests)
-      keepBuffer: 2, // Number of tile rows/columns to keep around the viewport
-      updateWhenZooming: true, // Update map during zoom animation
-      // Alternative performance mode for slower devices
-      performanceMode: false, // When true, uses more conservative settings
+      defaultZoom: isMobile ? 5 : 6, // Mobile: 5, Desktop: 6
+      minZoom: 4,
+      maxZoom: 8,
+      performanceMode: isMobile, // Enable performance mode on mobile
     },
     options
   );
@@ -37,6 +45,14 @@ function SouthernUSMap(containerId, options = {}) {
 
   // Load data
   this.loadMapData();
+
+  // Enable performance mode on mobile devices
+  if (isMobile) {
+    console.log("Enabling performance mode for mobile device");
+    this.setPerformanceMode(true);
+  }
+
+  console.log("Final options:", this.options);
 }
 
 SouthernUSMap.prototype.injectCSS = function () {
@@ -61,20 +77,41 @@ SouthernUSMap.prototype.injectCSS = function () {
       }
 
       .southern-us-map .state-label {
-        font-size: 14px;
+        font-size: 1rem;
         font-weight: 700;
-        color: #001b31;
+        color: white;
         background: transparent;
         text-align: center;
+        line-height: 1.2;
         transition: color 0.3s ease;
         pointer-events: none;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
       }
 
       .southern-us-map .city-label {
-        font-size: 11px;
-        background: transparent;
-        color: #414b54;
-        pointer-events: none;
+        font-size: 0.7rem;
+        background: rgba(255, 255, 255, 0.9);
+        color: #001b31;
+        border: 1px solid #00437a;
+        border-radius: 12px;
+        padding: 3px 8px;
+        font-weight: 400;
+        line-height: 1.2;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        pointer-events: auto;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        white-space: nowrap;
+        display: inline-block;
+        text-align: center;
+        width: auto !important;
+        height: auto !important;
+      }
+
+      .southern-us-map .city-label:hover {
+        background: #fbba00;
+        color: #001b31;
+        transform: scale(1.1);
       }
 
       .southern-us-modal {
@@ -123,8 +160,9 @@ SouthernUSMap.prototype.injectCSS = function () {
 
       .southern-us-modal-header h2 {
         margin: 0;
-        font-size: 24px;
+        font-size: 1.5rem;
         font-weight: 700;
+        line-height: 1.3;
       }
 
       .southern-us-modal-close {
@@ -159,46 +197,35 @@ SouthernUSMap.prototype.injectCSS = function () {
         object-fit: cover;
       }
 
-      .southern-us-description-section {
-        margin-bottom: 20px;
-      }
-
-      .southern-us-description-section h3 {
-        color: #00437a;
-        margin-bottom: 10px;
-        font-size: 18px;
-        font-weight: 700;
-        text-transform: none;
-      }
-
-      .southern-us-description-section p {
-        line-height: 1.6;
-        color: #414b54;
-        margin: 0;
-      }
-
+      .southern-us-description-section,
       .southern-us-music-section {
         margin-bottom: 30px;
-      }
-
-      .southern-us-music-section h3 {
-        color: #00437a;
-        margin-bottom: 10px;
-        font-size: 18px;
-        font-weight: 700;
-        text-transform: none;
       }
 
       .southern-us-artists-section {
         margin-bottom: 25px;
       }
 
+      .southern-us-description-section h3,
+      .southern-us-music-section h3,
       .southern-us-artists-section h3 {
         color: #00437a;
-        margin-bottom: 15px;
-        font-size: 18px;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
         font-weight: 700;
+        line-height: 1.3;
         text-transform: none;
+      }
+
+      .southern-us-artists-section h3 {
+        margin-bottom: 15px;
+      }
+
+      .southern-us-description-section p {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: #414b54;
+        margin: 0;
       }
 
       .southern-us-artists-container {
@@ -214,8 +241,9 @@ SouthernUSMap.prototype.injectCSS = function () {
         border: 1px solid #00437a;
         padding: 8px 16px;
         border-radius: 100px;
-        font-size: 14px;
+        font-size: 1rem;
         font-weight: 400;
+        line-height: 1.4;
         text-align: center;
         display: inline-block;
       }
@@ -229,7 +257,8 @@ SouthernUSMap.prototype.injectCSS = function () {
         color: #00437a;
         border: none;
         padding: 14px 32px;
-        font-size: 18px;
+        font-size: 1rem;
+        line-height: 1.4;
         border-radius: 100px;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -281,6 +310,11 @@ SouthernUSMap.prototype.injectCSS = function () {
           margin-bottom: 12px;
         }
 
+        .southern-us-music-section,
+        .southern-us-artists-section {
+          margin-bottom: 18px;
+        }
+
         .southern-us-description-section h3,
         .southern-us-music-section h3,
         .southern-us-artists-section h3 {
@@ -292,14 +326,6 @@ SouthernUSMap.prototype.injectCSS = function () {
           font-size: 14px;
           line-height: 1.5;
           margin-bottom: 0;
-        }
-
-        .southern-us-music-section {
-          margin-bottom: 18px;
-        }
-
-        .southern-us-artists-section {
-          margin-bottom: 18px;
         }
 
         .southern-us-artist-pill {
@@ -320,7 +346,7 @@ SouthernUSMap.prototype.initMap = function () {
   // Set up container - add our class without removing existing ones
   this.container.classList.add("southern-us-map");
 
-  // Create map with performance options
+  // Create map
   const mapOptions = {
     minZoom: this.options.minZoom,
     maxZoom: this.options.maxZoom,
@@ -331,39 +357,38 @@ SouthernUSMap.prototype.initMap = function () {
     doubleClickZoom: false,
     boxZoom: false,
     keyboard: false,
+    touchZoom: true,
     maxBounds: [
       [28, -95], // SW
       [37, -75], // NE
     ],
-    // Performance settings - adjust based on performanceMode
-    updateWhenIdle: this.options.performanceMode
-      ? true
-      : this.options.updateWhenIdle,
-    updateWhenZooming: this.options.updateWhenZooming,
   };
+
+  console.log("Initializing map with zoom:", this.options.defaultZoom);
+  console.log("Performance mode enabled:", this.options.performanceMode);
 
   this.map = L.map(this.container, mapOptions).setView(
     [33, -85],
     this.options.defaultZoom
   );
 
-  // Add base map with performance optimizations
-  const tileOptions = {
-    attribution: "&copy; OpenStreetMap contributors",
-    // Performance settings for better mobile experience
-    keepBuffer: this.options.keepBuffer,
-    updateWhenIdle: this.options.performanceMode
-      ? true
-      : this.options.updateWhenIdle,
-    updateWhenZooming: this.options.updateWhenZooming,
-    // Additional tile loading optimizations
-    reuseTiles: true,
-    unloadInvisibleTiles: !this.options.performanceMode, // Keep tiles in memory for faster panning unless in performance mode
-  };
+  console.log("Map initialized. Current zoom:", this.map.getZoom());
 
+  // Add zoom level and performance logging on pan/move events
+  this.map.on("moveend", () => {
+    console.log("Pan/Move Event - Current zoom level:", this.map.getZoom());
+    console.log(
+      "Pan/Move Event - Performance mode:",
+      this.options.performanceMode
+    );
+  });
+
+  // Add base map
   L.tileLayer(
     "https://{s}.basemaps.cartocdn.com/rastertiles/light_nolabels/{z}/{x}/{y}{r}.png",
-    tileOptions
+    {
+      attribution: "&copy; OpenStreetMap contributors",
+    }
   ).addTo(this.map);
 };
 
@@ -434,6 +459,10 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
   const state = this.stateData[stateId];
   if (!state) return;
 
+  // Show all sections for states
+  document.querySelector(".southern-us-flag-section").style.display = "block";
+  document.querySelector(".southern-us-music-section").style.display = "block";
+
   // Populate modal content
   document.getElementById("southern-us-modal-title").textContent = state.name;
   document.getElementById("southern-us-state-flag").src = state.flag;
@@ -443,27 +472,38 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
   document.getElementById("southern-us-state-description").textContent =
     state.description;
 
-  // Populate artists pills
+  // Populate music section with intro and artists
   const artistsContainer = document.getElementById("southern-us-state-artists");
-  artistsContainer.innerHTML = "";
+  artistsContainer.innerHTML = `
+    <p style="color: #414b54; line-height: 1.6; margin-bottom: 15px; font-size: 14px;">
+      ${
+        state.musicIntro ||
+        `Discover the rich musical heritage that makes ${state.name} a cornerstone of Southern sound.`
+      }
+    </p>
+    <h4 style="color: #00437a; font-size: 16px; margin-bottom: 10px; font-weight: 700;">Sounds of the South Featured Artists</h4>
+    <div class="southern-us-artists-pills"></div>
+  `;
+
+  const pillsContainer = artistsContainer.querySelector(
+    ".southern-us-artists-pills"
+  );
   state.artists.forEach((artist) => {
     const pill = document.createElement("div");
     pill.className = "southern-us-artist-pill";
     pill.textContent = artist;
-    artistsContainer.appendChild(pill);
+    pillsContainer.appendChild(pill);
   });
 
-  // Populate attractions pills
+  // Update attractions section title and make it a paragraph
+  document.querySelector(".southern-us-artists-section h3").textContent =
+    "Must-Visit Attractions";
   const attractionsContainer = document.getElementById(
     "southern-us-state-attractions"
   );
-  attractionsContainer.innerHTML = "";
-  state.attractions.forEach((attraction) => {
-    const pill = document.createElement("div");
-    pill.className = "southern-us-artist-pill";
-    pill.textContent = attraction;
-    attractionsContainer.appendChild(pill);
-  });
+  attractionsContainer.innerHTML = `<p style="color: #414b54; line-height: 1.6; margin: 0;">${
+    state.attractionsText || state.attractions.join(", ")
+  }</p>`;
 
   document.getElementById(
     "southern-us-cta-button"
@@ -475,6 +515,37 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
 
 SouthernUSMap.prototype.closeModal = function () {
   this.modal.style.display = "none";
+};
+
+SouthernUSMap.prototype.openCityModal = function (city) {
+  // Populate modal content for city
+  document.getElementById(
+    "southern-us-modal-title"
+  ).textContent = `${city.name}, ${city.state}`;
+
+  // Hide flag section for cities
+  document.querySelector(".southern-us-flag-section").style.display = "none";
+
+  document.getElementById("southern-us-state-description").textContent =
+    city.description;
+
+  // Hide music section for cities
+  document.querySelector(".southern-us-music-section").style.display = "none";
+
+  // Update attractions section for cities
+  document.querySelector(".southern-us-artists-section h3").textContent =
+    "Top Places to Visit";
+  const attractionsContainer = document.getElementById(
+    "southern-us-state-attractions"
+  );
+  attractionsContainer.innerHTML = `<p style="color: #414b54; line-height: 1.6; margin: 0;">${city.attractions}</p>`;
+
+  document.getElementById(
+    "southern-us-cta-button"
+  ).textContent = `Plan Your Visit to ${city.name}`;
+
+  // Show modal
+  this.modal.style.display = "block";
 };
 
 SouthernUSMap.prototype.loadMapData = function () {
@@ -577,9 +648,9 @@ SouthernUSMap.prototype.loadMapData = function () {
         filter: (feature) =>
           Object.keys(this.stateNames).includes(feature.id.toString()),
         style: {
-          color: "#00437a",
+          color: "white",
           weight: 1,
-          fillOpacity: 0.15,
+          fillOpacity: 1.0,
           fillColor: "#00437a",
         },
         // Performance optimization for vector layers
@@ -587,68 +658,34 @@ SouthernUSMap.prototype.loadMapData = function () {
         pane: "overlayPane", // Use a specific pane for better rendering control
         interactive: true,
         onEachFeature: (feature, layer) => {
-          // Add hover effects with lifting animation
+          // Add hover effects with yellow background and cursor pointer
           layer.on("mouseover", (e) => {
             const layer = e.target;
 
             layer.setStyle({
-              weight: 4,
-              color: "#00437a",
-              fillOpacity: 0.25,
-              fillColor: "#00437a",
+              weight: 2,
+              color: "white",
+              fillOpacity: 1.0,
+              fillColor: "#fbba00",
             });
             layer.bringToFront();
-
-            // Add lifting effect - move up and left with shadow
-            if (layer._path) {
-              // Temporarily disable transitions to reset without animation
-              const originalTransition = layer._path.style.transition;
-              layer._path.style.transition = "none";
-
-              // Reset to baseline immediately
-              layer._path.style.transform = "translate(0px, 0px) scale(1)";
-              layer._path.style.filter = "none";
-
-              // Force reflow to ensure reset is applied
-              layer._path.offsetHeight;
-
-              // Re-enable transitions and animate to hover state
-              layer._path.style.transition = originalTransition;
-              layer._path.style.transform =
-                "translate(-24px, -16px) scale(1.03)";
-              layer._path.style.filter =
-                "drop-shadow(6px 8px 16px rgba(0, 67, 122, 0.4))";
-            }
+            this.map.getContainer().style.cursor = "pointer";
           });
 
           layer.on("mouseout", (e) => {
             const layer = e.target;
             layer.setStyle({
               weight: 1,
-              color: "#00437a",
-              fillOpacity: 0.15,
+              color: "white",
+              fillOpacity: 1.0,
               fillColor: "#00437a",
             });
-
-            // Reset lifting effect
-            if (layer._path) {
-              layer._path.style.transform = "translate(0px, 0px) scale(1)";
-              layer._path.style.filter = "none";
-            }
+            this.map.getContainer().style.cursor = "";
           });
 
           // Add click effect
           layer.on("click", (e) => {
             this.openStateModal(feature.id);
-          });
-
-          // Add cursor pointer on hover
-          layer.on("mouseover", () => {
-            this.map.getContainer().style.cursor = "pointer";
-          });
-
-          layer.on("mouseout", () => {
-            this.map.getContainer().style.cursor = "";
           });
         },
       }).addTo(this.map);
@@ -663,9 +700,7 @@ SouthernUSMap.prototype.loadMapData = function () {
           ) {
             // Set consistent, smooth transition for hover effects
             layer._path.style.transition =
-              "all 0.35s cubic-bezier(0.35, 0.65, 0.3, 0.9)";
-            layer._path.style.transform = "translate(0px, 0px) scale(1)";
-            layer._path.style.filter = "none";
+              "all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
           }
         });
       }, 100);
@@ -681,30 +716,100 @@ SouthernUSMap.prototype.loadMapData = function () {
         }).addTo(this.map);
       }
 
-      // Add manually-specified cities
+      // Add manually-specified cities with data
       const cities = [
-        { name: "Birmingham, AL", coords: [33.5186, -86.8104] },
-        { name: "New Orleans, LA", coords: [29.9511, -90.0715] },
-        { name: "Jackson, MS", coords: [32.2988, -90.1848] },
-        { name: "Charlotte, NC", coords: [35.2271, -80.8431] },
-        { name: "Charleston, SC", coords: [32.7765, -79.9311] },
-        { name: "Nashville, TN", coords: [36.1627, -86.7816] },
+        {
+          name: "Birmingham",
+          state: "Alabama",
+          coords: [33.5186, -86.8104],
+          description:
+            "Alabama's largest city, known for its rich civil rights history and vibrant cultural scene.",
+          attractions:
+            "Visit the Birmingham Civil Rights Institute, explore the historic Vulcan Park, and enjoy the thriving food scene in the downtown district.",
+        },
+        {
+          name: "New Orleans",
+          state: "Louisiana",
+          coords: [29.9511, -90.0715],
+          description:
+            "The Big Easy - famous for jazz music, Creole cuisine, and vibrant nightlife.",
+          attractions:
+            "Experience the French Quarter's historic charm, take a streetcar ride through the Garden District, and immerse yourself in the legendary music scene on Frenchmen Street.",
+        },
+        {
+          name: "Jackson",
+          state: "Mississippi",
+          coords: [32.2988, -90.1848],
+          description:
+            "Mississippi's capital city, rich in blues heritage and Southern culture.",
+          attractions:
+            "Explore the Mississippi Museum of Natural Science, visit the historic Farish Street District, and discover the city's role in blues music history.",
+        },
+        {
+          name: "Charlotte",
+          state: "North Carolina",
+          coords: [35.2271, -80.8431],
+          description:
+            "The Queen City - a modern metropolis blending Southern charm with urban sophistication.",
+          attractions:
+            "Discover the NASCAR Hall of Fame, stroll through the beautiful Freedom Park, and experience the vibrant NoDa and South End neighborhoods.",
+        },
+        {
+          name: "Charleston",
+          state: "South Carolina",
+          coords: [32.7765, -79.9311],
+          description:
+            "The Holy City - renowned for its historic architecture, culinary scene, and Southern hospitality.",
+          attractions:
+            "Walk through the historic French Quarter, take a carriage tour of antebellum mansions, and savor world-class Lowcountry cuisine in award-winning restaurants.",
+        },
+        {
+          name: "Nashville",
+          state: "Tennessee",
+          coords: [36.1627, -86.7816],
+          description:
+            "Music City - the heart of country music and home to the Grand Ole Opry.",
+          attractions:
+            "Tour the Country Music Hall of Fame, catch a show at the historic Ryman Auditorium, and explore the honky-tonks on Broadway.",
+        },
       ];
 
       cities.forEach((city) => {
-        L.marker(city.coords, {
+        // Add white dot marker
+        const dotMarker = L.circleMarker(city.coords, {
+          radius: 3,
+          fillColor: "white",
+          color: "#00437a",
+          weight: 1,
+          opacity: 1,
+          fillOpacity: 1,
+        }).addTo(this.map);
+
+        // Add offset label marker
+        const labelMarker = L.marker(city.coords, {
           icon: L.divIcon({
             className: "southern-us-map city-label",
             html: city.name,
-            iconSize: [100, 20],
+            iconSize: [null, null], // Let it size dynamically
+            iconAnchor: [-15, 8], // Offset to top-right: left by -15px, up by 8px
           }),
         }).addTo(this.map);
+
+        // Add click events to both markers
+        dotMarker.on("click", () => {
+          this.openCityModal(city);
+        });
+
+        labelMarker.on("click", () => {
+          this.openCityModal(city);
+        });
       });
     });
 };
 
 // Method to toggle performance mode
 SouthernUSMap.prototype.setPerformanceMode = function (enabled) {
+  console.log("setPerformanceMode called with:", enabled);
   this.options.performanceMode = enabled;
 
   // Update map options
@@ -721,14 +826,6 @@ SouthernUSMap.prototype.setPerformanceMode = function (enabled) {
       layer.options.unloadInvisibleTiles = !enabled;
     }
   });
-
-  console.log(
-    `Performance mode ${enabled ? "enabled" : "disabled"}. ${
-      enabled
-        ? "More conservative tile loading for slower devices."
-        : "Optimized for smooth panning experience."
-    }`
-  );
 };
 
 // Method to get current performance settings
