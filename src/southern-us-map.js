@@ -155,8 +155,7 @@ SouthernUSMap.prototype.injectCSS = function () {
       }
 
       .southern-us-modal {
-        display: flex;
-        align-items: center;
+        display: none;
         position: fixed;
         z-index: 10000;
         left: 0;
@@ -168,6 +167,11 @@ SouthernUSMap.prototype.injectCSS = function () {
         font-weight: 400;
       }
 
+      .southern-us-modal.show {
+        display: flex;
+        align-items: center;
+      }
+
       .southern-us-modal-content {
         background-color: #fefefe;
         margin: 5% auto;
@@ -175,8 +179,11 @@ SouthernUSMap.prototype.injectCSS = function () {
         border-radius: 10px;
         width: 90%;
         max-width: 500px;
+        max-height: 90vh;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         animation: modalSlideIn 0.3s ease;
+        display: flex;
+        flex-direction: column;
       }
 
       @keyframes modalSlideIn {
@@ -197,6 +204,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         border-radius: 10px 10px 0 0;
         text-align: center;
         position: relative;
+        flex-shrink: 0;
       }
 
       .southern-us-modal-header h2 {
@@ -223,6 +231,8 @@ SouthernUSMap.prototype.injectCSS = function () {
 
       .southern-us-modal-body {
         padding: 30px;
+        overflow-y: auto;
+        flex: 1;
       }
 
       .southern-us-flag-section {
@@ -275,8 +285,8 @@ SouthernUSMap.prototype.injectCSS = function () {
         background: transparent;
         color: #414b54;
         border: 1px solid #00437a;
-        padding: 8px 16px;
-        border-radius: 100px;
+        padding: 8px;
+        border-radius: 10px;
         font-size: 1rem;
         font-weight: 400;
         line-height: 1.4;
@@ -288,14 +298,9 @@ SouthernUSMap.prototype.injectCSS = function () {
         transition: all 0.2s ease;
       }
 
-      .southern-us-artist-pill:hover {
-        background: rgba(0, 67, 122, 0.1);
-        transform: translateY(-1px);
-      }
-
       .southern-us-artist-pill img {
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         object-fit: cover;
         flex-shrink: 0;
@@ -303,24 +308,29 @@ SouthernUSMap.prototype.injectCSS = function () {
 
       .southern-us-cta-section {
         text-align: center;
+        padding: 20px 0;
       }
 
       .southern-us-cta-button {
-        background: #00437a;
-        color: white;
+        background: #fbba00;
+        color: #001b31;
         border: none;
-        padding: 14px 32px;
-        font-size: 1rem;
-        line-height: 1.4;
+        padding-top: .875rem;
+        padding-bottom: .875rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        font-size: 1.1rem;
+        line-height: 1.5;
         border-radius: 100px;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
         font-weight: 700;
         text-transform: uppercase;
+        font-family: "Gotham", sans-serif;
       }
 
       .southern-us-cta-button:hover {
-        background: #001b31;
+        background: #fcc833;
       }
 
       /* Mobile optimizations */
@@ -330,7 +340,6 @@ SouthernUSMap.prototype.injectCSS = function () {
           width: 95%;
           max-width: none;
           max-height: 90vh;
-          overflow-y: auto;
         }
 
         .southern-us-modal-header {
@@ -338,7 +347,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         }
 
         .southern-us-modal-header h2 {
-          font-size: 20px;
+          font-size: 1.3rem;
         }
 
         .southern-us-modal-close {
@@ -361,24 +370,24 @@ SouthernUSMap.prototype.injectCSS = function () {
 
 
         .southern-us-section h3, {
-          font-size: 17px;
+          font-size: 1.2rem;
           margin-bottom: 8px;
         }
 
         .southern-us-section p {
-          font-size: 14px;
+          font-size: 1rem;
           line-height: 1.5;
           margin-bottom: 0;
         }
 
         .southern-us-artist-pill {
-          padding: 6px 12px;
-          font-size: 13px;
+          padding: 6px;
+          font-size: 1rem;
         }
 
         .southern-us-cta-button {
           padding: 14px 28px;
-          font-size: 16px;
+          font-size: 1rem;
         }
       }
     `;
@@ -566,11 +575,11 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
   ).textContent = `Plan Your Visit to ${state.name}`;
 
   // Show modal
-  this.modal.style.display = "block";
+  this.modal.classList.add("show");
 };
 
 SouthernUSMap.prototype.closeModal = function () {
-  this.modal.style.display = "none";
+  this.modal.classList.remove("show");
 };
 
 SouthernUSMap.prototype.openCityModal = function (city) {
@@ -601,7 +610,7 @@ SouthernUSMap.prototype.openCityModal = function (city) {
   ).textContent = `Plan Your Visit to ${city.name}`;
 
   // Show modal
-  this.modal.style.display = "block";
+  this.modal.classList.add("show");
 };
 
 SouthernUSMap.prototype.loadMapData = function () {
