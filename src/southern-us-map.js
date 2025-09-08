@@ -2,6 +2,39 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import * as topojson from "topojson-client";
 
+// Import artist images
+// Alabama
+import redClayStraysImg from "./assets/images/artists/alabama/the-red-clay-strays.jfif";
+import muscadineBloodlineImg from "./assets/images/artists/alabama/muscadine-bloodline.jfif";
+import jasonIsbellImg from "./assets/images/artists/alabama/jason-isbell.jfif";
+
+// Louisiana
+import luckyDayeImg from "./assets/images/artists/louisiana/lucky-daye.jfif";
+import jonBatisteImg from "./assets/images/artists/louisiana/jon-batiste.jfif";
+import aaronNevilleImg from "./assets/images/artists/louisiana/aaron-neville.jfif";
+
+// Mississippi
+import kingfishIngramImg from "./assets/images/artists/mississippi/christone-kingfish-ingram.jfif";
+import charlieWorshamImg from "./assets/images/artists/mississippi/charlie-worsham.jfif";
+import kirbyImg from "./assets/images/artists/mississippi/kirby.jfif";
+import bigKritImg from "./assets/images/artists/mississippi/big-krit.jfif";
+
+// North Carolina
+import rhiannonGiddensImg from "./assets/images/artists/north-carolina/rhiannon-giddens.jfif";
+import chathamCountyLineImg from "./assets/images/artists/north-carolina/chatham-county-line.jfif";
+import mjLendermanImg from "./assets/images/artists/north-carolina/mj-lenderman.jfif";
+import avettBrothersImg from "./assets/images/artists/north-carolina/the-avett-brothers.jfif";
+
+// South Carolina
+import dariusRuckerImg from "./assets/images/artists/south-carolina/darius-rucker.jfif";
+import edwinMccainImg from "./assets/images/artists/south-carolina/edwin-mccain.jfif";
+import rankyTankyImg from "./assets/images/artists/south-carolina/ranky-tanky.jfif";
+
+// Tennessee
+import damienHorneImg from "./assets/images/artists/tennessee/damien-horne.jfif";
+import davidTolliverImg from "./assets/images/artists/tennessee/david-tolliver.jfif";
+import mauraStreppaImg from "./assets/images/artists/tennessee/maura-streppa.jfif";
+
 // SouthernUSMap Widget - ES6 Module Version
 function SouthernUSMap(containerId, options = {}) {
   this.containerId = containerId;
@@ -122,7 +155,8 @@ SouthernUSMap.prototype.injectCSS = function () {
       }
 
       .southern-us-modal {
-        display: none;
+        display: flex;
+        align-items: center;
         position: fixed;
         z-index: 10000;
         left: 0;
@@ -193,7 +227,7 @@ SouthernUSMap.prototype.injectCSS = function () {
 
       .southern-us-flag-section {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 18px;
       }
 
       .southern-us-state-flag {
@@ -204,42 +238,37 @@ SouthernUSMap.prototype.injectCSS = function () {
         object-fit: cover;
       }
 
-      .southern-us-description-section,
-      .southern-us-music-section {
-        margin-bottom: 30px;
+      .southern-us-section {
+        margin-bottom: 18px;
       }
 
-      .southern-us-artists-section {
-        margin-bottom: 25px;
-      }
-
-      .southern-us-description-section h3,
-      .southern-us-music-section h3,
-      .southern-us-artists-section h3 {
+      .southern-us-section h3 {
         color: #00437a;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
         font-size: 1.2rem;
+        font-weight: 700;
+        line-height: 1.5;
+        text-transform: none;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+      }
+        .southern-us-section h4 {
+        color: #00437a;
+        margin-bottom: 12px;
+        font-size: 1.1rem;
         font-weight: 700;
         line-height: 1.3;
         text-transform: none;
+        margin-block-start: 1em;
+        margin-block-end: 1em;
       }
 
-      .southern-us-artists-section h3 {
-        margin-bottom: 15px;
-      }
 
-      .southern-us-description-section p {
+      .southern-us-section p {
         font-size: 1rem;
         line-height: 1.6;
         color: #414b54;
         margin: 0;
-      }
-
-      .southern-us-artists-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: flex-start;
       }
 
       .southern-us-artist-pill {
@@ -252,7 +281,24 @@ SouthernUSMap.prototype.injectCSS = function () {
         font-weight: 400;
         line-height: 1.4;
         text-align: center;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin: 5px;
+        transition: all 0.2s ease;
+      }
+
+      .southern-us-artist-pill:hover {
+        background: rgba(0, 67, 122, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .southern-us-artist-pill img {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
       }
 
       .southern-us-cta-section {
@@ -260,8 +306,8 @@ SouthernUSMap.prototype.injectCSS = function () {
       }
 
       .southern-us-cta-button {
-        background: #fbba00;
-        color: #00437a;
+        background: #00437a;
+        color: white;
         border: none;
         padding: 14px 32px;
         font-size: 1rem;
@@ -274,7 +320,7 @@ SouthernUSMap.prototype.injectCSS = function () {
       }
 
       .southern-us-cta-button:hover {
-        background: #fcc833;
+        background: #001b31;
       }
 
       /* Mobile optimizations */
@@ -304,7 +350,7 @@ SouthernUSMap.prototype.injectCSS = function () {
           padding: 18px;
         }
 
-        .southern-us-flag-section {
+        .southern-us-section {
           margin-bottom: 12px;
         }
 
@@ -313,23 +359,13 @@ SouthernUSMap.prototype.injectCSS = function () {
           height: 53px;
         }
 
-        .southern-us-description-section {
-          margin-bottom: 12px;
-        }
 
-        .southern-us-music-section,
-        .southern-us-artists-section {
-          margin-bottom: 18px;
-        }
-
-        .southern-us-description-section h3,
-        .southern-us-music-section h3,
-        .southern-us-artists-section h3 {
+        .southern-us-section h3, {
           font-size: 17px;
           margin-bottom: 8px;
         }
 
-        .southern-us-description-section p {
+        .southern-us-section p {
           font-size: 14px;
           line-height: 1.5;
           margin-bottom: 0;
@@ -422,18 +458,18 @@ SouthernUSMap.prototype.createModal = function () {
           <h2 id="southern-us-modal-title">State Name</h2>
         </div>
         <div class="southern-us-modal-body">
-          <div class="southern-us-flag-section">
+          <div class="southern-us-flag-section southern-us-section">
             <img id="southern-us-state-flag" class="southern-us-state-flag" src="" alt="State Flag" />
           </div>
-          <div class="southern-us-description-section">
+          <div class="southern-us-description-section southern-us-section">
             <h3>About</h3>
             <p id="southern-us-state-description"></p>
           </div>
-          <div class="southern-us-music-section">
+          <div class="southern-us-music-section southern-us-section">
             <h3>Musical Heritage</h3>
             <div id="southern-us-state-artists" class="southern-us-artists-container"></div>
           </div>
-          <div class="southern-us-artists-section">
+          <div class="southern-us-artists-section southern-us-section">
             <h3>Must-Visit Attractions</h3>
             <div id="southern-us-state-attractions" class="southern-us-artists-container"></div>
           </div>
@@ -488,13 +524,13 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
   // Populate music section with intro and artists
   const artistsContainer = document.getElementById("southern-us-state-artists");
   artistsContainer.innerHTML = `
-    <p style="color: #414b54; line-height: 1.6; margin-bottom: 15px; font-size: 14px;">
+    <p class="southern-us-state-description">
       ${
         state.musicIntro ||
         `Discover the rich musical heritage that makes ${state.name} a cornerstone of Southern sound.`
       }
     </p>
-    <h4 style="color: #00437a; font-size: 16px; margin-bottom: 10px; font-weight: 700;">Sounds of the South Featured Artists</h4>
+    <h4>Sounds of the South Featured Artists</h4>
     <div class="southern-us-artists-pills"></div>
   `;
 
@@ -504,7 +540,14 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
   state.artists.forEach((artist) => {
     const pill = document.createElement("div");
     pill.className = "southern-us-artist-pill";
-    pill.textContent = artist;
+
+    // Create pill content with optional image
+    if (artist.image) {
+      pill.innerHTML = `<img src="${artist.image}" alt="${artist.name}" /><span>${artist.name}</span>`;
+    } else {
+      pill.innerHTML = `<span>${artist.name}</span>`;
+    }
+
     pillsContainer.appendChild(pill);
   });
 
@@ -578,7 +621,11 @@ SouthernUSMap.prototype.loadMapData = function () {
       flag: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Alabama.svg",
       description:
         "Known as the Heart of Dixie, Alabama is famous for its rich Civil Rights history, beautiful Gulf Coast beaches, and southern hospitality.",
-      artists: ["The Red Clay Strays", "Muscadine Bloodline", "Jason Isbell"],
+      artists: [
+        { name: "The Red Clay Strays", image: redClayStraysImg },
+        { name: "Muscadine Bloodline", image: muscadineBloodlineImg },
+        { name: "Jason Isbell", image: jasonIsbellImg },
+      ],
       attractions: [
         "Gulf State Park",
         "U.S. Space & Rocket Center",
@@ -590,7 +637,11 @@ SouthernUSMap.prototype.loadMapData = function () {
       flag: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Flag_of_Louisiana.svg",
       description:
         "Louisiana captivates visitors with its unique Creole and Cajun culture, world-renowned cuisine, vibrant festivals, and the historic charm of New Orleans.",
-      artists: ["Lucky Daye", "Jon Batiste", "Aaron Neville"],
+      artists: [
+        { name: "Lucky Daye", image: luckyDayeImg },
+        { name: "Jon Batiste", image: jonBatisteImg },
+        { name: "Aaron Neville", image: aaronNevilleImg },
+      ],
       attractions: ["French Quarter", "Garden District", "Bourbon Street"],
     },
     28: {
@@ -598,7 +649,12 @@ SouthernUSMap.prototype.loadMapData = function () {
       flag: "https://upload.wikimedia.org/wikipedia/commons/4/42/Flag_of_Mississippi.svg",
       description:
         "Mississippi is the birthplace of blues music, home to literary legends, and offers rich Delta culture along the mighty Mississippi River.",
-      artists: ['Christone "Kingfish" Ingram', "Charlie Worsham", "KIRBY"],
+      artists: [
+        { name: 'Christone "Kingfish" Ingram', image: kingfishIngramImg },
+        { name: "Charlie Worsham", image: charlieWorshamImg },
+        { name: "KIRBY", image: kirbyImg },
+        { name: "Big K.R.I.T.", image: bigKritImg },
+      ],
       attractions: ["Blues Trail", "Vicksburg Battlefield", "Natchez Trace"],
     },
     37: {
@@ -606,7 +662,12 @@ SouthernUSMap.prototype.loadMapData = function () {
       flag: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Flag_of_North_Carolina.svg",
       description:
         "North Carolina boasts stunning Blue Ridge Mountains, beautiful Outer Banks coastline, vibrant cities, and a perfect blend of mountain and coastal culture.",
-      artists: ["Rhiannon Giddens", "Chatham County Line", "MJ Lenderman"],
+      artists: [
+        { name: "Rhiannon Giddens", image: rhiannonGiddensImg },
+        { name: "Chatham County Line", image: chathamCountyLineImg },
+        { name: "MJ Lenderman", image: mjLendermanImg },
+        { name: "The Avett Brothers", image: avettBrothersImg },
+      ],
       attractions: [
         "Blue Ridge Parkway",
         "Outer Banks",
@@ -618,7 +679,11 @@ SouthernUSMap.prototype.loadMapData = function () {
       flag: "https://upload.wikimedia.org/wikipedia/commons/6/69/Flag_of_South_Carolina.svg",
       description:
         "South Carolina offers stunning coastal beauty, historic Charleston, beautiful plantations, and a perfect blend of Southern tradition and coastal living.",
-      artists: ["Darius Rucker", "Edwin McCain", "Ranky Tanky"],
+      artists: [
+        { name: "Darius Rucker", image: dariusRuckerImg },
+        { name: "Edwin McCain", image: edwinMccainImg },
+        { name: "Ranky Tanky", image: rankyTankyImg },
+      ],
       attractions: [
         "Historic Charleston",
         "Myrtle Beach",
@@ -630,7 +695,11 @@ SouthernUSMap.prototype.loadMapData = function () {
       flag: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Tennessee.svg",
       description:
         "Tennessee is the heart of country music, home to Nashville and Memphis, offering rich musical heritage, stunning Smoky Mountains, and vibrant cultural attractions.",
-      artists: ["Damien Horne", "David Tolliver", "Maura Streppa"],
+      artists: [
+        { name: "Damien Horne", image: damienHorneImg },
+        { name: "David Tolliver", image: davidTolliverImg },
+        { name: "Maura Streppa", image: mauraStreppaImg },
+      ],
       attractions: [
         "Nashville Music Row",
         "Graceland",
