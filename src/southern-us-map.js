@@ -56,7 +56,7 @@ function SouthernUSMap(containerId, options = {}) {
     {
       defaultZoom: isMobile ? 5 : 6, // Mobile: 5, Desktop: 6
       minZoom: 4,
-      maxZoom: 8,
+      maxZoom: 7,
       performanceMode: isMobile, // Enable performance mode on mobile
     },
     options
@@ -178,7 +178,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         padding: 0;
         border-radius: 10px;
         width: 90%;
-        max-width: 500px;
+        max-width: 700px;
         max-height: 90vh;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         animation: modalSlideIn 0.3s ease;
@@ -209,7 +209,7 @@ SouthernUSMap.prototype.injectCSS = function () {
 
       .southern-us-modal-header h2 {
         margin: 0;
-        font-size: 1.5rem;
+        font-size: 1.3rem;
         font-weight: 700;
         line-height: 1.3;
       }
@@ -299,8 +299,8 @@ SouthernUSMap.prototype.injectCSS = function () {
       }
 
       .southern-us-artist-pill img {
-        width: 32px;
-        height: 32px;
+        width: 45px;
+        height: 45px;
         border-radius: 50%;
         object-fit: cover;
         flex-shrink: 0;
@@ -319,7 +319,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         padding-bottom: .875rem;
         padding-left: 2rem;
         padding-right: 2rem;
-        font-size: 1.1rem;
+        font-size: 1rem;
         line-height: 1.5;
         border-radius: 100px;
         cursor: pointer;
@@ -327,14 +327,47 @@ SouthernUSMap.prototype.injectCSS = function () {
         font-weight: 700;
         text-transform: uppercase;
         font-family: "Gotham", sans-serif;
+        text-decoration: none;
+        display: inline-block;
       }
 
       .southern-us-cta-button:hover {
         background: #fcc833;
       }
 
-      /* Mobile optimizations */
-      @media (max-width: 768px) {
+      /* Large desktop optimizations - 1280px and up */
+      @media (min-width: 1280px) {
+            .southern-us-artist-pill img {
+        width: 32px;
+        height: 32px;
+      }
+        .southern-us-section h3 {
+          font-size: 1.5rem;
+        }
+
+        .southern-us-section h4 {
+          font-size: 1.375rem;
+        }
+
+        .southern-us-section p {
+          font-size: 1.25rem;
+        }
+
+        .southern-us-modal-header h2 {
+          font-size: 1.875rem;
+        }
+
+        .southern-us-map .state-label {
+          font-size: 1.25rem;
+        }
+
+        .southern-us-map .city-label {
+          font-size: 0.875rem;
+        }
+      }
+
+      /* Mobile and tablet optimizations - below 1280px */
+      @media (max-width: 1279px) {
         .southern-us-modal-content {
           margin: 3% auto;
           width: 95%;
@@ -369,25 +402,12 @@ SouthernUSMap.prototype.injectCSS = function () {
         }
 
 
-        .southern-us-section h3, {
-          font-size: 1.2rem;
-          margin-bottom: 8px;
-        }
-
-        .southern-us-section p {
-          font-size: 1rem;
-          line-height: 1.5;
-          margin-bottom: 0;
-        }
-
         .southern-us-artist-pill {
           padding: 6px;
-          font-size: 1rem;
         }
 
         .southern-us-cta-button {
           padding: 14px 28px;
-          font-size: 1rem;
         }
       }
     `;
@@ -483,7 +503,7 @@ SouthernUSMap.prototype.createModal = function () {
             <div id="southern-us-state-attractions" class="southern-us-artists-container"></div>
           </div>
           <div class="southern-us-cta-section">
-            <button id="southern-us-cta-button" class="southern-us-cta-button">Plan Your Visit</button>
+            <a id="southern-us-cta-button" class="southern-us-cta-button" href="#" target="_blank" rel="nofollow noopener noreferrer">Plan Your Visit</a>
           </div>
         </div>
       </div>
@@ -503,14 +523,7 @@ SouthernUSMap.prototype.createModal = function () {
     }
   });
 
-  ctaButton.onclick = () => {
-    const stateName = document.getElementById(
-      "southern-us-modal-title"
-    ).textContent;
-    alert(
-      `Planning your visit to ${stateName}! This would redirect to a travel planning service.`
-    );
-  };
+  // CTA button href will be updated when modal content is populated
 };
 
 SouthernUSMap.prototype.openStateModal = function (stateId) {
@@ -570,9 +583,14 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
     state.attractionsText || state.attractions.join(", ")
   }</p>`;
 
-  document.getElementById(
-    "southern-us-cta-button"
-  ).textContent = `Plan Your Visit to ${state.name}`;
+  // Update CTA button text and link
+  const ctaButton = document.getElementById("southern-us-cta-button");
+  ctaButton.textContent = `Plan Your Visit to ${state.name}`;
+
+  // Create URL-friendly state name and set href
+  const urlStateName = state.name.toLowerCase().replace(/\s+/g, "-");
+  const haysTravelUrl = `https://www.haystravel.co.uk/destinations/americas/the-south/${urlStateName}`;
+  ctaButton.href = haysTravelUrl;
 
   // Show modal
   this.modal.classList.add("show");
@@ -605,9 +623,14 @@ SouthernUSMap.prototype.openCityModal = function (city) {
   );
   attractionsContainer.innerHTML = `<p style="color: #414b54; line-height: 1.6; margin: 0;">${city.attractions}</p>`;
 
-  document.getElementById(
-    "southern-us-cta-button"
-  ).textContent = `Plan Your Visit to ${city.name}`;
+  // Update CTA button text and link for cities
+  const ctaButton = document.getElementById("southern-us-cta-button");
+  ctaButton.textContent = `Plan Your Visit to ${city.name}`;
+
+  // Create URL-friendly city name and set href
+  const urlCityName = city.name.toLowerCase().replace(/\s+/g, "-");
+  const haysTravelUrl = `https://www.haystravel.co.uk/destinations/americas/the-south/${urlCityName}`;
+  ctaButton.href = haysTravelUrl;
 
   // Show modal
   this.modal.classList.add("show");
@@ -812,61 +835,52 @@ SouthernUSMap.prototype.loadMapData = function () {
         `Initial state labels created with font size: ${initialFontSize}rem`
       );
 
-      // Add manually-specified cities with data
+      // Add Hays Travel featured cities with data
       const cities = [
         {
-          name: "Birmingham",
-          state: "Alabama",
-          coords: [33.5186, -86.8104],
-          description:
-            "Alabama's largest city, known for its rich civil rights history and vibrant cultural scene.",
-          attractions:
-            "Visit the Birmingham Civil Rights Institute, explore the historic Vulcan Park, and enjoy the thriving food scene in the downtown district.",
-        },
-        {
-          name: "New Orleans",
-          state: "Louisiana",
-          coords: [29.9511, -90.0715],
-          description:
-            "The Big Easy - famous for jazz music, Creole cuisine, and vibrant nightlife.",
-          attractions:
-            "Experience the French Quarter's historic charm, take a streetcar ride through the Garden District, and immerse yourself in the legendary music scene on Frenchmen Street.",
-        },
-        {
-          name: "Jackson",
-          state: "Mississippi",
-          coords: [32.2988, -90.1848],
-          description:
-            "Mississippi's capital city, rich in blues heritage and Southern culture.",
-          attractions:
-            "Explore the Mississippi Museum of Natural Science, visit the historic Farish Street District, and discover the city's role in blues music history.",
-        },
-        {
-          name: "Charlotte",
+          name: "Raleigh",
           state: "North Carolina",
-          coords: [35.2271, -80.8431],
+          coords: [35.7796, -78.6382],
           description:
-            "The Queen City - a modern metropolis blending Southern charm with urban sophistication.",
+            "North Carolina's capital city, known for its vibrant cultural scene, excellent museums, and beautiful parks.",
           attractions:
-            "Discover the NASCAR Hall of Fame, stroll through the beautiful Freedom Park, and experience the vibrant NoDa and South End neighborhoods.",
+            "Visit the North Carolina Museum of Art, explore the historic State Capitol, and enjoy the scenic Umstead State Park.",
         },
         {
-          name: "Charleston",
-          state: "South Carolina",
-          coords: [32.7765, -79.9311],
+          name: "Tupelo",
+          state: "Mississippi",
+          coords: [34.2576, -88.7034],
           description:
-            "The Holy City - renowned for its historic architecture, culinary scene, and Southern hospitality.",
+            "The birthplace of Elvis Presley, offering rich musical heritage and charming Southern hospitality.",
           attractions:
-            "Walk through the historic French Quarter, take a carriage tour of antebellum mansions, and savor world-class Lowcountry cuisine in award-winning restaurants.",
+            "Tour Elvis Presley's birthplace, visit the Tupelo Automobile Museum, and explore the beautiful Natchez Trace Parkway.",
         },
         {
-          name: "Nashville",
+          name: "Huntsville",
+          state: "Alabama",
+          coords: [34.7304, -86.5861],
+          description:
+            "Rocket City - home to NASA's Marshall Space Flight Center and rich aerospace heritage.",
+          attractions:
+            "Explore the U.S. Space & Rocket Center, visit the Huntsville Botanical Garden, and discover the historic Twickenham District.",
+        },
+        {
+          name: "Mobile",
+          state: "Alabama",
+          coords: [30.6954, -88.0399],
+          description:
+            "Alabama's oldest city, famous for its antebellum architecture, historic districts, and Gulf Coast charm.",
+          attractions:
+            "Stroll through the Historic Downtown District, visit Fort Morgan, and enjoy the beautiful Mobile Bay waterfront.",
+        },
+        {
+          name: "Sevierville",
           state: "Tennessee",
-          coords: [36.1627, -86.7816],
+          coords: [35.8681, -83.5619],
           description:
-            "Music City - the heart of country music and home to the Grand Ole Opry.",
+            "Gateway to the Great Smoky Mountains, offering outdoor adventures and mountain charm.",
           attractions:
-            "Tour the Country Music Hall of Fame, catch a show at the historic Ryman Auditorium, and explore the honky-tonks on Broadway.",
+            "Experience Dollywood theme park, explore the Great Smoky Mountains National Park, and enjoy scenic mountain views along the Parkway.",
         },
       ];
 
@@ -947,14 +961,27 @@ SouthernUSMap.prototype.updateCityMarkerVisibility = function () {
 
 // Helper method to calculate font size based on zoom level
 SouthernUSMap.prototype.calculateFontSize = function (zoomLevel) {
-  // Calculate font size based on zoom level
-  // Zoom 4-5: 0.7rem, Zoom 6: 1rem, Zoom 7-8: 1.2rem
-  if (zoomLevel <= 5) {
-    return 0.7; // Smaller for zoomed out view
-  } else if (zoomLevel <= 6) {
-    return 1.0; // Default size
+  // Detect large desktop for different scaling
+  const isLargeDesktop = window.innerWidth >= 1280;
+
+  if (isLargeDesktop) {
+    // Large Desktop (1280px+): Zoom 4-5: 0.875rem, Zoom 6: 1.25rem, Zoom 7-8: 1.5rem
+    if (zoomLevel <= 5) {
+      return 0.8; // Smaller for zoomed out view
+    } else if (zoomLevel <= 6) {
+      return 1.1; // Default size
+    } else {
+      return 1.5; // Larger for zoomed in view
+    }
   } else {
-    return 1.2; // Larger for zoomed in view
+    // Mobile/Tablet (below 1280px): Zoom 4-5: 0.7rem, Zoom 6: 1rem, Zoom 7-8: 1.2rem
+    if (zoomLevel <= 5) {
+      return 0.7; // Smaller for zoomed out view
+    } else if (zoomLevel <= 6) {
+      return 1.0; // Default size
+    } else {
+      return 1.2; // Larger for zoomed in view
+    }
   }
 };
 
