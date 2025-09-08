@@ -179,7 +179,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         border-radius: 10px;
         width: 90%;
         max-width: 700px;
-        max-height: 90svh;
+        max-height: 85vh;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         animation: modalSlideIn 0.3s ease;
         display: flex;
@@ -369,10 +369,21 @@ SouthernUSMap.prototype.injectCSS = function () {
       /* Mobile and tablet optimizations - below 1280px */
       @media (max-width: 1279px) {
         .southern-us-modal-content {
-          margin: 3% auto;
+          margin: 2vh auto;
           width: 95%;
           max-width: none;
-          max-height: 90vh;
+          max-height: 96vh;
+        }
+      }
+
+      /* Mobile specific optimizations */
+      @media (max-width: 768px) {
+        .southern-us-modal-content {
+          margin: 1vh auto;
+          width: 98%;
+          max-height: 98vh;
+          /* Fallback for newer browsers that support dynamic viewport units */
+          max-height: 98dvh;
         }
 
         .southern-us-modal-header {
