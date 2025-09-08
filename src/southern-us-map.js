@@ -895,13 +895,13 @@ SouthernUSMap.prototype.loadMapData = function () {
           fillOpacity: 1,
         });
 
-        // Add offset label marker
+        // Add label marker at coordinates
         const labelMarker = L.marker(city.coords, {
           icon: L.divIcon({
             className: "southern-us-map city-label",
             html: city.name,
             iconSize: [null, null], // Let it size dynamically
-            iconAnchor: [-15, 8], // Offset to top-right: left by -15px, up by 8px
+            iconAnchor: [null, null], // No offset - center at coordinates
           }),
         });
 
