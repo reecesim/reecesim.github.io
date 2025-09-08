@@ -299,8 +299,8 @@ SouthernUSMap.prototype.injectCSS = function () {
       }
 
       .southern-us-artist-pill img {
-        width: 45px;
-        height: 45px;
+        width: 32px;
+        height: 32px;
         border-radius: 50%;
         object-fit: cover;
         flex-shrink: 0;
@@ -338,8 +338,8 @@ SouthernUSMap.prototype.injectCSS = function () {
       /* Large desktop optimizations - 1280px and up */
       @media (min-width: 1280px) {
             .southern-us-artist-pill img {
-        width: 32px;
-        height: 32px;
+        width: 45px;
+        height: 45px;
       }
         .southern-us-section h3 {
           font-size: 1.5rem;
