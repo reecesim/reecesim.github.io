@@ -211,7 +211,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         margin: 0;
         font-size: 1.3rem;
         font-weight: 700;
-        line-height: 2.4375rem;
+        line-height: 2.1125rem;
       }
 
       .southern-us-modal-close {
@@ -257,7 +257,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         margin-bottom: 12px;
         font-size: 1.2rem;
         font-weight: 700;
-        line-height: 2.25rem;
+        line-height: 1.95rem;
         text-transform: none;
         margin-block-start: 1em;
         margin-block-end: 1em;
@@ -267,7 +267,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         margin-bottom: 12px;
         font-size: 1.1rem;
         font-weight: 700;
-        line-height: 2.0625rem;
+        line-height: 1.7875rem;
         text-transform: none;
         margin-block-start: 1em;
         margin-block-end: 1em;
@@ -276,7 +276,7 @@ SouthernUSMap.prototype.injectCSS = function () {
 
       .southern-us-section p {
         font-size: 1rem;
-        line-height: 1.875rem;
+        line-height: 1.625rem;
         color: #414b54;
         margin: 0;
       }
@@ -289,7 +289,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         border-radius: 10px;
         font-size: 1rem;
         font-weight: 400;
-        line-height: 1.875rem;
+        line-height: 1.625rem;
         text-align: center;
         display: inline-flex;
         align-items: center;
@@ -320,7 +320,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         padding-left: 2rem;
         padding-right: 2rem;
         font-size: 1rem;
-        line-height: 1.875rem;
+        line-height: 1.625rem;
         border-radius: 100px;
         cursor: pointer;
         transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -343,22 +343,22 @@ SouthernUSMap.prototype.injectCSS = function () {
       }
         .southern-us-section h3 {
           font-size: 1.5rem;
-          line-height: 2.8125rem;
+          line-height: 2.25rem;
         }
 
         .southern-us-section h4 {
           font-size: 1.375rem;
-          line-height: 2.578125rem;
+          line-height: 2.0625rem;
         }
 
         .southern-us-section p {
           font-size: 1.25rem;
-          line-height: 2.34375rem;
+          line-height: 1.875rem;
         }
 
         .southern-us-modal-header h2 {
           font-size: 1.875rem;
-          line-height: 3.515625rem;
+          line-height: 2.8125rem;
         }
 
         .southern-us-map .state-label {
