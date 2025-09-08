@@ -179,7 +179,7 @@ SouthernUSMap.prototype.injectCSS = function () {
         border-radius: 10px;
         width: 90%;
         max-width: 700px;
-        max-height: 90vh;
+        max-height: 90svh;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         animation: modalSlideIn 0.3s ease;
         display: flex;
