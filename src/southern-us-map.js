@@ -55,7 +55,7 @@ function SouthernUSMap(containerId, options = {}) {
   this.options = Object.assign(
     {
       defaultZoom: isMobile ? 5 : 6, // Mobile: 5, Desktop: 6
-      minZoom: 4,
+      minZoom: 5,
       maxZoom: 7,
       performanceMode: isMobile, // Enable performance mode on mobile
     },
@@ -431,8 +431,8 @@ SouthernUSMap.prototype.initMap = function () {
     keyboard: false,
     touchZoom: true,
     maxBounds: [
-      [28, -95], // SW
-      [37, -75], // NE
+      [26, -98], // SW - expanded slightly south and west
+      [39, -72], // NE - expanded slightly north and east
     ],
   };
 
@@ -930,7 +930,7 @@ SouthernUSMap.prototype.loadMapData = function () {
 // Method to update city marker visibility based on zoom level
 SouthernUSMap.prototype.updateCityMarkerVisibility = function () {
   const currentZoom = this.map.getZoom();
-  const shouldShowCities = currentZoom >= 7;
+  const shouldShowCities = currentZoom >= 6;
 
   this.cityMarkers.forEach((markerGroup) => {
     if (shouldShowCities) {
