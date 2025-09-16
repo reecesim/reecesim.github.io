@@ -46,17 +46,17 @@ function SouthernUSMap(containerId, options = {}) {
       navigator.userAgent
     );
 
-  console.log("Mobile Detection Debug:");
+  /*console.log("Mobile Detection Debug:");
   console.log("- window.innerWidth:", window.innerWidth);
   console.log("- isMobile:", isMobile);
-  console.log("- User Agent:", navigator.userAgent);
+  console.log("- User Agent:", navigator.userAgent);*/
 
-  // Clean options setup with mobile detection
+  // Clean options setup with mobile detection and responsive zoom levels
   this.options = Object.assign(
     {
       defaultZoom: isMobile ? 5 : 6, // Mobile: 5, Desktop: 6
-      minZoom: 5,
-      maxZoom: 7,
+      minZoom: isMobile ? 5 : 6, // Mobile: 5, Desktop: 6 (no zoom out on desktop)
+      maxZoom: isMobile ? 7 : 8, // Mobile: 7, Desktop: 8 (more zoom in on desktop)
       performanceMode: isMobile, // Enable performance mode on mobile
     },
     options
@@ -84,11 +84,11 @@ function SouthernUSMap(containerId, options = {}) {
 
   // Enable performance mode on mobile devices
   if (isMobile) {
-    console.log("Enabling performance mode for mobile device");
+    //  console.log("Enabling performance mode for mobile device");
     this.setPerformanceMode(true);
   }
 
-  console.log("Final options:", this.options);
+  // console.log("Final options:", this.options);
 }
 
 SouthernUSMap.prototype.injectCSS = function () {
@@ -433,48 +433,58 @@ SouthernUSMap.prototype.initMap = function () {
   // Set up container - add our class without removing existing ones
   this.container.classList.add("southern-us-map");
 
-  // Create map
+  // Detect mobile device for zoom settings
+  const isMobile =
+    window.innerWidth <= 768 ||
+    /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    );
+
+  // Create map with responsive zoom and pan settings
   const mapOptions = {
     minZoom: this.options.minZoom,
     maxZoom: this.options.maxZoom,
     zoomControl: false,
     attributionControl: false,
-    dragging: true,
-    scrollWheelZoom: true,
+    dragging: isMobile, // Only allow dragging/panning on mobile
+    scrollWheelZoom: isMobile, // Only allow scroll wheel zoom on mobile
     doubleClickZoom: false,
     boxZoom: false,
     keyboard: false,
-    touchZoom: true,
+    touchZoom: isMobile, // Only allow touch zoom on mobile
     maxBounds: [
-      [26, -98], // SW - expanded slightly south and west
-      [39, -72], // NE - expanded slightly north and east
+      [28, -95], // SW - tighter bounds focused on Southern states
+      [37, -75], // NE - tighter bounds focused on Southern states
     ],
   };
 
-  console.log("Initializing map with zoom:", this.options.defaultZoom);
-  console.log("Performance mode enabled:", this.options.performanceMode);
+  // console.log("Initializing map with zoom:", this.options.defaultZoom);
+  // console.log("Performance mode enabled:", this.options.performanceMode);
 
   this.map = L.map(this.container, mapOptions).setView(
-    [33, -85],
+    [31.5, -85],
     this.options.defaultZoom
   );
 
-  console.log("Map initialized. Current zoom:", this.map.getZoom());
+  // console.log("Map initialized. Current zoom:", this.map.getZoom());
 
   // Add zoom level and performance logging on pan/move events
   this.map.on("moveend", () => {
-    console.log("Pan/Move Event - Current zoom level:", this.map.getZoom());
-    console.log(
-      "Pan/Move Event - Performance mode:",
-      this.options.performanceMode
-    );
+    // console.log("Pan/Move Event - Current zoom level:", this.map.getZoom());
+    // console.log(
+    //   "Pan/Move Event - Performance mode:",
+    //   this.options.performanceMode
+    // );
   });
 
-  // Add zoom event listener for dynamic state label sizing and city marker visibility
-  this.map.on("zoomend", () => {
-    this.updateStateLabelSizes();
-    this.updateCityMarkerVisibility();
-  });
+  // Add zoom event listener for dynamic state label sizing and city marker visibility (mobile only)
+  if (isMobile) {
+    this.map.on("zoomend", () => {
+      this.updateStateLabelSizes();
+      this.updateCityMarkerVisibility();
+      this.updatePanningRestrictions();
+    });
+  }
 
   // Add base map
   L.tileLayer(
@@ -503,7 +513,7 @@ SouthernUSMap.prototype.createModal = function () {
         </div>
         <div class="southern-us-modal-body">
           <div class="southern-us-flag-section southern-us-section">
-            <img id="southern-us-state-flag" class="southern-us-state-flag" src="" alt="State Flag" />
+            <img style="margin:auto" id="southern-us-state-flag" class="southern-us-state-flag" src="" alt="State Flag" />
           </div>
           <div class="southern-us-description-section southern-us-section">
             <h3>About</h3>
@@ -763,10 +773,10 @@ SouthernUSMap.prototype.loadMapData = function () {
 
       const stateCentroids = {
         "01": [32.7396, -86.8435], // Alabama
-        22: [31.0, -92.0], // Louisiana
-        28: [32.6, -89.4], // Mississippi
-        37: [35.5, -79.0], // North Carolina
-        45: [33.8, -80.9], // South Carolina
+        22: [30.7, -92.0], // Louisiana - moved down (lower latitude)
+        28: [32.6, -89.8], // Mississippi - moved left (more west)
+        37: [35.8, -79.4], // North Carolina - moved north and west
+        45: [34.1, -80.5], // South Carolina - moved north
         47: [35.8, -86.4], // Tennessee
       };
 
@@ -846,9 +856,9 @@ SouthernUSMap.prototype.loadMapData = function () {
         }).addTo(this.map);
       }
 
-      console.log(
+      /* console.log(
         `Initial state labels created with font size: ${initialFontSize}rem`
-      );
+      );*/
 
       // Add Hays Travel featured cities with data
       const cities = [
@@ -939,7 +949,38 @@ SouthernUSMap.prototype.loadMapData = function () {
 
       // Set initial city marker visibility based on zoom level
       this.updateCityMarkerVisibility();
+
+      // Set initial panning restrictions (mobile only needs this)
+      const isMobileForInit =
+        window.innerWidth <= 768 ||
+        /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        );
+      if (isMobileForInit) {
+        this.updatePanningRestrictions();
+      }
     });
+};
+
+// Method to update panning restrictions based on zoom level
+SouthernUSMap.prototype.updatePanningRestrictions = function () {
+  const currentZoom = this.map.getZoom();
+  const isAtMinZoom = currentZoom <= this.options.minZoom;
+
+  if (isAtMinZoom) {
+    // Disable panning at max zoom out
+    this.map.dragging.disable();
+    this.map.getContainer().style.cursor = "default";
+  } else {
+    // Enable panning when zoomed in
+    this.map.dragging.enable();
+  }
+
+  /*console.log(
+    `Panning ${
+      isAtMinZoom ? "disabled" : "enabled"
+    } at zoom level ${currentZoom}`
+  );*/
 };
 
 // Method to update city marker visibility based on zoom level
@@ -967,35 +1008,45 @@ SouthernUSMap.prototype.updateCityMarkerVisibility = function () {
     }
   });
 
-  console.log(
+  /*console.log(
     `City markers ${
       shouldShowCities ? "shown" : "hidden"
     } at zoom level ${currentZoom}`
-  );
+  );*/
 };
 
 // Helper method to calculate font size based on zoom level
 SouthernUSMap.prototype.calculateFontSize = function (zoomLevel) {
-  // Detect large desktop for different scaling
+  // Detect mobile device and large desktop for different scaling
+  const isMobile = window.innerWidth <= 768;
   const isLargeDesktop = window.innerWidth >= 1280;
 
-  if (isLargeDesktop) {
-    // Large Desktop (1280px+): Zoom 4-5: 0.875rem, Zoom 6: 1.25rem, Zoom 7-8: 1.5rem
+  if (isMobile) {
+    // Mobile: Zoom 5: 0.65rem, Zoom 6: 0.8rem, Zoom 7: 1.2rem
     if (zoomLevel <= 5) {
-      return 0.8; // Smaller for zoomed out view
+      return 0.65; // Very slightly smaller for zoomed out view on mobile
     } else if (zoomLevel <= 6) {
-      return 1.1; // Default size
-    } else {
-      return 1.5; // Larger for zoomed in view
-    }
-  } else {
-    // Mobile/Tablet (below 1280px): Zoom 4-5: 0.7rem, Zoom 6: 1rem, Zoom 7-8: 1.2rem
-    if (zoomLevel <= 5) {
-      return 0.7; // Smaller for zoomed out view
-    } else if (zoomLevel <= 6) {
-      return 1.0; // Default size
+      return 0.8; // Medium size
     } else {
       return 1.2; // Larger for zoomed in view
+    }
+  } else if (isLargeDesktop) {
+    // Large Desktop (1280px+): Zoom 6: 1.0rem, Zoom 7: 1.2rem, Zoom 8: 1.4rem
+    if (zoomLevel <= 6) {
+      return 1.0; // Slightly smaller default size at min zoom
+    } else if (zoomLevel <= 7) {
+      return 1.2; // Medium zoom
+    } else {
+      return 1.4; // Larger for max zoom
+    }
+  } else {
+    // Tablet/Small Desktop: Zoom 6: 0.9rem, Zoom 7: 1.0rem, Zoom 8: 1.2rem
+    if (zoomLevel <= 6) {
+      return 0.9; // Slightly smaller default size at min zoom
+    } else if (zoomLevel <= 7) {
+      return 1.0; // Medium zoom
+    } else {
+      return 1.2; // Larger for max zoom
     }
   }
 };
@@ -1013,14 +1064,14 @@ SouthernUSMap.prototype.updateStateLabelSizes = function () {
     span.style.fontSize = fontSize + "rem";
   });
 
-  console.log(
+  /*console.log(
     `Updated state label font size to ${fontSize}rem for zoom level ${currentZoom}`
-  );
+  );*/
 };
 
 // Method to toggle performance mode
 SouthernUSMap.prototype.setPerformanceMode = function (enabled) {
-  console.log("setPerformanceMode called with:", enabled);
+  /*console.log("setPerformanceMode called with:", enabled);*/
   this.options.performanceMode = enabled;
 
   // Update map options
