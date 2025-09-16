@@ -555,6 +555,9 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
   const state = this.stateData[stateId];
   if (!state) return;
 
+  // Prevent background scrolling
+  this.preventBackgroundScroll();
+
   // Show all sections for states
   document.querySelector(".southern-us-flag-section").style.display = "block";
   document.querySelector(".southern-us-music-section").style.display = "block";
@@ -617,15 +620,24 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
   const haysTravelUrl = `https://www.haystravel.co.uk/destinations/americas/the-south/${urlStateName}`;
   ctaButton.href = haysTravelUrl;
 
+  // Reset modal scroll position to top
+  this.resetModalScroll();
+
   // Show modal
   this.modal.classList.add("show");
 };
 
 SouthernUSMap.prototype.closeModal = function () {
   this.modal.classList.remove("show");
+
+  // Re-enable background scrolling
+  this.enableBackgroundScroll();
 };
 
 SouthernUSMap.prototype.openCityModal = function (city) {
+  // Prevent background scrolling
+  this.preventBackgroundScroll();
+
   // Populate modal content for city
   document.getElementById(
     "southern-us-modal-title"
@@ -656,6 +668,9 @@ SouthernUSMap.prototype.openCityModal = function (city) {
   const urlCityName = city.name.toLowerCase().replace(/\s+/g, "-");
   const haysTravelUrl = `https://www.haystravel.co.uk/destinations/americas/the-south/${urlCityName}`;
   ctaButton.href = haysTravelUrl;
+
+  // Reset modal scroll position to top
+  this.resetModalScroll();
 
   // Show modal
   this.modal.classList.add("show");
@@ -1100,7 +1115,35 @@ SouthernUSMap.prototype.getPerformanceSettings = function () {
   };
 };
 
+// Method to prevent background scrolling when modal is open
+SouthernUSMap.prototype.preventBackgroundScroll = function () {
+  // Apply styles to prevent scrolling on the parent page
+  document.body.style.overflow = "hidden";
+  document.documentElement.style.overflow = "hidden";
+};
+
+// Method to re-enable background scrolling when modal is closed
+SouthernUSMap.prototype.enableBackgroundScroll = function () {
+  // Remove the styles that prevent scrolling
+  document.body.style.overflow = "";
+  document.documentElement.style.overflow = "";
+};
+
+// Method to reset modal scroll position to top
+SouthernUSMap.prototype.resetModalScroll = function () {
+  // Use a small delay to ensure modal content is rendered
+  setTimeout(() => {
+    const modalBody = this.modal.querySelector(".southern-us-modal-body");
+    if (modalBody) {
+      modalBody.scrollTop = 0;
+    }
+  }, 10);
+};
+
 SouthernUSMap.prototype.destroy = function () {
+  // Re-enable background scrolling in case modal was open
+  this.enableBackgroundScroll();
+
   if (this.map) {
     this.map.remove();
   }
