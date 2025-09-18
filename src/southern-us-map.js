@@ -281,6 +281,31 @@ SouthernUSMap.prototype.injectCSS = function () {
         margin: 0;
       }
 
+      .southern-us-section ul {
+        font-size: 1rem;
+        line-height: 1.625rem;
+        color: #414b54;
+        margin: 0;
+        padding-left: 1.2rem;
+        list-style-type: none;
+      }
+
+      .southern-us-section li {
+        font-size: 1rem;
+        line-height: 1.625rem;
+        color: #414b54;
+        margin-bottom: 0.5rem;
+        position: relative;
+      }
+
+      .southern-us-section li:before {
+        content: "•";
+        color: #00437a;
+        font-weight: bold;
+        position: absolute;
+        left: -1rem;
+      }
+
       .southern-us-artist-pill {
         background: transparent;
         color: #414b54;
@@ -352,6 +377,16 @@ SouthernUSMap.prototype.injectCSS = function () {
         }
 
         .southern-us-section p {
+          font-size: 1.25rem;
+          line-height: 1.875rem;
+        }
+
+        .southern-us-section ul {
+          font-size: 1.25rem;
+          line-height: 1.875rem;
+        }
+
+        .southern-us-section li {
           font-size: 1.25rem;
           line-height: 1.875rem;
         }
@@ -607,9 +642,11 @@ SouthernUSMap.prototype.openStateModal = function (stateId) {
   const attractionsContainer = document.getElementById(
     "southern-us-state-attractions"
   );
-  attractionsContainer.innerHTML = `<p style="color: #414b54; line-height: 1.6; margin: 0;">${
-    state.attractionsText || state.attractions.join(", ")
-  }</p>`;
+  attractionsContainer.innerHTML =
+    state.attractionsText ||
+    `<p style="color: #414b54; line-height: 1.6; margin: 0;">${state.attractions.join(
+      ", "
+    )}</p>`;
 
   // Update CTA button text and link
   const ctaButton = document.getElementById("southern-us-cta-button");
@@ -658,7 +695,7 @@ SouthernUSMap.prototype.openCityModal = function (city) {
   const attractionsContainer = document.getElementById(
     "southern-us-state-attractions"
   );
-  attractionsContainer.innerHTML = `<p style="color: #414b54; line-height: 1.6; margin: 0;">${city.attractions}</p>`;
+  attractionsContainer.innerHTML = city.attractions;
 
   // Update CTA button text and link for cities
   const ctaButton = document.getElementById("southern-us-cta-button");
@@ -698,11 +735,8 @@ SouthernUSMap.prototype.loadMapData = function () {
         { name: "Muscadine Bloodline", image: muscadineBloodlineImg },
         { name: "Jason Isbell", image: jasonIsbellImg },
       ],
-      attractions: [
-        "Gulf State Park",
-        "U.S. Space & Rocket Center",
-        "Historic Selma",
-      ],
+      attractionsText:
+        "<ul><li><strong>Birmingham Civil Rights Institute</strong> - Explore the powerful history of the Civil Rights Movement through interactive exhibits.</li><li><strong>Gulf Shores Beaches</strong> - Relax on pristine white sand beaches along Alabama's beautiful Gulf Coast.</li><li><strong>Huntsville Space Center</strong> - Discover America's space program at the U.S. Space & Rocket Center.</li></ul>",
     },
     22: {
       name: "Louisiana",
@@ -911,7 +945,7 @@ SouthernUSMap.prototype.loadMapData = function () {
           description:
             "Alabama's oldest city, famous for its antebellum architecture, historic districts, and Gulf Coast charm.",
           attractions:
-            "Stroll through the Historic Downtown District, visit Fort Morgan, and enjoy the beautiful Mobile Bay waterfront.",
+            "<ul><li><strong>Historic Downtown & Dauphin Street</strong> - Stroll past preserved architecture, boutiques, and lively cafés.</li><li><strong>USS Alabama Battleship Memorial Park</strong> - Step aboard a legendary WWII battleship on Mobile Bay.</li><li><strong>Fort Morgan</strong> - Explore a storied 19th-century fort guarding the bay.</li><li><strong>Mobile Bay Waterfront</strong> - Savor seafood, sea breezes, and unforgettable sunsets.</li></ul>",
         },
         {
           name: "Sevierville",
