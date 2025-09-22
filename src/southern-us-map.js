@@ -729,88 +729,93 @@ SouthernUSMap.prototype.loadMapData = function () {
       name: "Alabama",
       flag: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Alabama.svg",
       description:
-        "Known as the Heart of Dixie, Alabama is famous for its rich Civil Rights history, beautiful Gulf Coast beaches, and southern hospitality.",
+        "From civil rights landmarks to coastal escapes and world-changing music, Alabama offers an authentic taste of the South.",
+      musicIntro:
+        "Home to the Muscle Shoals sound, Alabama has played a defining role in American music, blending soul, rock, country, and gospel in ways that shaped generations of artists.",
       artists: [
         { name: "The Red Clay Strays", image: redClayStraysImg },
         { name: "Muscadine Bloodline", image: muscadineBloodlineImg },
         { name: "Jason Isbell", image: jasonIsbellImg },
       ],
       attractionsText:
-        "<ul><li><strong>Birmingham Civil Rights Institute</strong> - Explore the powerful history of the Civil Rights Movement through interactive exhibits.</li><li><strong>Gulf Shores Beaches</strong> - Relax on pristine white sand beaches along Alabama's beautiful Gulf Coast.</li><li><strong>Huntsville Space Center</strong> - Discover America's space program at the U.S. Space & Rocket Center.</li></ul>",
+        "<ul><li><strong>Muscle Shoals Studios</strong> - Legendary recording site for artists from Aretha Franklin to The Rolling Stones.</li><li><strong>Civil Rights Trail (Birmingham & Montgomery)</strong> - Historic landmarks central to the Civil Rights Movement.</li><li><strong>Gulf Shores</strong> - Pristine beaches along Alabama's southern coast.</li></ul>",
     },
     22: {
       name: "Louisiana",
       flag: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Flag_of_Louisiana.svg",
       description:
-        "Louisiana captivates visitors with its unique Creole and Cajun culture, world-renowned cuisine, vibrant festivals, and the historic charm of New Orleans.",
+        "Louisiana is a feast for the senses - a rich heritage, combined with bold flavours, vibrant festivals, and the unmistakable spirit of New Orleans.",
+      musicIntro:
+        "As the birthplace of jazz, it remains a cornerstone of Southern sound, steeped in blues, zydeco, gospel, and R&B.",
       artists: [
         { name: "Lucky Daye", image: luckyDayeImg },
         { name: "Jon Batiste", image: jonBatisteImg },
         { name: "Aaron Neville", image: aaronNevilleImg },
       ],
-      attractions: ["French Quarter", "Garden District", "Bourbon Street"],
+      attractionsText:
+        "<ul><li><strong>French Quarter</strong> - The historic heart of New Orleans, known for jazz clubs, architecture, and vibrant nightlife.</li><li><strong>Garden District</strong> - A picturesque neighborhood with grand mansions and oak-lined streets.</li><li><strong>Bourbon Street</strong> - Famous for live music, bars, and Mardi Gras celebrations.</li></ul>",
     },
     28: {
       name: "Mississippi",
       flag: "https://upload.wikimedia.org/wikipedia/commons/4/42/Flag_of_Mississippi.svg",
       description:
-        "Mississippi is the birthplace of blues music, home to literary legends, and offers rich Delta culture along the mighty Mississippi River.",
+        "Mississippi captivates with its rich Southern traditions, soulful cuisine, Delta landscapes, and the enduring spirit of the Mississippi River.",
+      musicIntro:
+        "Widely known as the birthplace of the blues, Mississippi has shaped the sound of America, influencing gospel, country, rock 'n' roll, and soul.",
       artists: [
         { name: 'Christone "Kingfish" Ingram', image: kingfishIngramImg },
         { name: "Charlie Worsham", image: charlieWorshamImg },
         { name: "KIRBY", image: kirbyImg },
         { name: "Big K.R.I.T.", image: bigKritImg },
       ],
-      attractions: ["Blues Trail", "Vicksburg Battlefield", "Natchez Trace"],
+      attractionsText:
+        "<ul><li><strong>Delta Blues Museum (Clarksdale)</strong> - Celebrating the history and legacy of the blues.</li><li><strong>Elvis Presley Birthplace (Tupelo)</strong> - A tribute to the King of Rock 'n' Roll.</li><li><strong>Mississippi River</strong> - A symbol of the state's history, culture, and natural beauty.</li></ul>",
     },
     37: {
       name: "North Carolina",
       flag: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Flag_of_North_Carolina.svg",
       description:
-        "North Carolina boasts stunning Blue Ridge Mountains, beautiful Outer Banks coastline, vibrant cities, and a perfect blend of mountain and coastal culture.",
+        "North Carolina draws visitors with its scenic Blue Ridge Mountains, pristine Atlantic coastline, vibrant cities, and a culture that blends tradition with innovation.",
+      musicIntro:
+        "From bluegrass and folk to jazz, soul, and rock, North Carolina's musical legacy has influenced generations and continues to shape the sounds of America.",
       artists: [
         { name: "Rhiannon Giddens", image: rhiannonGiddensImg },
         { name: "Chatham County Line", image: chathamCountyLineImg },
         { name: "MJ Lenderman", image: mjLendermanImg },
         { name: "The Avett Brothers", image: avettBrothersImg },
       ],
-      attractions: [
-        "Blue Ridge Parkway",
-        "Outer Banks",
-        "Great Smoky Mountains",
-      ],
+      attractionsText:
+        "<ul><li><strong>Blue Ridge Parkway</strong> - A scenic drive through the Appalachian Mountains.</li><li><strong>Outer Banks</strong> - A string of barrier islands known for beaches and history.</li><li><strong>Biltmore Estate (Asheville)</strong> - America's largest privately owned home, set in the Blue Ridge Mountains.</li></ul>",
     },
     45: {
       name: "South Carolina",
       flag: "https://upload.wikimedia.org/wikipedia/commons/6/69/Flag_of_South_Carolina.svg",
       description:
-        "South Carolina offers stunning coastal beauty, historic Charleston, beautiful plantations, and a perfect blend of Southern tradition and coastal living.",
+        "South Carolina enchants with its historic coastal cities, Lowcountry charm, rich Gullah culture, and a warm spirit of Southern hospitality.",
+      musicIntro:
+        "From the soulful sounds of spirituals and gospel to the rhythms of jazz, beach music, and R&B, the state's music reflects a cultural legacy that still resonates today.",
       artists: [
         { name: "Darius Rucker", image: dariusRuckerImg },
         { name: "Edwin McCain", image: edwinMccainImg },
         { name: "Ranky Tanky", image: rankyTankyImg },
       ],
-      attractions: [
-        "Historic Charleston",
-        "Myrtle Beach",
-        "Magnolia Plantation",
-      ],
+      attractionsText:
+        "<ul><li><strong>Charleston Historic District</strong> - Cobblestone streets, pastel homes, and centuries of history.</li><li><strong>Hilton Head Island</strong> - Famous for beaches, golf, and Lowcountry culture.</li><li><strong>Fort Sumter</strong> - The historic site where the Civil War began.</li></ul>",
     },
     47: {
       name: "Tennessee",
       flag: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Tennessee.svg",
       description:
-        "Tennessee is the heart of country music, home to Nashville and Memphis, offering rich musical heritage, stunning Smoky Mountains, and vibrant cultural attractions.",
+        "From the rhythms of Nashville and Memphis to the peaks of the Smoky Mountains, Tennessee blends music, history, and natural beauty into an unforgettable Southern experience.",
+      musicIntro:
+        "Known as the birthplace of country music and home to rock 'n' roll, Tennessee has shaped global sound through legends of blues, soul, gospel, and Americana.",
       artists: [
         { name: "Damien Horne", image: damienHorneImg },
         { name: "David Tolliver", image: davidTolliverImg },
         { name: "Maura Streppa", image: mauraStreppaImg },
       ],
-      attractions: [
-        "Nashville Music Row",
-        "Graceland",
-        "Great Smoky Mountains",
-      ],
+      attractionsText:
+        "<ul><li><strong>Graceland (Memphis)</strong> - The iconic home of Elvis Presley.</li><li><strong>Grand Ole Opry (Nashville)</strong> - A cornerstone of country music.</li><li><strong>Great Smoky Mountains National Park</strong> - America's most visited national park, full of scenic beauty and Appalachian heritage.</li></ul>",
     },
   };
 
@@ -916,34 +921,34 @@ SouthernUSMap.prototype.loadMapData = function () {
           state: "North Carolina",
           coords: [35.7796, -78.6382],
           description:
-            "North Carolina's capital city, known for its vibrant cultural scene, excellent museums, and beautiful parks.",
+            "Known as the 'City of Oaks', Raleigh combines historic charm with cutting-edge innovation, offering a vibrant mix of culture, cuisine, and Southern hospitality at the heart of North Carolina's Research Triangle.",
           attractions:
-            "Visit the North Carolina Museum of Art, explore the historic State Capitol, and enjoy the scenic Umstead State Park.",
+            "<ul><li><strong>North Carolina Museum of Art</strong> - Renowned collections and outdoor sculpture park.</li><li><strong>North Carolina Museum of Natural Sciences</strong> - One of the Southeast's top science museums.</li><li><strong>Pullen Park</strong> - A family-friendly landmark with rides, gardens, and trails.</li><li><strong>Historic Oakwood</strong> - A beautifully preserved 19th-century neighborhood with tree-lined streets and Victorian homes.</li></ul>",
         },
         {
           name: "Tupelo",
           state: "Mississippi",
           coords: [34.2576, -88.7034],
           description:
-            "The birthplace of Elvis Presley, offering rich musical heritage and charming Southern hospitality.",
+            "Born in Tupelo: the King of Rock 'n' Roll - a city where music history comes alive amid Southern warmth, rich traditions, and a spirit that still inspires the world.",
           attractions:
-            "Tour Elvis Presley's birthplace, visit the Tupelo Automobile Museum, and explore the beautiful Natchez Trace Parkway.",
+            "<ul><li><strong>Elvis Presley Birthplace & Museum</strong> - Step inside the humble home where the King of Rock 'n' Roll began.</li><li><strong>Tupelo Automobile Museum</strong> - Discover a world-class collection tracing the history of the automobile.</li><li><strong>Natchez Trace Parkway</strong> - Journey along one of America's most scenic historic routes.</li></ul>",
         },
         {
           name: "Huntsville",
           state: "Alabama",
           coords: [34.7304, -86.5861],
           description:
-            "Rocket City - home to NASA's Marshall Space Flight Center and rich aerospace heritage.",
+            'Famously known as "Rocket City," Huntsville blends space-age innovation with Southern charm, where world-changing history meets a vibrant, welcoming community.',
           attractions:
-            "Explore the U.S. Space & Rocket Center, visit the Huntsville Botanical Garden, and discover the historic Twickenham District.",
+            "<ul><li><strong>U.S. Space & Rocket Center</strong> - Explore space exploration history, including rockets, artifacts, and interactive exhibits.</li><li><strong>Huntsville Botanical Garden</strong> - A 112-acre oasis of trails, themed gardens, and seasonal displays.</li><li><strong>Monte Sano State Park</strong> - Scenic mountain trails and sweeping views just minutes from downtown.</li><li><strong>Historic Downtown Huntsville</strong> - Charming streets filled with shops, restaurants, and preserved architecture.</li></ul>",
         },
         {
           name: "Mobile",
           state: "Alabama",
           coords: [30.6954, -88.0399],
           description:
-            "Alabama's oldest city, famous for its antebellum architecture, historic districts, and Gulf Coast charm.",
+            "Founded in 1702, Mobile is Alabama's oldest city, known for its rich heritage, antebellum architecture, coastal charm, and as the birthplace of Mardi Gras in the U.S.",
           attractions:
             "<ul><li><strong>Historic Downtown & Dauphin Street</strong> - Stroll past preserved architecture, boutiques, and lively cafés.</li><li><strong>USS Alabama Battleship Memorial Park</strong> - Step aboard a legendary WWII battleship on Mobile Bay.</li><li><strong>Fort Morgan</strong> - Explore a storied 19th-century fort guarding the bay.</li><li><strong>Mobile Bay Waterfront</strong> - Savor seafood, sea breezes, and unforgettable sunsets.</li></ul>",
         },
@@ -952,9 +957,9 @@ SouthernUSMap.prototype.loadMapData = function () {
           state: "Tennessee",
           coords: [35.8681, -83.5619],
           description:
-            "Gateway to the Great Smoky Mountains, offering outdoor adventures and mountain charm.",
+            "Set against the backdrop of the Great Smoky Mountains, Sevierville offers small-town charm, outdoor adventure, and a proud musical legacy as the hometown of Dolly Parton.",
           attractions:
-            "Experience Dollywood theme park, explore the Great Smoky Mountains National Park, and enjoy scenic mountain views along the Parkway.",
+            "<ul><li><strong>Dolly Parton Statue & Downtown Sevierville</strong> - Celebrate the life of the country music icon and stroll the historic town square.</li><li><strong>Smoky Mountain Deer Farm & Exotic Petting Zoo</strong> - A family favorite with hands-on animal encounters.</li><li><strong>Sevierville Golf Club</strong> - Championship courses surrounded by stunning mountain views.</li><li><strong>Great Smoky Mountains National Park</strong> - Just minutes away, offering hiking, waterfalls, and breathtaking scenery.</li></ul>",
         },
       ];
 
