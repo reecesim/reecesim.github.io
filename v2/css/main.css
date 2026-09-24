@@ -173,7 +173,7 @@ a.ywc-proj:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
 .ywc-proj__shot--img{aspect-ratio:1200/630;background:var(--paper)}
 .ywc-heading h1{font:500 clamp(40px,4.4vw,60px)/1.04 var(--font-display);letter-spacing:-.008em;color:var(--text-strong);margin:14px 0 0}
 
-/* More work list */
+/* Compact project list (.ywc-more, currently unused) */
 .ywc-more{margin-top:56px}
 .ywc-more__list{list-style:none;padding:0;margin:18px 0 0;border:1px solid var(--border-hair);border-radius:var(--radius-md);background:var(--surface-card)}
 .ywc-more__list li{display:grid;grid-template-columns:150px 1fr;gap:6px 24px;padding:18px 24px;border-top:1px solid var(--border-hair)}
