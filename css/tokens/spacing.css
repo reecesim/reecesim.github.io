@@ -1,0 +1,32 @@
+/* ============================================================
+   SPACING & LAYOUT TOKENS
+   4px base grid. Generous, editorial rhythm.
+   ============================================================ */
+:root {
+  --space-0:   0;
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-32:  128px;
+  --space-40:  160px;
+
+  /* Section rhythm */
+  --section-y:      var(--space-32);
+  --section-y-lg:   var(--space-40);
+  --block-gap:      var(--space-6);
+
+  /* Container widths */
+  --container:      1200px;
+  --container-text: 68ch;   /* comfortable measure for prose */
+  --container-wide: 1440px;
+  --gutter:         var(--space-8);
+}

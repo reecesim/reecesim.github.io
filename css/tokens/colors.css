@@ -1,0 +1,77 @@
+/* ============================================================
+   COLOR TOKENS — Your Web Consultant
+   Monochrome: near-black ink on light grey, no chroma. The "accent"
+   is ink itself — emphasis comes from weight, scale, and contrast,
+   not colour. Semantic status hues kept muted for genuine states only.
+   ============================================================ */
+:root {
+  /* --- Neutral grey scale (cool-neutral, essentially B&W) --- */
+  --stone-50:  #F7F7F6;
+  --stone-100: #ECECEA;
+  --stone-200: #DFDFDC;
+  --stone-300: #CACAC6;
+  --stone-400: #A1A19C;
+  --stone-500: #767671;
+  --stone-600: #565651;
+  --stone-700: #3A3A37;
+  --stone-800: #252523;
+  --stone-900: #171715;
+  --stone-950: #0E0E0D;
+
+  /* --- Light grey backgrounds --- */
+  --bone:      #F3F3F1;
+  --bone-deep: #EAEAE8;
+  --paper:     #FFFFFF;
+
+  /* --- Ink (near-black, not pure #000) --- */
+  --ink:       #161513;
+  --ink-soft:  #2A2A27;
+
+  /* --- Muted status hues (real states only; use sparingly) --- */
+  --green-500: #4C7A62;
+  --green-100: #E5EDE9;
+  --red-500:   #AB483F;
+  --red-100:   #F0DDDA;
+
+  /* ============================================================
+     SEMANTIC ALIASES
+     ============================================================ */
+  --bg-page:        var(--bone);
+  --bg-page-deep:   var(--bone-deep);
+  --bg-ink:         var(--ink);          /* inverted sections */
+  --surface-card:   var(--paper);
+  --surface-raised: #FFFFFF;
+  --surface-sunken: var(--bone-deep);
+
+  --text-strong:  var(--ink);
+  --text-body:    var(--stone-700);
+  --text-muted:   var(--stone-500);
+  --text-faint:   var(--stone-400);
+  --text-on-ink:  var(--stone-50);
+  --text-on-ink-muted: var(--stone-400);
+  --text-accent:  var(--ink);            /* "accent" = ink */
+
+  --accent:        var(--ink);
+  --accent-hover:  var(--stone-800);     /* buttons lighten slightly */
+  --accent-press:  #000000;
+  --accent-tint:   var(--stone-100);
+  --accent-on:     #FFFFFF;
+
+  --highlight:      var(--ink);          /* stars, marks — ink */
+  --highlight-tint: var(--stone-100);
+
+  --border-hair:   var(--stone-200);
+  --border-line:   var(--stone-300);
+  --border-strong: var(--ink);
+  --border-on-ink: rgba(255,255,255,0.16);
+
+  --focus-ring:    var(--ink);
+
+  --success: var(--green-500);
+  --success-tint: var(--green-100);
+  --danger:  var(--red-500);
+  --danger-tint: var(--red-100);
+  --warning: var(--stone-700);
+
+  --selection-bg: var(--stone-200);
+}

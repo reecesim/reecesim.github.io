@@ -1,610 +1,129 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Southern US Interactive Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <style>
-      @font-face {
-        font-family: "Gotham";
-        src: url("./fonts/Gotham-book.woff2") format("woff2"),
-          url("./fonts/Gotham-book.woff") format("woff");
-        font-weight: 400;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      @font-face {
-        font-family: "Gotham";
-        src: url("./fonts/Gotham-bold.woff2") format("woff2"),
-          url("./fonts/Gotham-bold.woff") format("woff");
-        font-weight: 700;
-        font-style: normal;
-        font-display: swap;
-      }
-
-      * {
-        font-family: "Gotham", "Helvetica Neue", Arial, sans-serif;
-        font-weight: 400; /* Book weight */
-      }
-      #map {
-        height: 100vh;
-        perspective: 1000px;
-        transform-style: preserve-3d;
-      }
-
-      .leaflet-container svg {
-        perspective: 1000px;
-        transform-style: preserve-3d;
-      }
-
-      .state-label {
-        font-size: 14px;
-        font-weight: 700; /* Bold weight for state names */
-        color: #001b31;
-        background: transparent;
-        text-align: center;
-        transition: color 0.3s ease;
-        pointer-events: none; /* Allow clicking through to state underneath */
-      }
-
-      .city-label {
-        font-size: 11px;
-        background: transparent;
-        color: #414b54;
-        pointer-events: none; /* Not clickable and allow clicking through to state underneath */
-      }
-
-      /* Modal Styles */
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-      }
-
-      .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 0;
-        border-radius: 10px;
-        width: 90%;
-        max-width: 500px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        animation: modalSlideIn 0.3s ease;
-      }
-
-      @keyframes modalSlideIn {
-        from {
-          transform: translateY(-50px);
-          opacity: 0;
-        }
-        to {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-
-      .modal-header {
-        background: #00437a;
-        color: white;
-        padding: 20px;
-        border-radius: 10px 10px 0 0;
-        text-align: center;
-        position: relative;
-      }
-
-      .modal-header h2 {
-        margin: 0;
-        font-size: 24px;
-        font-weight: 700; /* Bold weight for modal state names */
-      }
-
-      .close {
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        color: white;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-        line-height: 1;
-      }
-
-      .close:hover {
-        opacity: 0.7;
-      }
-
-      .modal-body {
-        padding: 30px;
-      }
-
-      .flag-section {
-        text-align: center;
-        margin-bottom: 25px;
-      }
-
-      .state-flag {
-        width: 120px;
-        height: 80px;
-        border: 2px solid #ddd;
-        border-radius: 5px;
-        object-fit: cover;
-      }
-
-      .description-section {
-        margin-bottom: 25px;
-      }
-
-      .description-section h3 {
-        color: #00437a;
-        margin-bottom: 10px;
-        font-size: 22px;
-        font-weight: 700;
-        text-transform: none;
-      }
-
-      .description-section p {
-        line-height: 1.6;
-        color: #414b54;
-        margin: 0;
-      }
-
-      .music-section {
-        margin-bottom: 30px;
-      }
-
-      .music-section h3 {
-        color: #00437a;
-        margin-bottom: 10px;
-        font-size: 22px;
-        font-weight: 700;
-        text-transform: none;
-      }
-
-      .music-section p {
-        line-height: 1.6;
-        color: #444;
-        margin: 0;
-      }
-
-      .cta-section {
-        text-align: center;
-      }
-
-      .cta-button {
-        background: #fbba00;
-        color: #00437a;
-        border: none;
-        padding: 14px 32px;
-        font-size: 16px;
-        border-radius: 100px;
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-        font-weight: 700;
-        text-transform: uppercase;
-      }
-
-      .cta-button:hover {
-        background: #fcc833;
-      }
-
-      .artists-section {
-        margin-bottom: 25px;
-      }
-
-      .artists-section h3 {
-        color: #00437a;
-        margin-bottom: 15px;
-        font-size: 22px;
-        font-weight: 700;
-        text-transform: none;
-      }
-
-      .artists-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: flex-start;
-      }
-
-      .artist-pill {
-        background: transparent;
-        color: #414b54;
-        border: 1px solid #00437a;
-        padding: 8px 16px;
-        border-radius: 100px;
-        font-size: 14px;
-        font-weight: 400;
-        text-align: center;
-        display: inline-block;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="map"></div>
-
-    <!-- State Info Modal -->
-    <div id="stateModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <span class="close">&times;</span>
-          <h2 id="modalTitle">State Name</h2>
-        </div>
-        <div class="modal-body">
-          <div class="flag-section">
-            <img id="stateFlag" class="state-flag" src="" alt="State Flag" />
-          </div>
-          <div class="description-section">
-            <h3>About</h3>
-            <p id="stateDescription"></p>
-          </div>
-          <div class="music-section">
-            <h3>Musical Heritage</h3>
-            <div id="stateArtists" class="artists-container"></div>
-          </div>
-          <div class="artists-section">
-            <h3>Must-Visit Attractions</h3>
-            <div id="stateAttractions" class="artists-container"></div>
-          </div>
-          <div class="cta-section">
-            <button id="ctaButton" class="cta-button">Plan Your Visit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Leaflet + TopoJSON -->
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script src="https://unpkg.com/topojson-client@3"></script>
-
-    <script>
-      // Create locked map view
-      const map = L.map("map", {
-        minZoom: 5,
-        maxZoom: 7,
-        zoomControl: false,
-        attributionControl: false,
-        dragging: true,
-        scrollWheelZoom: false,
-        doubleClickZoom: false,
-        boxZoom: false,
-        keyboard: false,
-        maxBounds: [
-          [28, -95], // SW
-          [37, -75], // NE
-        ],
-      }).setView([33, -85], 6);
-
-      // Minimal base map - no roads, no labels
-      L.tileLayer(
-        "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}",
-        {
-          attribution: "&copy; OpenStreetMap contributors",
-        }
-      ).addTo(map);
-
-      // Define state data globally so modal functions can access it
-      const stateNames = {
-        "01": "Alabama",
-        22: "Louisiana",
-        28: "Mississippi",
-        37: "North Carolina",
-        45: "South Carolina",
-        47: "Tennessee",
-      };
-
-      // Comprehensive state data for modal
-      const stateData = {
-        "01": {
-          name: "Alabama",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Flag_of_Alabama.svg",
-          description:
-            "Known as the Heart of Dixie, Alabama is famous for its rich Civil Rights history, beautiful Gulf Coast beaches, and southern hospitality.",
-          music:
-            "Alabama is the birthplace of the legendary country group Alabama and has deep roots in country, blues, and gospel music, with cities like Muscle Shoals being iconic recording destinations that helped shape Southern rock and country music.",
-          artists: [
-            "The Red Clay Strays",
-            "Muscadine Bloodline",
-            "Jason Isbell",
-          ],
-          attractions: [
-            "Gulf State Park",
-            "U.S. Space & Rocket Center",
-            "Historic Selma",
-          ],
-        },
-        22: {
-          name: "Louisiana",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/e/e0/Flag_of_Louisiana.svg",
-          description:
-            "Louisiana captivates visitors with its unique Creole and Cajun culture, world-renowned cuisine, vibrant festivals, and the historic charm of New Orleans.",
-          music:
-            "While famous for jazz and blues, Louisiana has a rich country music heritage with zydeco influences and has produced country stars like Tim McGraw, blending traditional country with the state's unique cultural rhythms.",
-          artists: ["Lucky Daye", "Jon Batiste", "Aaron Neville"],
-          attractions: ["French Quarter", "Garden District", "Bourbon Street"],
-        },
-        28: {
-          name: "Mississippi",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/4/42/Flag_of_Mississippi.svg",
-          description:
-            "Mississippi is the birthplace of blues music, home to literary legends, and offers rich Delta culture along the mighty Mississippi River.",
-          music:
-            "Mississippi is the cradle of American music, producing country legends like Faith Hill, Tammy Wynette, and Charley Pride, while its Delta blues tradition deeply influenced country music's emotional storytelling and guitar styles.",
-          artists: ['Christone "Kingfish" Ingram', "Charlie Worsham", "KIRBY"],
-          attractions: [
-            "Blues Trail",
-            "Vicksburg Battlefield",
-            "Natchez Trace",
-          ],
-        },
-        37: {
-          name: "North Carolina",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/b/bb/Flag_of_North_Carolina.svg",
-          description:
-            "North Carolina boasts stunning Blue Ridge Mountains, beautiful Outer Banks coastline, vibrant cities, and a perfect blend of mountain and coastal culture.",
-          music:
-            "North Carolina is home to legendary bluegrass and country artists like Doc Watson and Earl Scruggs, and the state's Appalachian mountain music traditions have profoundly shaped modern country and folk music.",
-          artists: ["Rhiannon Giddens", "Chatham County Line", "MJ Lenderman"],
-          attractions: [
-            "Blue Ridge Parkway",
-            "Outer Banks",
-            "Great Smoky Mountains",
-          ],
-        },
-        45: {
-          name: "South Carolina",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/6/69/Flag_of_South_Carolina.svg",
-          description:
-            "South Carolina offers stunning coastal beauty, historic Charleston, beautiful plantations, and a perfect blend of Southern tradition and coastal living.",
-          music:
-            "South Carolina has contributed significantly to country music with artists like Darius Rucker (formerly of Hootie & the Blowfish) and has a strong bluegrass tradition that influences modern country music throughout the region.",
-          artists: ["Darius Rucker", "Edwin McCain", "Ranky Tanky"],
-          attractions: [
-            "Historic Charleston",
-            "Myrtle Beach",
-            "Magnolia Plantation",
-          ],
-        },
-        47: {
-          name: "Tennessee",
-          flag: "https://upload.wikimedia.org/wikipedia/commons/9/9e/Flag_of_Tennessee.svg",
-          description:
-            "Tennessee is the heart of country music, home to Nashville and Memphis, offering rich musical heritage, stunning Smoky Mountains, and vibrant cultural attractions.",
-          music:
-            "Tennessee is the undisputed capital of country music, home to the Grand Ole Opry, Country Music Hall of Fame, and countless legendary artists from Hank Williams to Dolly Parton, making Nashville the global center of country music production and performance.",
-          artists: ["Damien Horne", "David Tolliver", "Maura Streppa"],
-          attractions: [
-            "Nashville Music Row",
-            "Graceland",
-            "Great Smoky Mountains",
-          ],
-        },
-      };
-
-      // Modal functionality - define before the fetch
-      const modal = document.getElementById("stateModal");
-      const closeBtn = document.getElementsByClassName("close")[0];
-
-      function openStateModal(stateId) {
-        const state = stateData[stateId];
-        if (!state) return;
-
-        // Populate modal content
-        document.getElementById("modalTitle").textContent = state.name;
-        document.getElementById("stateFlag").src = state.flag;
-        document.getElementById("stateFlag").alt = `Flag of ${state.name}`;
-        document.getElementById("stateDescription").textContent =
-          state.description;
-
-        // Populate artists pills
-        const artistsContainer = document.getElementById("stateArtists");
-        artistsContainer.innerHTML = "";
-        state.artists.forEach((artist) => {
-          const pill = document.createElement("div");
-          pill.className = "artist-pill";
-          pill.textContent = artist;
-          artistsContainer.appendChild(pill);
-        });
-
-        // Populate attractions pills
-        const attractionsContainer =
-          document.getElementById("stateAttractions");
-        attractionsContainer.innerHTML = "";
-        state.attractions.forEach((attraction) => {
-          const pill = document.createElement("div");
-          pill.className = "artist-pill";
-          pill.textContent = attraction;
-          attractionsContainer.appendChild(pill);
-        });
-
-        document.getElementById(
-          "ctaButton"
-        ).textContent = `Plan Your Visit to ${state.name}`;
-
-        // Show modal
-        modal.style.display = "block";
-      }
-
-      function closeModal() {
-        modal.style.display = "none";
-      }
-
-      // Event listeners
-      closeBtn.onclick = closeModal;
-
-      window.onclick = function (event) {
-        if (event.target === modal) {
-          closeModal();
-        }
-      };
-
-      document.getElementById("ctaButton").onclick = function () {
-        const stateName = document.getElementById("modalTitle").textContent;
-        alert(
-          `Planning your visit to ${stateName}! This would redirect to a travel planning service.`
-        );
-      };
-
-      // Load low-fidelity US state shapes
-      fetch("https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json")
-        .then((res) => res.json())
-        .then((topoData) => {
-          const geojson = topojson.feature(topoData, topoData.objects.states);
-
-          const stateCentroids = {
-            "01": [32.7396, -86.8435], // Alabama
-            22: [31.0, -92.0], // Louisiana
-            28: [32.6, -89.4], // Mississippi
-            37: [35.5, -79.0], // North Carolina
-            45: [33.8, -80.9], // South Carolina
-            47: [35.8, -86.4], // Tennessee
-          };
-
-          L.geoJSON(geojson, {
-            filter: (feature) =>
-              Object.keys(stateNames).includes(feature.id.toString()),
-            style: {
-              color: "#00437a",
-              weight: 1,
-              fillOpacity: 0.15,
-              fillColor: "#00437a",
-            },
-            onEachFeature: (feature, layer) => {
-              // Add hover effects with 3D popout
-              layer.on("mouseover", function (e) {
-                const layer = e.target;
-
-                layer.setStyle({
-                  weight: 4,
-                  color: "#00437a",
-                  fillOpacity: 0.25,
-                  fillColor: "#00437a",
-                });
-                layer.bringToFront();
-
-                // Add 3D effect - transitions are already set up
-                if (layer._path) {
-                  layer._path.style.transform = "translateZ(10px) scale(1.02)";
-                  layer._path.style.filter =
-                    "drop-shadow(-6px -6px 12px rgba(0, 67, 122, 0.3))";
-                }
-              });
-
-              layer.on("mouseout", function (e) {
-                const layer = e.target;
-                layer.setStyle({
-                  weight: 1,
-                  color: "#00437a",
-                  fillOpacity: 0.15,
-                  fillColor: "#00437a",
-                });
-
-                // Reset 3D effect with smooth ease-out
-                if (layer._path) {
-                  layer._path.style.transform = "translateZ(0px) scale(1)";
-                  layer._path.style.filter = "none";
-                  // Set a slightly slower transition for mouseout only
-                  layer._path.style.transition =
-                    "all 0.5s cubic-bezier(0.25, 0.1, 0.25, 1)";
-
-                  // Reset to normal transition after animation completes
-                  setTimeout(() => {
-                    if (layer._path) {
-                      layer._path.style.transition =
-                        "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-                    }
-                  }, 500);
-                }
-              });
-
-              // Add click effect with animation
-              layer.on("click", function (e) {
-                const layer = e.target;
-                // Brief highlight animation
-                layer.setStyle({
-                  weight: 4,
-                  color: "#f7931e",
-                  fillOpacity: 0.4,
-                  fillColor: "#f7931e",
-                });
-
-                setTimeout(() => {
-                  layer.setStyle({
-                    weight: 1,
-                    color: "#00437a",
-                    fillOpacity: 0.15,
-                    fillColor: "#00437a",
-                  });
-                }, 200);
-
-                openStateModal(feature.id);
-              });
-
-              // Add cursor pointer on hover
-              layer.on("mouseover", function () {
-                map.getContainer().style.cursor = "pointer";
-              });
-
-              layer.on("mouseout", function () {
-                map.getContainer().style.cursor = "";
-              });
-            },
-          }).addTo(map);
-
-          // Initialize transitions for all states after they're added to the map
-          setTimeout(() => {
-            map.eachLayer((layer) => {
-              if (
-                layer._path &&
-                layer.feature &&
-                stateNames[layer.feature.id]
-              ) {
-                layer._path.style.transition =
-                  "all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-                layer._path.style.transform = "translateZ(0px) scale(1)";
-                layer._path.style.filter = "none";
-              }
-            });
-          }, 100);
-
-          // Add state labels
-          for (const id in stateCentroids) {
-            L.marker(stateCentroids[id], {
-              icon: L.divIcon({
-                className: "state-label",
-                html: stateNames[id],
-                iconSize: [100, 20],
-              }),
-            }).addTo(map);
-          }
-
-          // Add manually-specified cities
-          const cities = [
-            { name: "Birmingham, AL", coords: [33.5186, -86.8104] },
-            { name: "New Orleans, LA", coords: [29.9511, -90.0715] },
-            { name: "Jackson, MS", coords: [32.2988, -90.1848] },
-            { name: "Charlotte, NC", coords: [35.2271, -80.8431] },
-            { name: "Charleston, SC", coords: [32.7765, -79.9311] },
-            { name: "Nashville, TN", coords: [36.1627, -86.7816] },
-          ];
-
-          cities.forEach((city) => {
-            L.marker(city.coords, {
-              icon: L.divIcon({
-                className: "city-label",
-                html: city.name,
-                iconSize: [100, 20],
-              }),
-            }).addTo(map);
-          });
-        });
-    </script>
-  </body>
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reece Sim — HubSpot CMS developer &amp; fractional CTO</title>
+<meta name="description" content="Reece Sim is a HubSpot CMS developer, fractional CTO and landing-page specialist in Leyland, UK. Six case studies, 5.0 reviews, and a straight answer on scope.">
+<link rel="canonical" href="https://reecesim.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Reece Sim">
+<meta property="og:locale" content="en_GB">
+<meta property="og:title" content="Reece Sim — HubSpot CMS developer &amp; fractional CTO">
+<meta property="og:description" content="Reece Sim is a HubSpot CMS developer, fractional CTO and landing-page specialist in Leyland, UK. Six case studies, 5.0 reviews, and a straight answer on scope.">
+<meta property="og:url" content="https://reecesim.com/">
+<meta property="og:image" content="https://reecesim.com/img/sketchdev.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+<header class="ywc-header">
+<div class="ywc-header__in">
+<a class="ywc-brand" href="/"><span class="ywc-mono" aria-hidden="true">R</span><span><span class="ywc-brand__name">Reece Sim</span><span class="ywc-brand__sub">HubSpot CMS developer · Founder @ Themespot</span></span></a>
+<nav class="ywc-nav" aria-label="Primary">
+<a href="#work">Work</a><a href="#reviews">Reviews</a><a href="#path">Journey</a><a href="#about">About</a>
+<a class="ywc-btn ywc-btn--primary" href="#contact">Start a project</a>
+</nav>
+</div>
+</header>
+<main>
+<section class="ywc-hero ywc-wrap">
+<div class="ywc-hero__grid">
+<div>
+<div class="ywc-hero__kick">
+<span class="ywc-tag"><span class="ywc-dot"></span>Available for work</span>
+<p class="ywc-eyebrow">Now building <a href="https://themespot.app" target="_blank" rel="noopener">Themespot</a></p>
+</div>
+<h1>I make complex web projects feel <em>simple</em>.</h1>
+<p class="ywc-hero__sub">Fractional CTO, HubSpot CMS specialist, and landing-page nerd — helping teams ship the right thing, on time, without the jargon.</p>
+<div class="ywc-hero__cta">
+<a class="ywc-btn ywc-btn--primary ywc-btn--lg" href="#work">See the work<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></svg></a>
+<a class="ywc-btn ywc-btn--link ywc-btn--lg" href="#contact">Message me</a>
+</div>
+<ul class="ywc-meta">
+<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>Leyland, UK</li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>4–8 hr avg response</li>
+<li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 12 2 2 4-4"/><path d="M12 3l2.3 1.7 2.8-.3 1 2.7 2.4 1.5-.9 2.7.9 2.7-2.4 1.5-1 2.7-2.8-.3L12 21l-2.3-1.7-2.8.3-1-2.7L3.5 15l.9-2.7-.9-2.7 2.4-1.5 1-2.7 2.8.3Z"/></svg>ID &amp; phone verified</li>
+</ul>
+</div>
+<div><div class="ywc-portrait"><div class="ywc-portrait__cap"><b>Reece Sim</b><span>Web developer &amp; consultant</span></div></div></div>
+</div>
+</section>
+<section class="ywc-ink"><div class="ywc-wrap ywc-proof">
+<ul class="ywc-stats"><li class="ywc-stat"><b>100%</b><span>Client satisfaction</span></li><li class="ywc-stat"><b>47</b><span>Projects</span></li><li class="ywc-stat"><b>2011</b><span>Building for the web since</span></li></ul>
+<p class="ywc-eyebrow ywc-eyebrow--ink" style="margin-top:34px">What clients endorse</p>
+<ul class="ywc-endorse"><li>Clear communicator<i>11</i></li><li>Collaborative<i>8</i></li><li>Committed to quality<i>8</i></li><li>Reliable<i>7</i></li><li>Solution oriented<i>7</i></li><li>Detail oriented<i>3</i></li></ul>
+</div></section>
+<section class="ywc-section ywc-wrap" id="work" data-ywc-work>
+<div class="ywc-heading"><p class="ywc-eyebrow">Selected work</p><h2>Six case studies, one standard.</h2><p>HubSpot CMS builds, landing pages, and web apps that earn their traffic.</p></div>
+<div class="ywc-filters" role="group" aria-label="Filter work">
+<button type="button" class="ywc-filter" data-f="all" aria-pressed="true">All</button><button type="button" class="ywc-filter" data-f="HubSpot CMS" aria-pressed="false">HubSpot CMS</button><button type="button" class="ywc-filter" data-f="Landing page" aria-pressed="false">Landing page</button><button type="button" class="ywc-filter" data-f="Web app" aria-pressed="false">Web app</button>
+</div>
+<ul class="ywc-work">
+<li data-role="HubSpot CMS"><a class="ywc-proj" href="/work/sketchdev-hubspot-cms-build/"><div class="ywc-proj__shot ywc-proj__shot--img"><img src="/img/sketchdev.png" width="1200" height="630" loading="lazy" alt="The relaunched Sketch Development homepage shown on a laptop"></div><div class="ywc-proj__body"><p class="ywc-eyebrow">HubSpot CMS</p><h3>HubSpot CMS Build &amp; Relaunch</h3><p>A pixel-perfect custom HubSpot CMS theme for a US software consultancy, extended from a handful of designed pages into a complete site.</p><div class="ywc-proj__tags"><span class="ywc-tag">Development</span><span class="ywc-tag">Theme build</span></div></div></a></li>
+<li data-role="HubSpot CMS"><a class="ywc-proj" href="/work/fintech-landing-page-suite/"><div class="ywc-proj__shot ywc-proj__shot--img"><img src="/img/admirals.png" width="1200" height="630" loading="lazy" alt="An Admirals commodities trading landing page shown on a laptop"></div><div class="ywc-proj__body"><p class="ywc-eyebrow">HubSpot CMS</p><h3>63-Page FinTech Landing Page Suite</h3><p>Delivered 63 fintech landing pages in 10 weeks. Built reusable templates to speed up campaign launches and remove developer bottlenecks.</p><div class="ywc-proj__tags"><span class="ywc-tag">Development</span><span class="ywc-tag">63 pages</span></div></div></a></li>
+<li data-role="Web app"><a class="ywc-proj" href="/work/easyjet-mobile-first-content-hub/"><div class="ywc-proj__shot ywc-proj__shot--img"><img src="/img/easyjet.webp" width="1200" height="630" loading="lazy" alt="Three phone screens of the easyJet holidays “Discover Lanzarote your way” swipe experience"></div><div class="ywc-proj__body"><p class="ywc-eyebrow">Web app</p><h3>Mobile-first Content Hub</h3><p>A mobile-first, rich landing experience for a large travel brand.</p><div class="ywc-proj__tags"><span class="ywc-tag">Design</span><span class="ywc-tag">Development</span><span class="ywc-tag">Mobile-first</span></div></div></a></li>
+<li data-role="HubSpot CMS"><a class="ywc-proj" href="/work/enterprise-website-improvement/"><div class="ywc-proj__shot ywc-proj__shot--img"><img src="/img/enterprise.webp" width="1200" height="630" loading="lazy" alt="Illustration of a house on crumbling foundations (before) and the same house rebuilt on solid foundations (after)"></div><div class="ywc-proj__body"><p class="ywc-eyebrow">HubSpot CMS</p><h3>Enterprise Website Improvement</h3><p>How a complex multi-site company went from a shaky relaunch to a polished and maintainable system.</p><div class="ywc-proj__tags"><span class="ywc-tag">Continuous improvement</span><span class="ywc-tag">Core Web Vitals</span></div></div></a></li>
+<li data-role="HubSpot CMS"><a class="ywc-proj" href="/work/platform195-website-rebuild/"><div class="ywc-proj__shot ywc-proj__shot--img"><img src="/img/platform195.webp" width="1200" height="630" loading="lazy" alt="The rebuilt Platform195 homepage shown on a laptop"></div><div class="ywc-proj__body"><p class="ywc-eyebrow">HubSpot CMS</p><h3>Website Rebuild &amp; Content Migration</h3><p>The full website rebuild and content migration completed for Platform195, a travel-focused marketing agency.</p><div class="ywc-proj__tags"><span class="ywc-tag">Development</span><span class="ywc-tag">Migration</span></div></div></a></li>
+<li data-role="Landing page"><a class="ywc-proj" href="/work/groundswell-landing-page/"><div class="ywc-proj__shot ywc-proj__shot--img"><img src="/img/groundswell.webp" width="1200" height="630" loading="lazy" alt="The Groundswell landing page, “Change is happening faster than we think”, shown on a laptop"></div><div class="ywc-proj__body"><p class="ywc-eyebrow">Landing page</p><h3>Landing Page Design &amp; Development</h3><p>A scroll-led, animated landing page for Global Optimism’s Groundswell initiative.</p><div class="ywc-proj__tags"><span class="ywc-tag">Design</span><span class="ywc-tag">Development</span><span class="ywc-tag">Animation</span></div></div></a></li>
+</ul>
+<div class="ywc-more"><p class="ywc-eyebrow">More work</p><ul class="ywc-more__list"><li><p class="ywc-eyebrow">Fractional CTO</p><div><h3>SMS-based learning platform</h3><p>Took over a $100k undocumented MVP; shipped the remaining features incl. AI course generation, consolidated &amp; documented the code, updated Terraform, and built the site + app integration.</p></div></li><li><p class="ywc-eyebrow">Next.js</p><div><h3>Hays Travel itinerary generator</h3><p>Interactive itineraries driven by destination interest, with share incentives for a social-media competition.</p></div></li><li><p class="ywc-eyebrow">HubSpot CMS</p><div><h3>Rentable — Yardi integration LP</h3><p>Figma-to-HubSpot landing page built from fully customizable modules the marketing team edits themselves.</p></div></li><li><p class="ywc-eyebrow">HubSpot CMS</p><div><h3>Cisco partner landing pages</h3><p>A group of four landing pages for a Cisco product line, built for a reseller.</p></div></li><li><p class="ywc-eyebrow">Web app</p><div><h3>Propel real-estate sales tool</h3><p>A web app showcasing a new development, designed for 4K TVs in buyer sales meetings.</p></div></li><li><p class="ywc-eyebrow">Instapage</p><div><h3>Masterschool interactive LP</h3><p>Pushed past Instapage’s native limits to add interactive navigation and sliders.</p></div></li><li><p class="ywc-eyebrow">Landing page</p><div><h3>Heart In Diamond jewelry LP</h3><p>An aesthetic, fast landing page built for paid traffic.</p></div></li></ul></div>
+</section>
+<section class="ywc-section ywc-wrap" id="reviews">
+<div class="ywc-heading"><p class="ywc-eyebrow">Every rating · 5.0</p><h2>My clients do the bragging.</h2></div>
+<figure class="ywc-feature"><span class="ywc-stars" aria-label="5 out of 5">★★★★★</span><blockquote>True intelligence is being able to explain a complex topic so that a lay person can understand. He was honest, forthright, and focused on what truly mattered — someone you can trust to guide a project thoughtfully, efficiently, and with your best interests in mind.</blockquote><figcaption class="ywc-review__meta"><span>Fractional CTO for SaaS company</span><span>2025</span></figcaption></figure>
+<ul class="ywc-reviews"><li class="ywc-review"><span class="ywc-stars" aria-label="5 out of 5">★★★★★</span><p>Reece is fantastic to work with — clear communication, quality of work, and ease to work with. We hope to work with him on an ongoing basis.</p><div class="ywc-review__meta"><span>HubDB CAD drawing library</span><span>2026</span></div></li><li class="ywc-review"><span class="ywc-stars" aria-label="5 out of 5">★★★★★</span><p>Easy to communicate with, solution oriented, efficient delivery. Would definitely hire again.</p><div class="ywc-review__meta"><span>HubSpot CMS website</span><span>2024</span></div></li><li class="ywc-review"><span class="ywc-stars" aria-label="5 out of 5">★★★★★</span><p>So responsive, multi-talented and great at communicating. It's so reassuring knowing he'll help us when needed.</p><div class="ywc-review__meta"><span>HubSpot CMS improvements</span><span>2024</span></div></li><li class="ywc-review"><span class="ywc-stars" aria-label="5 out of 5">★★★★★</span><p>Great communications, very easy to work with. This job completed and exceeded our expectations, and was delivered perfectly on time.</p><div class="ywc-review__meta"><span>Enject one-pager website</span><span>2024</span></div></li><li class="ywc-review"><span class="ywc-stars" aria-label="5 out of 5">★★★★★</span><p>Attentive to detail, equally skillful in design and programming, and truly personable. Can't recommend his services enough!</p><div class="ywc-review__meta"><span>Heart In Diamond landing page</span><span>2022</span></div></li><li class="ywc-review"><span class="ywc-stars" aria-label="5 out of 5">★★★★★</span><p>One of the best people we have ever worked with. All timelines met, quality is fantastic, and he's always suggesting improvements.</p><div class="ywc-review__meta"><span>Real Estate Sales Software</span><span>2022</span></div></li><li class="ywc-review"><span class="ywc-stars" aria-label="5 out of 5">★★★★★</span><p>Gave great, actionable feedback on our landing page. Easy to work with.</p><div class="ywc-review__meta"><span>Landing-page user testing</span><span>2021</span></div></li></ul>
+</section>
+<section class="ywc-section ywc-wrap" id="path">
+<div class="ywc-split">
+<div>
+<div class="ywc-heading"><p class="ywc-eyebrow">From zero</p><h2>A five-year climb, one 5.0 at a time.</h2></div>
+<ol class="ywc-tl"><li><span class="ywc-tl__yr">2021</span><div class="ywc-tl__body"><p class="ywc-eyebrow" style="margin-bottom:6px">First jobs</p><h3>$9.60 landing-page user test</h3><p>Where it started — tiny CRO gigs and user interviews, then landing pages at $30–50/hr on Instapage, Unbounce &amp; Leadshook.</p></div></li><li><span class="ywc-tl__yr">2022–23</span><div class="ywc-tl__body"><h3>Bigger retainers</h3><p>A 591-hour marketing-ops &amp; consulting engagement and a first 5.0 review streak that never broke.</p></div></li><li><span class="ywc-tl__yr">2024</span><div class="ywc-tl__body"><p class="ywc-eyebrow" style="margin-bottom:6px">HubSpot era</p><h3>HubSpot CMS specialist at $60–125/hr</h3><p>Themes, Figma-to-HubSpot, enterprise clients, a membership site (Talon.One &amp; Braze) and a $10,000 CMS build. HubSpot CMS Developer certified.</p></div></li><li><span class="ywc-tl__yr">2025–26</span><div class="ywc-tl__body"><h3>Fractional CTO for a SaaS company</h3><p>474 hours guiding product — finding bugs, proposing HubDB, advising when to pause, and helping find product-market fit. Four contracts in progress.</p></div></li><li data-active><span class="ywc-tl__yr">2026–present</span><div class="ywc-tl__body"><p class="ywc-eyebrow" style="margin-bottom:6px">Founder</p><h3>Building Themespot</h3><p>HubSpot AI content management — an AI-powered content platform built for HubSpot.</p></div></li></ol>
+</div>
+<div id="about">
+<div class="ywc-aside"><div class="ywc-card">
+<span class="ywc-lbl">The toolkit</span>
+<div class="ywc-chips"><span class="ywc-tag">HubSpot</span><span class="ywc-tag">HubL</span><span class="ywc-tag">HubDB</span><span class="ywc-tag">CMS-React modules</span><span class="ywc-tag">JavaScript</span><span class="ywc-tag">React</span><span class="ywc-tag">Next.js</span><span class="ywc-tag">Express.js</span><span class="ywc-tag">REST APIs</span><span class="ywc-tag">Stripe</span><span class="ywc-tag">CRO</span><span class="ywc-tag">SEO</span><span class="ywc-tag">Site migrations</span><span class="ywc-tag">Figma</span><span class="ywc-tag">Instapage</span><span class="ywc-tag">Unbounce</span><span class="ywc-tag">Umbraco</span><span class="ywc-tag">WordPress</span></div>
+<hr class="ywc-rule">
+<span class="ywc-lbl">Certified</span>
+<ul class="ywc-certs"><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>HubSpot CMS Developer (2024)</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>HubSpot Growth-Driven Design (2024)</li><li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg>Southport College — Computer Science</li></ul>
+</div></div>
+</div>
+</div>
+</section>
+<section class="ywc-ink" id="contact"><div class="ywc-wrap ywc-contact">
+<div class="ywc-contact__grid">
+<div>
+<h2>Tell me what you're building.</h2>
+<p class="ywc-contact__lead">I'll reply within 4–8 hours, in plain English, with an honest read on scope — including whether you need me at all.</p>
+<div class="ywc-contact__links">
+<a href="mailto:reece@yourwebconsultant.com"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 6 10-6"/></svg>reece@yourwebconsultant.com</a>
+<a href="https://meetings-eu1.hubspot.com/rsim" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></svg>Book a call</a>
+<a href="https://github.com/reecesim" target="_blank" rel="noopener"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-4 1.5-4-2.5-6-3m12 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3-.4 5.9-1.5 5.9-6.5a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1.4-.4-4.6 1.7a11.6 11.6 0 0 0-6 0C4.8 1.9 3.4 2.3 3.4 2.3a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 2 8.7c0 5 2.9 6.1 5.9 6.5a3.4 3.4 0 0 0-.9 2.6V22"/></svg>GitHub</a>
+</div>
+</div>
+<div class="ywc-formcard">
+<script src="https://js-eu1.hsforms.net/forms/embed/147476381.js" defer></script>
+<div class="hs-form-frame" data-region="eu1" data-form-id="1feda992-e5d2-45ee-bcd6-858f49e876be" data-portal-id="147476381"></div>
+</div>
+</div>
+<footer class="ywc-footer"><span>© 2026 Reece Sim · Leyland, UK · <a href="/privacy/">Privacy</a></span><span>Top Rated Plus · 100% Job Success</span></footer>
+</div></section>
+</main>
+<script>
+document.querySelectorAll("[data-ywc-work]").forEach(function(root){
+ var btns=root.querySelectorAll(".ywc-filter"),cards=root.querySelectorAll(".ywc-work > [data-role]");
+ btns.forEach(function(b){b.addEventListener("click",function(){
+  btns.forEach(function(o){o.setAttribute("aria-pressed",o===b?"true":"false")});
+  var v=b.getAttribute("data-f");
+  cards.forEach(function(c){c.style.display=(v==="all"||c.getAttribute("data-role")===v)?"":"none"});
+ })});
+});
+</script>
+</body>
 </html>
