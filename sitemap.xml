@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://reecesim.com/</loc><lastmod>2026-09-24</lastmod></url>
-  <url><loc>https://reecesim.com/work/</loc><lastmod>2026-09-24</lastmod></url>
-  <url><loc>https://reecesim.com/work/sketchdev-hubspot-cms-build/</loc><lastmod>2026-09-24</lastmod></url>
-  <url><loc>https://reecesim.com/work/fintech-landing-page-suite/</loc><lastmod>2026-09-24</lastmod></url>
-  <url><loc>https://reecesim.com/work/easyjet-mobile-first-content-hub/</loc><lastmod>2026-09-24</lastmod></url>
-  <url><loc>https://reecesim.com/work/enterprise-website-improvement/</loc><lastmod>2026-09-24</lastmod></url>
-  <url><loc>https://reecesim.com/work/platform195-website-rebuild/</loc><lastmod>2026-09-24</lastmod></url>
-  <url><loc>https://reecesim.com/work/groundswell-landing-page/</loc><lastmod>2026-09-24</lastmod></url>
-  <url><loc>https://reecesim.com/privacy/</loc><lastmod>2026-09-24</lastmod></url>
+  <url><loc>https://reecesim.com/</loc></url>
+  <url><loc>https://reecesim.com/portfolio/</loc></url>
+  <url><loc>https://reecesim.com/contact/</loc></url>
+  <url><loc>https://reecesim.com/book-a-call/</loc></url>
+  <url><loc>https://reecesim.com/privacy/</loc></url>
+  <url><loc>https://reecesim.com/portfolio/63-page-enterprise-landing-page-suite/</loc></url>
+  <url><loc>https://reecesim.com/portfolio/agency-website-rebuild/</loc></url>
+  <url><loc>https://reecesim.com/portfolio/enterprise-website-improvement/</loc></url>
+  <url><loc>https://reecesim.com/portfolio/hubspot-theme-build-website-relaunch/</loc></url>
+  <url><loc>https://reecesim.com/portfolio/landing-page-design-development/</loc></url>
+  <url><loc>https://reecesim.com/portfolio/mobile-first-content-hub/</loc></url>
 </urlset>

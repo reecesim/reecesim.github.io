@@ -1,0 +1,4792 @@
+/* Settings */
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+:root {
+
+    /* HubSpot DND layout grid */
+    --ywc--column__gap: 2.13%;
+    --ywc--column__widthMultiplier: 8.333;
+
+    /* Sections */
+    --ywc--contentWrapper--narrow__maxWidth:  768px ;
+    --ywc--contentWrapper--medium__maxWidth:  1000px ;
+    --ywc--contentWrapper--wide__maxWidth:  1200px ;
+
+    --ywc--section--extraSmall__verticalPadding:  48px ;
+    --ywc--section--small__verticalPadding:  64px ;
+    --ywc--section--medium__verticalPadding:  96px ;
+    --ywc--section--large__verticalPadding:  128px ;
+    --ywc--section--extraLarge__verticalPadding:  192px ;
+
+    /* Default section left/right padding */
+    --ywc--section--horizontalPadding:  32px ;
+
+    /* Gap - default gaps that could be easily leveraged in module styles via class names */
+    --ywc--gap--extraSmall:  19px ;
+    --ywc--gap--small:  29px ;
+    --ywc--gap--medium:  32px ;
+    --ywc--gap--large:  58px ;
+    --ywc--gap--extraLarge:  77px ;
+
+    /* Spacing - default spacing values  */
+    --ywc--spacing--4:  5px ;
+    --ywc--spacing--8:  10px ;
+    --ywc--spacing--12:  14px ;
+    --ywc--spacing--16:  19px ;
+    --ywc--spacing--20:  24px ;
+    --ywc--spacing--24:  29px ;
+    --ywc--spacing--32:  38px ;
+    --ywc--spacing--40:  48px ;
+    --ywc--spacing--48:  58px ;
+    --ywc--spacing--56:  67px ;
+    --ywc--spacing--64:  64px ;
+    --ywc--spacing--72:  72px ;
+    --ywc--spacing--80:  80px ;
+    --ywc--spacing--88:  88px ;
+    --ywc--spacing--96:  96px ;
+    --ywc--spacing--104:  104px ;
+    --ywc--spacing--112:  112px ;
+    --ywc--spacing--120:  120px ;
+    --ywc--spacing--128:  128px ;
+    --ywc--spacing--136:  136px ;
+    --ywc--spacing--144:  144px ;
+    --ywc--spacing--152:  152px ;
+    --ywc--spacing--160:  160px ;
+    --ywc--spacing--168:  168px ;
+    --ywc--spacing--176:  176px ;
+    --ywc--spacing--184:  184px ;
+    --ywc--spacing--192:  192px ;
+
+    /*
+     * Bounded-element size scale. Foundation baseline + per-element
+     * resolved values (avatar / logo / icon). Modules consume the
+     * element-specific tokens; the bare --ywc--size--* tokens are
+     * available for ad-hoc cases that don't fit a named family.
+     */
+    --ywc--size--xs:  24px ;
+    --ywc--size--sm:  40px ;
+    --ywc--size--md:  64px ;
+    --ywc--size--lg:  96px ;
+    --ywc--size--xl:  128px ;
+
+    --ywc--avatarSize--xs:  24px ;
+    --ywc--avatarSize--sm:  40px ;
+    --ywc--avatarSize--md:  64px ;
+    --ywc--avatarSize--lg:  96px ;
+    --ywc--avatarSize--xl:  128px ;
+
+    --ywc--logoSize--xs--height:  24px ;
+    --ywc--logoSize--sm--height:  40px ;
+    --ywc--logoSize--md--height:  64px ;
+    --ywc--logoSize--lg--height:  96px ;
+    --ywc--logoSize--xl--height:  128px ;
+
+    --ywc--iconSize--xs:  24px ;
+    --ywc--iconSize--sm:  40px ;
+    --ywc--iconSize--md:  64px ;
+    --ywc--iconSize--lg:  96px ;
+    --ywc--iconSize--xl:  128px ;
+
+    /*
+     * Module-level max-width presets (used by utility modules:
+     * Heading, RichText, List, Button, FormContainer, SectionIntro, etc.).
+     * Distinct from --ywc--contentWrapper-- which sizes whole sections.
+     */
+    --ywc--moduleMaxWidth--full: none;
+    --ywc--moduleMaxWidth--large: 1000px;
+    --ywc--moduleMaxWidth--medium: 800px;
+    --ywc--moduleMaxWidth--small: 650px;
+
+    /*
+     * Module-level inner/outer spacing presets used by per-module
+     * "Inner spacing" / "Outer spacing" choice fields.
+     * Aliases over the raw spacing scale so child themes can re-map presets
+     * without rewriting every module's CSS-var generator.
+     */
+    --ywc--moduleSpacing--none: 0;
+    --ywc--moduleSpacing--small: var(--ywc--spacing--16);
+    --ywc--moduleSpacing--medium: var(--ywc--spacing--32);
+    --ywc--moduleSpacing--large: var(--ywc--spacing--48);
+    --ywc--moduleSpacing--xlarge: var(--ywc--spacing--64);
+
+    /* Grids */
+    --default-section-padding: var(--ywc--section--large__verticalPadding) var(--ywc--section--horizontalPadding);
+    --default-section-margin: 0;
+    --default-section-max-width: var(--ywc--contentWrapper--wide__maxWidth);
+    --default-container-padding: 0;
+    --default-container-margin: 0;
+    --default-container-gap: var(--ywc--gap--medium);
+    --default-container-row-gap: var(--ywc--gap--medium);
+    --default-container-column-gap: var(--ywc--gap--medium);
+    --default-table-padding: 0;
+    --default-table-margin: 0;
+    --default-table-row-gap: var(--ywc--gap--medium);
+    --default-table-column-gap: var(--ywc--gap--medium);
+}
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+:root {
+
+  /* Text spacing */
+
+  --ywc--text--extraSmall__margin: 0 0.75rem; /* 12px */
+  --ywc--text--small__margin: 0 1.25rem; /* 20px */
+  --ywc--text__margin: 0 2rem; /* 32px */
+  --ywc--text--large__margin: 0 2.5rem; /* 40px */
+  --ywc--text--extraLarge__margin: 0 4rem; /* 64px */
+
+  /* Body */
+
+  --ywc--baseText__fontSize:  16px ;
+  --ywc--body__font: Inter, sans-serif;
+  --ywc--body--small__fontSize:  1.000125rem ;
+  --ywc--body__fontSize:  1.125rem ;
+  --ywc--body--large__fontSize:  1.499625rem ;
+  --ywc--body--extraLarge__fontSize:  1.9991249999999998rem ;
+  --ywc--body__fontWeight:  normal ;
+  --ywc--body__fontStyle:  normal ;
+  --ywc--body__lineHeight:  1.55 ;
+  --ywc--body__textTransform:  none ;
+  --ywc--body__letterSpacing:  0px ;
+
+  /* Lists */
+
+  --ywc--list__font: Inter, sans-serif;
+  --ywc--list__fontSize:  1.125rem ;
+  --ywc--list__fontWeight:  400 ;
+  --ywc--list__fontStyle:  normal ;
+  --ywc--list__lineHeight:  1.55 ;
+  --ywc--list__textTransform:  none ;
+  --ywc--list__letterSpacing:  0px ;
+    
+    --ywc--list__markerColor: currentColor;
+    
+  --ywc--list__unorderedMarkerStyle:  disc ;
+  --ywc--list__orderedMarkerStyle:  decimal ;
+
+    
+    --ywc--list__marginBlock: var(--ywc--spacing--32);
+    
+
+    
+    --ywc--list__itemGap: var(--ywc--spacing--8);
+    
+
+    
+    --ywc--list__paddingInlineStart: var(--ywc--spacing--32);
+    
+
+  /* Primary links */
+
+  --ywc--link--primary__fontColor:  #10243E ;
+  --ywc--link--primary__textTransform:  none ;
+  --ywc--link--primary__letterSpacing:  0px ;
+
+    
+    --ywc--link--primary__textDecoration: none;
+    --ywc--link--primary__textDecorationColor: transparent;
+    
+
+  /* Hover state */
+
+  --ywc--link--primary__hover--fontColor:  #10243E ;
+
+    
+    --ywc--link--primary__hover--textDecoration: underline;
+    --ywc--link--primary__hover--textDecorationColor:  #10243E ;
+    
+
+  /* Secondary links */
+
+  --ywc--link--secondary__fontColor:  #10243E ;
+  --ywc--link--secondary__textTransform:  none ;
+  --ywc--link--secondary__letterSpacing:  0px ;
+
+    
+    --ywc--link--secondary__textDecoration: none;
+    --ywc--link--secondary__textDecorationColor: transparent;
+    
+
+  /* Hover state */
+
+  --ywc--link--secondary__hover--fontColor:  #10243E ;
+
+    
+    --ywc--link--secondary__hover--textDecoration: underline;
+    --ywc--link--secondary__hover--textDecorationColor:  #10243E ;
+    
+
+  /* Headings */
+
+  /* Percentage change for the heading font sizes on mobile */
+  --ywc--heading__tablet-modifier: 0.8;
+
+  --ywc--heading__lineHeight:  1.2 ;
+
+  --ywc--display1__font: Inter, sans-serif;
+  --ywc--display1__fontSize: 6rem;
+  --ywc--display1__fontWeight: 800;
+  --ywc--display1__textTransform: none;
+  --ywc--display1__letterSpacing: 0px;
+
+  --ywc--display2__font: Inter, sans-serif;
+  --ywc--display2__fontSize: 5.25rem;
+  --ywc--display2__fontWeight: 800;
+  --ywc--display2__textTransform: none;
+  --ywc--display2__letterSpacing: 0px;
+
+  --ywc--h1__font: Libre Baskerville, sans-serif;
+  --ywc--h1__fontSize:  3.9375rem ;
+  --ywc--h1__fontWeight:  700 ;
+  --ywc--h1__fontStyle:  normal ;
+  --ywc--h1__textTransform:  capitalize ;
+  --ywc--h1__letterSpacing:  0px ;
+
+  --ywc--h2__font: Libre Baskerville, sans-serif;
+  --ywc--h2__fontSize:  3.0rem ;
+  --ywc--h2__fontWeight:  700 ;
+  --ywc--h2__fontStyle:  normal ;
+  --ywc--h2__textTransform:  capitalize ;
+  --ywc--h2__letterSpacing:  0px ;
+
+  --ywc--h3__font: Libre Baskerville, sans-serif;
+  --ywc--h3__fontSize:  2.25rem ;
+  --ywc--h3__fontWeight:  normal ;
+  --ywc--h3__fontStyle:  normal ;
+  --ywc--h3__textTransform:  capitalize ;
+  --ywc--h3__letterSpacing:  0px ;
+
+  --ywc--h4__font: Libre Baskerville, sans-serif;
+  --ywc--h4__fontSize:  1.75rem ;
+  --ywc--h4__fontWeight:  normal ;
+  --ywc--h4__fontStyle:  normal ;
+  --ywc--h4__textTransform:  none ;
+  --ywc--h4__letterSpacing:  0px ;
+
+  --ywc--h5__font: Inter, sans-serif;
+  --ywc--h5__fontSize:  1.375rem ;
+  --ywc--h5__fontWeight:  600 ;
+  --ywc--h5__fontStyle:  normal ;
+  --ywc--h5__textTransform:  none ;
+  --ywc--h5__letterSpacing:  0px ;
+
+  --ywc--h6__font: Inter, sans-serif;
+  --ywc--h6__fontSize:  1.125rem ;
+  --ywc--h6__fontWeight:  600 ;
+  --ywc--h6__fontStyle:  normal ;
+  --ywc--h6__textTransform:  none ;
+  --ywc--h6__letterSpacing:  0px ;
+
+
+  /* Eyebrows */
+
+  --ywc--eyebrow__font: Inter, sans-serif;
+  --ywc--eyebrow__fontSize:  0.875rem ;
+  --ywc--eyebrow__fontWeight:  700 ;
+  --ywc--eyebrow__fontStyle:  normal ;
+  --ywc--eyebrow__textTransform:  none ;
+  --ywc--eyebrow__letterSpacing:  0px ;
+
+  /* Quotes */
+
+  --ywc--quotes__font: Inter, sans-serif;
+  --ywc--quotes__fontColor:   ;
+  --ywc--quotes__fontSize:  1.125rem ;
+  --ywc--quotes__fontWeight:  400 ;
+  --ywc--quotes__fontStyle:  normal ;
+  --ywc--quotes__textTransform:  none ;
+  --ywc--quotes__letterSpacing:  0px ;
+
+    /* Captions */
+
+  --ywc--captions__font: Inter, sans-serif;
+  --ywc--captions__fontSize:  0.75rem ;
+  --ywc--captions__fontWeight:  600 ;
+  --ywc--captions__fontStyle:  normal ;
+  --ywc--captions__case:  none ;
+  --ywc--captions__letterSpacing:  0px ;
+
+  /* Images */
+
+  --ywc--rteImages__margin: 2rem; /* 32px */
+}
+
+  
+
+  
+
+  
+
+ /*
+ * Mono baseline (DEV-98). Slot intent:
+ *   color_1 #FFFFFF  page background, lightest surface
+ *   color_2 #F5F5F5  muted / elevated surface, light text on dark sections
+ *   color_3 #737373  muted text, captions, dividers, disabled states
+ *   color_4 #171717  primary text on light / primary surface on dark
+ *   color_5 #0A0A0A  highest contrast text / darkest surface
+ *
+ * Primary accent ships with a default brand colour (#0D9488 teal) chosen to
+ * read on light, subtle, and dark surfaces. Tertiary and complementary accent
+ * slots stay UNSET at the parent baseline and fall back to text colour
+ * (base color_4 / `--ywc--color--onLight`); child themes populate them to
+ * introduce additional brand colours for sections 3 and 6.
+ */
+
+:root {
+  /* Foundation neutral ramp */
+  --ywc--color--base--1:  #fefeff ;
+  --ywc--color--base--2:  #f5f5f5 ;
+  --ywc--color--base--3:  #667085 ;
+  --ywc--color--base--4:  #10243E ;
+  --ywc--color--base--5:  #071421 ;
+
+  /* DEPRECATED — numeric accent aliases kept for backwards compatibility with
+   * code that pre-dated the tertiary/complementary/primary rename. New code
+   * should reference the semantic names below (--ywc--color--primary,
+   * --ywc--color--complementary, --ywc--color--tertiary). When tertiary /
+   * complementary are unset they fall back to the onLight text colour — that's
+   * why these swatches render near-black in the preview on the parent theme. */
+  --ywc--color--accent--1:  #10243E ;
+  --ywc--color--accent--2:  #00B8A9 ;
+  --ywc--color--accent--3:  #10243E ;
+
+  /* Semantic tokens */
+  --ywc--color--white:  #fefeff ;
+  --ywc--color--black:  #071421 ;
+  --ywc--color--primary:  #10243E ;
+  --ywc--color--complementary:  #00B8A9 ;
+  --ywc--color--tertiary:  #10243E ;
+  --ywc--color--onLight:  #10243E ;
+  --ywc--color--onDark:  #fefeff ;
+  --ywc--color--danger:  #DE2828 ;
+  --ywc--headings--color:  #10243E ;
+
+  /*
+   * Mode-aware accent variants (foundation for theme modes).
+   *
+   * Primary is always set (parent default), so its variants are always
+   * emitted. Complementary is still conditional — only emitted when the
+   * brand populates that slot.
+   *
+   * `--on-light` / `--on-dark` are the light- and dark-mode variants. A
+   * brand's primary may not contrast on both modes; `--on-dark` mixes with
+   * white so it stays readable on dark surfaces. Brands whose primary works
+   * on both get effectively identical values (color-mix of a mid-tone with
+   * 25% white barely shifts hue). `--contrast--on-light`/`-on-dark` are the
+   * text colours that sit ON the coloured button.
+   *
+   * `--active` is the variant selected by the theme-mode cascade (Phase 5):
+   * at :root it defaults to `--on-light`; the dark-mode block overrides to
+   * `--on-dark`.
+   */
+  /*
+   * `--contrast--on-light/on-dark` use the `contrast_text` macro above,
+   * which calls HubSpot's native `color_contrast` to WCAG-test white
+   * against the brand colour and falls back to black when white fails.
+   * For the `--on-dark` variant — which is a 25%-lightened mix of the
+   * brand — we feed the lightened colour through HubSpot's native
+   * `color_variant(hex, 25)` (HSL lightening) as the contrast-test
+   * input. `color_variant` is not pixel-identical to `color-mix(...75%,
+   * white)` but is a close enough proxy to decide black vs white for
+   * body text. Both functions are present in HubSpot production and
+   * shimmed in the local renderer for preview parity.
+   *
+   * A progressive-enhancement block at the end of this file swaps to
+   * CSS `contrast-color()` where supported — same logic, browser-native,
+   * auto-reacts to token changes at paint time.
+   */
+  --ywc--color--primary--on-light: var(--ywc--color--primary);
+  --ywc--color--primary--on-dark: color-mix(in srgb, var(--ywc--color--primary) 75%, var(--ywc--color--white));
+  --ywc--color--primary--contrast--on-light:  var(--ywc--color--white) ;
+  --ywc--color--primary--contrast--on-dark:  var(--ywc--color--white) ;
+  --ywc--color--primary--active: var(--ywc--color--primary--on-light);
+  --ywc--color--primary--contrast--active: var(--ywc--color--primary--contrast--on-light);
+
+    
+    --ywc--color--complementary--on-light: var(--ywc--color--complementary);
+    --ywc--color--complementary--on-dark: color-mix(in srgb, var(--ywc--color--complementary) 75%, var(--ywc--color--white));
+    --ywc--color--complementary--contrast--on-light:  var(--ywc--color--black) ;
+    --ywc--color--complementary--contrast--on-dark:  var(--ywc--color--black) ;
+    --ywc--color--complementary--active: var(--ywc--color--complementary--on-light);
+    --ywc--color--complementary--contrast--active: var(--ywc--color--complementary--contrast--on-light);
+    
+
+    
+
+  /*
+   * Overlay tokens. Derived from the brand's black / white slots via color-mix
+   * so overlays (modal scrims, image gradients, hover fills, subtle tints)
+   * follow if a child theme retunes `color_5` or `color_1`. Keep the names
+   * semantic (subtle / soft / matte / scrim / backdrop) — consumers should
+   * reach for the closest-in-intent token, not pick an opacity by hand.
+   */
+  --ywc--color--overlay--subtle:         color-mix(in srgb, var(--ywc--color--black)  5%, transparent);
+  --ywc--color--overlay--soft:           color-mix(in srgb, var(--ywc--color--black) 10%, transparent);
+  --ywc--color--overlay--matte:          color-mix(in srgb, var(--ywc--color--black) 40%, transparent);
+  --ywc--color--overlay--scrim:          color-mix(in srgb, var(--ywc--color--black) 50%, transparent);
+  --ywc--color--overlay--strong:         color-mix(in srgb, var(--ywc--color--black) 80%, transparent);
+  --ywc--color--overlay--backdrop:       color-mix(in srgb, var(--ywc--color--black) 85%, transparent);
+  --ywc--color--overlay--onDark--subtle: color-mix(in srgb, var(--ywc--color--white) 30%, transparent);
+  --ywc--color--overlay--onDark--strong: color-mix(in srgb, var(--ywc--color--white) 90%, transparent);
+
+  /* Alias — legacy token name, now derived from the overlay scale. */
+  --ywc--color--neutral-100: var(--ywc--color--overlay--subtle);
+
+  /*
+   * Semantic surface + muted tokens.
+   * Stubbed against the existing palette so utility modules (RichText, List,
+   * FormContainer) can reference a stable token name. Child themes override
+   * these to retune the muted/surface scheme without touching module CSS.
+   *
+   * `muted` uses color-mix to soften onLight by 40% against the light surface.
+   * Falls back to onLight in browsers without color-mix support.
+   */
+  --ywc--color--muted: color-mix(in srgb, #10243E 60%, #fefeff);
+  --ywc--color--surface--light:  #fefeff ;
+  --ywc--color--surface--subtle:  #f5f5f5 ;
+  --ywc--color--surface--dark:  #071421 ;
+  --ywc--color--border--subtle:  #f5f5f5 ;
+}
+
+/*
+ * Theme-mode flip — switch `--active` aliases to their `--on-dark` variants
+ * when the site is rendering in dark mode. The button cascade in
+ * `_button.hubl.css` reads `--ywc--color--primary--active` so this swap
+ * propagates automatically to every primary button on the page.
+ *
+ * `theme_mode`:
+ *   light          → no flip (default :root values win)
+ *   dark           → :root overrides active → on-dark
+ *   user_selector  → `html[data-ywc-theme="dark"]` overrides active → on-dark
+ *                     (client script sets the attribute based on user choice
+ *                      or `prefers-color-scheme` on first visit)
+ *
+ * Wrapped in a hubl conditional on `accent_colors.primary` / `.complementary`
+ * so we only emit these rules when the corresponding `--active` token
+ * actually exists at :root (otherwise the override would bind to nothing).
+ */
+
+  
+
+html[data-ywc-theme="dark"] {
+    --ywc--color--primary--active: var(--ywc--color--primary--on-dark);
+    --ywc--color--primary--contrast--active: var(--ywc--color--primary--contrast--on-dark);
+      
+      --ywc--color--complementary--active: var(--ywc--color--complementary--on-dark);
+      --ywc--color--complementary--contrast--active: var(--ywc--color--complementary--contrast--on-dark);
+      
+      
+  }
+
+  
+
+/*
+ * Progressive enhancement — CSS `contrast-color()`.
+ *
+ * Future-proofs the contrast tokens: where the browser ships `contrast-color()`
+ * (Chrome 137+ as of 2025; Safari/Firefox pending), the token is recomputed
+ * by the browser from the live brand-colour value. That means:
+ *
+ *   1. If a downstream stylesheet or child theme changes the computed value
+ *      of `--ywc--color--primary`, the contrast text auto-updates — no
+ *      rerender of the HubL needed.
+ *   2. The pick uses the same WCAG rules the macro above approximates, but
+ *      evaluated at paint time against the actual rendered colour (including
+ *      any `color-mix` transforms applied above).
+ *
+ * Where the function isn't supported, the `:root` tokens emitted by the
+ * macro above remain in force — the `@supports` block simply doesn't apply.
+ * Safe, opt-in enhancement.
+ */
+
+@supports (color: contrast-color(red)) {
+  :root {
+    --ywc--color--primary--contrast--on-light: contrast-color(var(--ywc--color--primary--on-light));
+    --ywc--color--primary--contrast--on-dark: contrast-color(var(--ywc--color--primary--on-dark));
+    --ywc--color--primary--contrast--active: contrast-color(var(--ywc--color--primary--active));
+
+    --ywc--color--complementary--contrast--on-light: contrast-color(var(--ywc--color--complementary--on-light));
+    --ywc--color--complementary--contrast--on-dark: contrast-color(var(--ywc--color--complementary--on-dark));
+    --ywc--color--complementary--contrast--active: contrast-color(var(--ywc--color--complementary--active));
+
+    --ywc--color--tertiary--contrast--on-light: contrast-color(var(--ywc--color--tertiary--on-light));
+    --ywc--color--tertiary--contrast--on-dark: contrast-color(var(--ywc--color--tertiary--on-dark));
+    --ywc--color--tertiary--contrast--active: contrast-color(var(--ywc--color--tertiary--active));
+  }
+}
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+ :root {
+  /* Density-scaled button padding. Drives every button variant and the
+   * legacy `.cta-*` classes. At density=100 → 8px / 16px (parent default).
+   * At 50 → slim (4px / 8px). At 200 → chunky (16px / 32px). */
+  --ywc--button__padding: 10px  19px ;
+
+  /* ----------------------------------------------------------------
+   * Primary button — surface-aware.
+   *
+   * Colour tokens resolve through the surface cascade:
+   *   bg   = brand primary (if set), else the surface's own text colour
+   *   text = brand primary contrast (if set), else the surface's own bg
+   *
+   * This means a primary button dropped into any surface (section,
+   * card, icon wrapper, whatever) auto-contrasts with that surface —
+   * no per-surface button override required. Brand themes opt in by
+   * setting `accent_colors.primary`; `--ywc--color--primary--active`
+   * is only emitted when the brand field is populated (see
+   * `_colors.hubl.css`), so the var() fallback fires cleanly for
+   * monochrome themes.
+   *
+   * Typography, shape, and border thickness remain theme-field driven
+   * (brand identity, not surface-dependent).
+   * ---------------------------------------------------------------- */
+  --ywc--button--primary__font: Inter, sans-serif;
+  /*
+    TODO: Look into why primary_button.text.size ~ primary_button.text.size_unit
+    is not evaluating to the correct size_unit, but can still take in px
+  */
+  --ywc--button--primary__fontSize:  1.0rem ;
+  --ywc--button--primary__fontWeight:  700 ;
+  --ywc--button--primary__fontStyle:  normal ;
+  --ywc--button--primary__textTransform:  none ;
+  --ywc--button--primary__letterSpacing:  0px ;
+
+  --ywc--button--primary__backgroundColor:  var(--ywc--color--primary--active, var(--ywc--surface__textColor)) ;
+  --ywc--button--primary__textColor:  #fefeff ;
+  --ywc--button--primary__hover--backgroundColor:  color-mix(in srgb, var(--ywc--button--primary__backgroundColor) 88%, var(--ywc--surface__backgroundColor)) ;
+  --ywc--button--primary__hover--textColor:  #fefeff ;
+
+  /* Primary button shape */
+    
+      
+    
+
+    
+    --ywc--button--primary__borderRadius: var(--ywc-rounded);
+    
+
+    
+  --ywc--button--primary__active--backgroundColor:  color-mix(in srgb, var(--ywc--button--primary__hover--backgroundColor) 80%, var(--ywc--surface__backgroundColor)) ;
+
+  /* Primary button border */
+  --ywc--button--primary__borderThickness:  0px ;
+  --ywc--button--primary__hover--borderThickness:  0px ;
+
+    
+    --ywc--button--primary__borderColor: transparent;
+    --ywc--button--primary__hover--borderColor: transparent;
+      
+    
+
+  /* ----------------------------------------------------------------
+   * Secondary button — always ghost against the surface.
+   *
+   * Transparent fill + 1px border in the surface text colour. Looks
+   * like a secondary button on every surface without per-surface
+   * overrides. Brand theme settings control typography + shape, but
+   * the colour treatment is cascade-driven and non-negotiable; this
+   * is the deliberate trade for auto-adapting surface-aware buttons.
+   * ---------------------------------------------------------------- */
+  --ywc--button--secondary__font: Inter, sans-serif;
+  --ywc--button--secondary__fontSize:  1.0rem ;
+  --ywc--button--secondary__fontWeight:  500 ;
+  --ywc--button--secondary__fontStyle:  normal ;
+  --ywc--button--secondary__textTransform:  none ;
+  --ywc--button--secondary__letterSpacing:  0px ;
+
+    
+    
+    --ywc--button--secondary__backgroundColor:  var(--ywc--surface__textColor) ;
+    --ywc--button--secondary__hover--backgroundColor:  color-mix(in srgb, var(--ywc--surface__textColor) 88%, var(--ywc--surface__backgroundColor)) ;
+      
+      
+    
+  --ywc--button--secondary__textColor:  #10243E ;
+  --ywc--button--secondary__borderColor:  var(--ywc--surface__textColor) ;
+  --ywc--button--secondary__borderThickness: 1px;
+  --ywc--button--secondary__hover--textColor:  #10243E ;
+  --ywc--button--secondary__hover--borderColor:  var(--ywc--surface__textColor) ;
+  --ywc--button--secondary__hover--borderThickness: 1px;
+    
+    
+
+  /* Secondary button shape (from theme field — brand identity). */
+    
+      
+    
+
+    
+    --ywc--button--secondary__borderRadius: var(--ywc-rounded);
+    
+
+  /* Tertiary button font */
+  --ywc--button--tertiary__font: Inter, sans-serif;
+  --ywc--button--tertiary__fontSize:  1.0rem ;
+  --ywc--button--tertiary__fontWeight:  500 ;
+  --ywc--button--tertiary__fontStyle:  normal ;
+  --ywc--button--tertiary__textTransform:  none ;
+  --ywc--button--tertiary__letterSpacing:  0px ;
+
+  /* Tertiary button text color */
+  --ywc--button--tertiary__textColor:  #fefeff ;
+  --ywc--button--tertiary__hover--textColor:  #fefeff ;
+
+  /* Tertiary button shape */
+    
+      
+    
+
+    
+    --ywc--button--tertiary__borderRadius: var(--ywc-rounded);
+    
+
+  /* Tertiary button background color */
+    
+    --ywc--button--tertiary__backgroundColor:  #071421 ;
+    --ywc--button--tertiary__hover--backgroundColor:  #10243E ;
+      
+
+    
+
+  /* Tertiary button border */
+  --ywc--button--tertiary__borderThickness:  0px ;
+  --ywc--button--tertiary__hover--borderThickness:  0px ;
+
+    
+    --ywc--button--tertiary__borderColor: transparent;
+    --ywc--button--tertiary__hover--borderColor: transparent;
+    
+
+  /* Accent button font */
+  --ywc--button--accent__font: Inter, sans-serif;
+  --ywc--button--accent__fontSize:  1.0rem ;
+  --ywc--button--accent__fontWeight:  500 ;
+  --ywc--button--accent__fontStyle:  normal ;
+  --ywc--button--accent__textTransform:  none ;
+  --ywc--button--accent__letterSpacing:  0px ;
+
+  /* Accent button text color */
+  --ywc--button--accent__textColor:  #10243E ;
+  --ywc--button--accent__hover--textColor:  #10243E ;
+
+  /* Accent button shape */
+    
+      
+    
+
+    
+    --ywc--button--accent__borderRadius: var(--ywc-rounded);
+    
+
+  /* Accent button background color */
+    
+    --ywc--button--accent__backgroundColor: transparent;
+    --ywc--button--accent__hover--backgroundColor: transparent;
+      
+    
+
+  /* Accent button border */
+  --ywc--button--accent__borderThickness:  0px ;
+  --ywc--button--accent__hover--borderThickness:  0px ;
+
+    
+    --ywc--button--accent__borderColor: transparent;
+    --ywc--button--accent__hover--borderColor: transparent;
+    
+
+  /* Outline button font */
+  --ywc--button--outline__font: Inter, sans-serif;
+  --ywc--button--outline__fontSize:  1.0rem ;
+  --ywc--button--outline__fontWeight:  500 ;
+  --ywc--button--outline__fontStyle:  normal ;
+  --ywc--button--outline__textTransform:  none ;
+  --ywc--button--outline__letterSpacing:  0px ;
+
+  /* Outline button text color */
+  --ywc--button--outline__textColor:  #10243E ;
+  --ywc--button--outline__hover--textColor:  #fefeff ;
+
+  /* Outline button shape */
+    
+      
+    
+
+    
+    --ywc--button--outline__borderRadius: var(--ywc-rounded);
+    
+
+  /* Outline button background color */
+    
+    --ywc--button--outline__backgroundColor: transparent;
+    --ywc--button--outline__hover--backgroundColor:  #10243E ;
+      
+    
+
+  /* Outline button border */
+  --ywc--button--outline__borderThickness:  2px ;
+  --ywc--button--outline__hover--borderThickness:  2px ;
+
+    
+    --ywc--button--outline__borderColor:  #10243E ;
+    --ywc--button--outline__hover--borderColor:  #10243E ;
+      
+    
+
+}
+
+  
+
+  
+
+:root {
+  /* Form field background color */
+    
+    --ywc--formField__backgroundColor:  #f5f5f5 ;
+    
+
+  /* Form field shape */
+    
+      
+    
+
+    
+    --ywc--formField__borderRadius: 8px;
+    
+
+  /* Form field border -- multiple fields to properly handle field visibility for both fill and no fill */
+    
+      
+    
+
+  /* Proper usage of variables to achieve "All" or "Bottom" will be within CSS */
+    
+    --ywc--formField__borderThickness: 0;
+    --ywc--formField__borderColor: transparent;
+    
+
+    
+
+    
+
+    
+
+    
+
+  /* Form field text color */
+  --ywc--formFieldInput__textColor:  #10243E ;
+
+  /* Form field spacing */
+  --ywc--formField__marginBottom: var(--ywc--spacing--32);
+
+  /* Form textarea border radius */
+  --ywc--formFieldTextArea__borderRadius: calc(var(--ywc--formField__borderRadius) * 0.5);
+
+  /* Form field checkbox/radio */
+  --ywc--formFieldCheckboxRadio__size: 24px;
+  --ywc--formFieldCheckboxRadio__fillColor: var(--ywc--color--onLight);
+
+  /* Form field placeholder */
+  --ywc--formFieldPlaceholder__textColor:  #667085 ;
+
+  /* Form required field color */
+  --ywc--formRequired__color: var(--ywc--color--danger);
+
+  /* Form field datepicker icon */
+  --ywc--formField__datepickerIcon: url("data:image/svg+xml,%3Csvg width='24' height='29' viewBox='0 0 24 29' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_3812_12272)'%3E%3Cpath d='M8.14286 2.07136C8.14286 1.35886 7.56964 0.785645 6.85714 0.785645C6.14464 0.785645 5.57143 1.35886 5.57143 2.07136V4.21422H3.42857C1.5375 4.21422 0 5.75172 0 7.64279V8.49993V11.0714V24.7856C0 26.6767 1.5375 28.2142 3.42857 28.2142H20.5714C22.4625 28.2142 24 26.6767 24 24.7856V11.0714V8.49993V7.64279C24 5.75172 22.4625 4.21422 20.5714 4.21422H18.4286V2.07136C18.4286 1.35886 17.8554 0.785645 17.1429 0.785645C16.4304 0.785645 15.8571 1.35886 15.8571 2.07136V4.21422H8.14286V2.07136ZM2.57143 11.0714H21.4286V24.7856C21.4286 25.2571 21.0429 25.6428 20.5714 25.6428H3.42857C2.95714 25.6428 2.57143 25.2571 2.57143 24.7856V11.0714Z' fill='%2309152B'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_3812_12272'%3E%3Crect width='24' height='27.4286' fill='white' transform='translate(0 0.785645)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+
+  /* Form field select icon */
+  --ywc--formField__selectIcon: url("data:image/svg+xml,%3Csvg width='24' height='25' viewBox='0 0 24 25' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10.9407 19.5595C11.5267 20.1454 12.4782 20.1454 13.0642 19.5595L22.0642 10.5595C22.6501 9.97354 22.6501 9.02197 22.0642 8.43604C21.4782 7.8501 20.5267 7.8501 19.9407 8.43604L12.0001 16.3767L4.05947 8.44072C3.47354 7.85478 2.52197 7.85478 1.93604 8.44072C1.3501 9.02666 1.3501 9.97822 1.93604 10.5642L10.936 19.5642L10.9407 19.5595Z' fill='%2309152B'/%3E%3C/svg%3E%0A");
+
+  /* Textarea drag icon */
+  --ywc--formField__dragIcon: url("data:image/svg+xml,%3Csvg width='11' height='12' viewBox='0 0 22 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cline y1='-1' x2='29.5206' y2='-1' transform='matrix(-0.666795 0.745241 -0.806754 -0.590888 19.6843 0)' stroke='%23303F59' stroke-width='2'/%3E%3Cpath d='M21.0005 9.99756L10.5005 21.9976' stroke='%23303F59' stroke-width='2'/%3E%3C/svg%3E%0A");
+
+  /* Label text */
+  --ywc--formLabel__textColor:  #10243E ;
+  --ywc--formLabel__font: Inter, sans-serif;
+  --ywc--formLabel__fontSize:  0.875rem ;
+  --ywc--formLabel__fontWeight:  500 ;
+  --ywc--formLabel__textTransform:  none ;
+  --ywc--formLabel__letterSpacing:  0px ;
+  --ywc--formLabel__marginBottom: var(--ywc--spacing--8);
+
+  /* Help text */
+  --ywc--formHelpText__textColor: var(--ywc--color--muted);
+
+  /* Form background color */
+    
+    --ywc--form__backgroundColor:  #fefeff ;
+    
+
+  /* Form shape */
+    
+      
+    
+
+    
+    --ywc--form__borderRadius: 24px;
+    
+
+  /* Form border */
+    
+    --ywc--form__borderThickness:  1px ;
+    --ywc--form__borderColor:  #667085 ;
+    
+
+  /* Form spacing */
+  --ywc--form__padding: var(--ywc--spacing--48);
+
+  /*
+   * FormContainer module tokens — surface card that wraps the embedded
+   * HubSpot form. Stubbed against existing colour/spacing/border tokens so
+   * child themes can rebrand the form container without touching module CSS.
+   */
+  --ywc--formContainer__backgroundColor: var(--ywc--color--surface--light);
+  --ywc--formContainer__textColor: var(--ywc--color--onLight);
+  --ywc--formContainer__linkColor: var(--ywc--color--primary);
+  --ywc--formContainer__borderRadius: var(--ywc-rounded--large);
+  --ywc--formContainer__paddingBlock: var(--ywc--spacing--56);
+  --ywc--formContainer__paddingInline: var(--ywc--spacing--48);
+  --ywc--formContainer__paddingBlock--mobile: var(--ywc--spacing--32);
+  --ywc--formContainer__paddingInline--mobile: var(--ywc--spacing--24);
+  --ywc--formContainer__gap: var(--ywc--spacing--32);
+  --ywc--formContainer__columnGap: 10%;
+  --ywc--formContainer__columnWidth: 45%;
+
+  /* CSS variables for new forms */
+
+  /* Global vars */
+  --hsf-global__font-family: var(--ywc--formLabel__font);
+  --hsf-global__font-size: var(--ywc--formLabel__fontSize);
+  --hsf-global__color: var(--ywc--formLabel__textColor);
+  --hsf-global-error__color: var(--ywc--formRequired__color);
+
+  /* Form */
+  --hsf-background__background-color: var(--ywc--form__backgroundColor);
+  --hsf-background__padding: var(--ywc--form__padding);
+  --hsf-background__border-style: solid;
+  --hsf-background__border-color: var(--ywc--form__borderColor);
+  --hsf-background__border-radius: var(--ywc--form__borderRadius);
+  --hsf-background__border-width: var(--ywc--form__borderThickness);
+
+  /* Content */
+  --hsf-heading__font-family: var(--hsf-global__font-family);
+  --hsf-heading__color: var(--hsf-global__color);
+  --hsf-heading__text-shadow: none;
+  --hsf-richtext__font-family: var(--hsf-global__font-family);
+  --hsf-richtext__font-size: var(--hsf-global__font-size);
+  --hsf-richtext__color: var(--hsf-global__color);
+
+  /* Labels */
+  --hsf-field-label__font-family: var(--hsf-global__font-family);
+  --hsf-field-label__font-size: var(--hsf-global__font-size);
+  --hsf-field-label__font-weight: var(--ywc--formLabel__fontWeight);
+  --hsf-field-label__letter-spacing: var(--ywc--formLabel__letterSpacing);
+  --hsf-field-label__text-transform: var(--ywc--formLabel__textTransform);
+  --hsf-field-label__color: var(--hsf-global__color);
+  --hsf-field-label-requiredindicator__color: var(--hsf-global-error__color);
+  --hsf-module__vertical-spacing: var(--ywc--formLabel__marginBottom);
+
+  /* Help text */
+  --hsf-field-description__font-family: var(--hsf-global__color);
+  --hsf-field-description__color: var(--ywc--formHelpText__textColor);
+
+  /* Errors */
+  --hsf-erroralert__font-family: var(--ywc--formLabel__font);
+  --hsf-erroralert__color: var(--hsf-global-error__color);
+
+  /* Field footer */
+  --hsf-field-footer__font-family: var(--hsf-field-description__font-family);
+  --hsf-field-footer__color: var(--hsf-field-description__color);
+
+  /* Field */
+  --hsf-field-input__font-family: var(--hsf-global__font-family);
+  --hsf-field-input__background-color: var(--ywc--formField__backgroundColor);
+  --hsf-field-input__placeholder-color: var(--ywc--formFieldPlaceholder__textColor);
+  --hsf-field-input__border-color: var(--ywc--formField__borderColor);
+    
+    --hsf-field-input__border-width: 0;
+    ;
+  --hsf-field-input__border-style: solid;
+  --hsf-field-input__border-radius: var(--ywc--formField__borderRadius);
+  --hsf-field-input__padding: var(--ywc--spacing--16) var(--ywc--spacing--12);
+  --hsf-field-input__color: var(--ywc--formFieldInput__textColor);
+  --hsf-row__vertical-spacing: var(--ywc--formField__marginBottom);
+  --hsf-row__horizontal-spacing: var(--ywc--spacing--32);
+
+  /* Textarea */
+  --hsf-field-textarea__font-family: var(--hsf-field-input__font-family);
+  --hsf-field-textarea__color: var(--hsf-field-input__color);
+  --hsf-field-textarea__background-color: var(--hsf-field-input__background-color);
+  --hsf-field-textarea__border-color: var(--hsf-field-input__border-color);
+  --hsf-field-textarea__border-style: var(--hsf-field-input__border-style);
+  --hsf-field-textarea__border-radius: var(--ywc--formFieldTextArea__borderRadius);
+  --hsf-field-textarea__padding: var(--hsf-field-input__padding);
+
+  /* Checkbox */
+  --hsf-field-checkbox__padding: calc(var(--ywc--formFieldCheckboxRadio__size) / 2);
+  --hsf-field-checkbox__background-color: var(--ywc--color--white);
+  --hsf-field-checkbox__color: var(--ywc--formFieldCheckboxRadio__fillColor);
+  --hsf-field-checkbox__border-color: var(--ywc--color--border--subtle);
+  --hsf-field-checkbox__border-width: 1px 1px 1px 1px;
+  --hsf-field-checkbox__border-style: var(--hsf-field-input__border-style);
+
+  /* Radio */
+  --hsf-field-radio__padding: calc(var(--ywc--formFieldCheckboxRadio__size) / 2);
+  --hsf-field-radio__background-color: var(--ywc--color--white);
+  --hsf-field-radio__color: var(--ywc--formFieldCheckboxRadio__fillColor);
+  --hsf-field-radio__border-color: var(--hsf-field-input__border-color);
+  --hsf-field-radio__border-width: 1px 1px 1px 1px;
+  --hsf-field-radio__border-style: var(--hsf-field-input__border-style);
+
+  /* Progress bar CSS vars:
+    - --hsf-progressbar__font-family
+    - --hsf-progressbar__font-family
+    - --hsf-progressbar__font-size
+    - --hsf-progressbar__color
+    - --hsf-progressbar__background-color
+    - --hsf-progressbar__background
+    - --hsf-progressbar__border-color
+    - --hsf-progressbar__border-style
+    - --hsf-progressbar__border-width
+  */
+
+  /* Button */
+  --hsf-button__width: 100%;
+  --hsf-button__font-family: var(--ywc--button--primary__font);
+  --hsf-button__font-size: var(--ywc--button--primary__fontSize);
+  --hsf-button__font-weight: var(--ywc--button--primary__fontWeight);
+  --hsf-button__letter-spacing: var(--ywc--button--primary__letterSpacing);
+  --hsf-button__text-transform: var(--ywc--button--primary__textTransform);
+  --hsf-button__color: var(--ywc--button--primary__textColor);
+  --hsf-button__background-color: var(--ywc--button--primary__backgroundColor);
+  --hsf-button__background-image: none;
+  --hsf-button__border-radius: var(--ywc--button--primary__borderRadius);
+  --hsf-button__border-width: var(--ywc--button--primary__borderThickness);
+  --hsf-button__border-style: solid;
+  --hsf-button__border-color: var(--ywc--button--primary__borderColor);
+  --hsf-button__padding: var(--ywc--spacing--20) var(--ywc--spacing--24);
+  --hsf-button__box-shadow: none;
+  --hsf-button--hover__color: var(--ywc--button--primary__hover--textColor);
+  --hsf-button--hover__background-color: var(--ywc--button--primary__hover--backgroundColor);
+  --hsf-button--hover__border-color: var(--ywc--button--primary__hover--borderColor);
+  --hsf-button--focus__color: var(--ywc--button--primary__hover--textColor);
+  --hsf-button--focus__background-color: var(--ywc--button--primary__hover--backgroundColor);
+  --hsf-button--focus__border-color: var(--ywc--button--primary__hover--borderColor);
+}
+
+@media (max-width: 600px) {
+  :root {
+    --ywc--form__padding: var(--ywc--spacing--24);
+  }
+
+  .hsfc-PhoneInput__FlagAndCaret {
+    --hsf-field-input__padding: var(--ywc--spacing--20) var(--ywc--spacing--16);
+  }
+}
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+:root {
+  /* Global card shape */
+    
+    --ywc--card__borderRadius: var(--ywc-rounded--extra-large, 32px);
+    --ywc--card__iconBorderRadius: var(--ywc-rounded--large, 24px);
+    
+
+  /* Global card border thickness */
+  --ywc--card__borderThickness:  1px ;
+
+  /*
+   * Card grid sizing tokens. Drive the auto-fit minimum column width used by
+   * the Card module so child themes can retune card density without editing
+   * module source. Defaults match the previous hardcoded `250px` / `223px`.
+   */
+  --ywc--card__gridMinWidth: 250px;
+  --ywc--card__gridMinWidth--compact: 223px;
+  --ywc--card__imageMaxWidth: 250px;
+
+  /* Card variant 1 (White) */
+  --ywc--card--variant1__borderRadius: var(--ywc--card__borderRadius);
+  --ywc--card--variant1__iconBorderRadius: var(--ywc--card__iconBorderRadius);
+  --ywc--card--variant1__borderThickness: var(--ywc--card__borderThickness);
+  --ywc--card--variant1__backgroundColor:  #fefeff ;
+  --ywc--card--variant1__borderColor:  #f5f5f5 ;
+  --ywc--card--variant1__textColor:  #10243E ;
+  --ywc--card--variant1__iconColor:  #10243E ;
+  --ywc--card--variant1__iconBackgroundColor:  #00B8A9 ;
+
+  /* White variant links (primary) */
+  --ywc--card--variant1--link__fontColor:  #10243E ;
+    
+    --ywc--card--variant1--link__textDecoration: none;
+    --ywc--card--variant1--link__textDecorationColor: transparent;
+    
+  --ywc--card--variant1--link__hover--fontColor:  #10243E ;
+    
+    --ywc--card--variant1--link__hover--textDecoration: underline;
+    --ywc--card--variant1--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /* Card variant 2 (Grey) */
+  --ywc--card--variant2__borderRadius: var(--ywc--card__borderRadius);
+  --ywc--card--variant2__iconBorderRadius: var(--ywc--card__iconBorderRadius);
+  --ywc--card--variant2__borderThickness: var(--ywc--card__borderThickness);
+  --ywc--card--variant2__backgroundColor:  #f5f5f5 ;
+  --ywc--card--variant2__borderColor:  #667085 ;
+  --ywc--card--variant2__textColor:  #10243E ;
+  --ywc--card--variant2__iconColor:  #10243E ;
+  --ywc--card--variant2__iconBackgroundColor:  #fefeff ;
+
+  /* Grey variant links (primary) */
+  --ywc--card--variant2--link__fontColor:  #10243E ;
+    
+    --ywc--card--variant2--link__textDecoration: none;
+    --ywc--card--variant2--link__textDecorationColor: transparent;
+    
+  --ywc--card--variant2--link__hover--fontColor:  #10243E ;
+    
+    --ywc--card--variant2--link__hover--textDecoration: underline;
+    --ywc--card--variant2--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /* Card variant 3 (Black) */
+  --ywc--card--variant3__borderRadius: var(--ywc--card__borderRadius);
+  --ywc--card--variant3__iconBorderRadius: var(--ywc--card__iconBorderRadius);
+  --ywc--card--variant3__borderThickness: var(--ywc--card__borderThickness);
+  --ywc--card--variant3__backgroundColor:  #071421 ;
+  --ywc--card--variant3__borderColor:  #071421 ;
+  --ywc--card--variant3__textColor:  #fefeff ;
+  --ywc--card--variant3__iconColor:  #00B8A9 ;
+  --ywc--card--variant3__iconBackgroundColor:  #10243E ;
+
+  /* Black variant links (secondary) */
+  --ywc--card--variant3--link__fontColor:  #10243E ;
+    
+    --ywc--card--variant3--link__textDecoration: none;
+    --ywc--card--variant3--link__textDecorationColor: transparent;
+    
+  --ywc--card--variant3--link__hover--fontColor:  #10243E ;
+    
+    --ywc--card--variant3--link__hover--textDecoration: underline;
+    --ywc--card--variant3--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /* Card variant 4 (Primary) */
+  --ywc--card--variant4__borderRadius: var(--ywc--card__borderRadius);
+  --ywc--card--variant4__iconBorderRadius: var(--ywc--card__iconBorderRadius);
+  --ywc--card--variant4__borderThickness: var(--ywc--card__borderThickness);
+  --ywc--card--variant4__backgroundColor:  #10243E ;
+  --ywc--card--variant4__borderColor:  #10243E ;
+  --ywc--card--variant4__textColor:  #fefeff ;
+  --ywc--card--variant4__iconColor:  #fefeff ;
+  --ywc--card--variant4__iconBackgroundColor:  #071421 ;
+
+  /* Primary variant links (secondary) */
+  --ywc--card--variant4--link__fontColor:  #10243E ;
+    
+    --ywc--card--variant4--link__textDecoration: none;
+    --ywc--card--variant4--link__textDecorationColor: transparent;
+    
+  --ywc--card--variant4--link__hover--fontColor:  #10243E ;
+    
+    --ywc--card--variant4--link__hover--textDecoration: underline;
+    --ywc--card--variant4--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /*
+   * Card variant 5 (Accent 1) — surfaced in the Card module so brand themes
+   * can carry their accent palette into card grids without dropping back to
+   * the deprecated `custom` colour escape hatch. Uses Accent 1 from the
+   * theme's accent palette as the background; legibility is provided by
+   * `--ywc--color--onLight` so most accent tints work without rebranding.
+   */
+  --ywc--card--variant5__borderRadius: var(--ywc--card__borderRadius);
+  --ywc--card--variant5__iconBorderRadius: var(--ywc--card__iconBorderRadius);
+  --ywc--card--variant5__borderThickness: var(--ywc--card__borderThickness);
+  --ywc--card--variant5__backgroundColor:  #f5f5f5 ;
+  --ywc--card--variant5__borderColor:  #f5f5f5 ;
+  --ywc--card--variant5__textColor:  #10243E ;
+  --ywc--card--variant5__iconColor:  #10243E ;
+  --ywc--card--variant5__iconBackgroundColor:  #fefeff ;
+
+  /* Accent 1 variant links (primary — accents pair with the brand link colour) */
+  --ywc--card--variant5--link__fontColor:  #10243E ;
+    
+    --ywc--card--variant5--link__textDecoration: none;
+    --ywc--card--variant5--link__textDecorationColor: transparent;
+    
+  --ywc--card--variant5--link__hover--fontColor:  #10243E ;
+    
+    --ywc--card--variant5--link__hover--textDecoration: underline;
+    --ywc--card--variant5--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /* Card variant 6 (Accent 2) — same rationale as Accent 1, second accent slot */
+  --ywc--card--variant6__borderRadius: var(--ywc--card__borderRadius);
+  --ywc--card--variant6__iconBorderRadius: var(--ywc--card__iconBorderRadius);
+  --ywc--card--variant6__borderThickness: var(--ywc--card__borderThickness);
+  --ywc--card--variant6__backgroundColor:  #00B8A9 ;
+  --ywc--card--variant6__borderColor:  #00B8A9 ;
+  --ywc--card--variant6__textColor:  #10243E ;
+  --ywc--card--variant6__iconColor:  #10243E ;
+  --ywc--card--variant6__iconBackgroundColor:  #fefeff ;
+
+  /* Accent 2 variant links (primary) */
+  --ywc--card--variant6--link__fontColor:  #10243E ;
+    
+    --ywc--card--variant6--link__textDecoration: none;
+    --ywc--card--variant6--link__textDecorationColor: transparent;
+    
+  --ywc--card--variant6--link__hover--fontColor:  #10243E ;
+    
+    --ywc--card--variant6--link__hover--textDecoration: underline;
+    --ywc--card--variant6--link__hover--textDecorationColor:  #10243E ;
+    
+}
+
+/* ===========================================================================
+ * THEME MODES — dark palette overrides for card variants
+ * ===========================================================================
+ *
+ * Without these overrides the six `--ywc--card--variantN__*` tokens stay
+ * frozen at their light-mode values when the page flips to dark, leaving
+ * white cards on a near-black canvas (the bug visible on the dark pricing
+ * preview).
+ *
+ * The recipe mirrors `_section-colors.hubl.css`:
+ *
+ *   variant1 White    → lifted dark grey  (color_5 + 8% color_1)
+ *                       — sits one tonal step above a section-1 / section-2
+ *                       canvas, same recipe section-2 itself uses.
+ *   variant2 Grey     → more-lifted dark  (color_5 + 14% color_1)
+ *                       — keeps the "grey card on a grey section" hierarchy
+ *                       intact (variant2 must always read as one step lifted
+ *                       from variant1, on either scheme).
+ *   variant3 Black    → deep dark         (color_5)
+ *                       — was the deepest surface in light; stays the
+ *                       deepest in dark (sits flush with the section-1
+ *                       canvas, which is the inverse of "black card on
+ *                       white page" in light mode).
+ *   variant4 Primary  → brand primary --on-dark
+ *                       — same swap section-5 already does in dark mode.
+ *   variant5 Accent 1 → tertiary accent (or fallback grey) lifted via
+ *                       --on-dark mix; text reads against the dark base.
+ *   variant6 Accent 2 → complementary accent (or fallback grey) lifted via
+ *                       --on-dark mix; same shape as variant5.
+ *
+ * Borders track each card's bg one step further (subtle hairline so the
+ * card edge stays visible against the section it sits on) and icons swap
+ * to the `--on-dark` accent variants where applicable.
+ *
+ * Selector matches `_section-colors.hubl.css`: `:root` for site-wide dark,
+ * `html[data-ywc-theme="dark"]` when the user toggle is wired up.
+ * ======================================================================= */
+
+  
+
+  
+
+  
+
+  
+
+ html[data-ywc-theme="dark"] 
+
+{
+  /* Card variant 1 (White → lifted dark grey) */
+  --ywc--card--variant1__backgroundColor: color-mix(in srgb, #071421 92%, #fefeff);
+  --ywc--card--variant1__borderColor: color-mix(in srgb, #071421 80%, #fefeff);
+  --ywc--card--variant1__textColor:  #f5f5f5 ;
+  --ywc--card--variant1__iconColor: var(--ywc--color--primary--on-dark);
+  --ywc--card--variant1__iconBackgroundColor: color-mix(in srgb, #071421 80%, #fefeff);
+
+  /* Card variant 2 (Grey → more-lifted dark grey, stays one step above variant1) */
+  --ywc--card--variant2__backgroundColor: color-mix(in srgb, #071421 86%, #fefeff);
+  --ywc--card--variant2__borderColor: color-mix(in srgb, #071421 74%, #fefeff);
+  --ywc--card--variant2__textColor:  #f5f5f5 ;
+  --ywc--card--variant2__iconColor: var(--ywc--color--primary--on-dark);
+  --ywc--card--variant2__iconBackgroundColor: color-mix(in srgb, #071421 92%, #fefeff);
+
+  /* Card variant 3 (Black → deep dark; stays the deepest, sits flush with section-1 canvas) */
+  --ywc--card--variant3__backgroundColor:  #071421 ;
+  --ywc--card--variant3__borderColor: color-mix(in srgb, #071421 88%, #fefeff);
+  --ywc--card--variant3__textColor:  #f5f5f5 ;
+  --ywc--card--variant3__iconColor: var(--ywc--color--complementary--on-dark);
+  --ywc--card--variant3__iconBackgroundColor: color-mix(in srgb, #071421 80%, #fefeff);
+
+  /* Card variant 4 (Primary → brand primary --on-dark) */
+  --ywc--card--variant4__backgroundColor: var(--ywc--color--primary--on-dark);
+  --ywc--card--variant4__borderColor: var(--ywc--color--primary--on-dark);
+  --ywc--card--variant4__textColor: var(--ywc--color--primary--contrast--on-dark);
+  --ywc--card--variant4__iconColor: var(--ywc--color--primary--contrast--on-dark);
+  --ywc--card--variant4__iconBackgroundColor: color-mix(in srgb, #071421 75%, #fefeff);
+
+  /* Card variant 5 (Accent 1 → tertiary accent, text reads against the lift) */
+  --ywc--card--variant5__backgroundColor: color-mix(in srgb, #071421 86%, #fefeff);
+  --ywc--card--variant5__borderColor: color-mix(in srgb, #071421 74%, #fefeff);
+  --ywc--card--variant5__textColor:  #f5f5f5 ;
+  --ywc--card--variant5__iconColor: var(--ywc--color--primary--on-dark);
+  --ywc--card--variant5__iconBackgroundColor: color-mix(in srgb, #071421 92%, #fefeff);
+
+  /* Card variant 6 (Accent 2 → complementary accent, text reads against the lift) */
+  --ywc--card--variant6__backgroundColor: color-mix(in srgb, #00B8A9 25%, #071421);
+  --ywc--card--variant6__borderColor: color-mix(in srgb, #00B8A9 35%, #071421);
+  --ywc--card--variant6__textColor:  #f5f5f5 ;
+  --ywc--card--variant6__iconColor: var(--ywc--color--primary--on-dark);
+  --ywc--card--variant6__iconBackgroundColor: color-mix(in srgb, #071421 92%, #fefeff);
+}
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+:root {
+
+  /* ------------------------------------------------------------------
+   * Section 1 — Canvas
+   *
+   * accentColor wrapped in a HubL conditional so it falls back to the
+   * same scope's text colour when the underlying accent slot is unset
+   * (mono baseline — DEV-98). Child themes that populate accent slots
+   * render normally.
+   * ------------------------------------------------------------------ */
+  --ywc--section--1__backgroundColor:  #fefeff ;
+  --ywc--section--1__textColor:  #10243E ;
+  --ywc--section--1__accentColor: #10243E;
+  --ywc--section--1__captionColor:  #667085 ;
+  --ywc--section--1--blockquote__textColor:  #10243E ;
+  --ywc--section--1--blockquote__backgroundColor:  #f5f5f5 ;
+  --ywc--section--1--blockquote__accentColor: #10243E;
+
+    
+      
+    
+
+  --ywc--section--1--link__fontColor:  #10243E ;
+
+    
+    --ywc--section--1--link__textDecoration: none;
+    --ywc--section--1--link__textDecorationColor: transparent;
+    
+
+  --ywc--section--1--link__hover--fontColor:  #10243E ;
+    
+    --ywc--section--1--link__hover--textDecoration: underline;
+    --ywc--section--1--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /* ------------------------------------------------------------------
+   * Section 2 — Subtle
+   * ------------------------------------------------------------------ */
+  --ywc--section--2__backgroundColor:  #f5f5f5 ;
+  --ywc--section--2__textColor:  #10243E ;
+  --ywc--section--2__accentColor: #10243E;
+  --ywc--section--2__captionColor:  #667085 ;
+  --ywc--section--2--blockquote__textColor:  #10243E ;
+  --ywc--section--2--blockquote__backgroundColor:  #f5f5f5 ;
+  --ywc--section--2--blockquote__accentColor: #10243E;
+
+    
+      
+    
+
+  --ywc--section--2--link__fontColor:  #10243E ;
+
+    
+    --ywc--section--2--link__textDecoration: none;
+    --ywc--section--2--link__textDecorationColor: transparent;
+    
+
+  --ywc--section--2--link__hover--fontColor:  #10243E ;
+    
+    --ywc--section--2--link__hover--textDecoration: underline;
+    --ywc--section--2--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /* ------------------------------------------------------------------
+   * Section 3 — Accent
+   *
+   * The slot's semantic role is "third brand colour surface / accent
+   * highlight" — per the parent theme's original design intent, tertiary
+   * lands here. Emission resolves through a three-tier priority chain:
+   *
+   *   Tertiary set → dedicated third-brand surface (preferred).
+   *   Tertiary unset, complementary set → fall back to second-brand colour.
+   *   Both unset → soft tint of primary on canvas (subtle highlight, the
+   *     single-brand baseline).
+   *
+   * Field-level overrides for the section-3 bg no longer apply in this
+   * path (same trade-off as the dark-mode override below). Child themes
+   * that need a bespoke Section 3 should re-declare the token directly.
+   * ------------------------------------------------------------------ */
+    
+    --ywc--section--3__backgroundColor:  #00B8A9 ;
+    --ywc--section--3__textColor: var(--ywc--color--complementary--contrast--on-light);
+    --ywc--section--3__accentColor: var(--ywc--color--complementary--contrast--on-light);
+    
+  --ywc--section--3__captionColor:  #f5f5f5 ;
+  --ywc--section--3--blockquote__textColor:  #fefeff ;
+  --ywc--section--3--blockquote__backgroundColor:  #10243E ;
+  --ywc--section--3--blockquote__accentColor: #10243E;
+
+    
+      
+    
+
+  --ywc--section--3--link__fontColor:  #10243E ;
+
+    
+    --ywc--section--3--link__textDecoration: none;
+    --ywc--section--3--link__textDecorationColor: transparent;
+    
+
+  --ywc--section--3--link__hover--fontColor:  #10243E ;
+    
+    --ywc--section--3--link__hover--textDecoration: underline;
+    --ywc--section--3--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /* ------------------------------------------------------------------
+   * Section 4 — Emphasis (inverse / high-contrast standout)
+   *
+   * Dark-palette section on the mono baseline: near-black bg, off-white
+   * text. Caption has a special auto-derivation — the caption_color
+   * field inherits mid-grey by default which is too dark against a
+   * dark bg, so when the field is still at its inherited default we
+   * compute a muted tone by mixing the section's text colour against
+   * its background. Explicit values entered in Theme Settings always
+   * win.
+   * ------------------------------------------------------------------ */
+  --ywc--section--4__backgroundColor:  #10243E ;
+  --ywc--section--4__textColor:  #f5f5f5 ;
+  --ywc--section--4__accentColor: #00B8A9;
+  --ywc--section--4__captionColor: color-mix(in srgb, #f5f5f5 70%, #10243E);
+  --ywc--section--4--blockquote__textColor:  #f5f5f5 ;
+  --ywc--section--4--blockquote__backgroundColor:  #071421 ;
+  --ywc--section--4--blockquote__accentColor: #00B8A9;
+
+    
+      
+    
+
+  --ywc--section--4--link__fontColor:  #10243E ;
+
+    
+    --ywc--section--4--link__textDecoration: none;
+    --ywc--section--4--link__textDecorationColor: transparent;
+    
+
+  --ywc--section--4--link__hover--fontColor:  #10243E ;
+    
+    --ywc--section--4--link__hover--textDecoration: underline;
+    --ywc--section--4--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /* ------------------------------------------------------------------
+   * Section 5 — Primary accent (bg derived from brand primary)
+   *
+   * Text colour routes through `--ywc--color--primary--contrast--on-light`
+   * so it auto-picks black/white based on primary's luminance. The field
+   * default (color_1 = white) silently failed WCAG for light-primary
+   * brands (amber/yellow/lime); this keeps section-5 body copy readable
+   * regardless of hue. Same trade-off as section 3: field override for
+   * section-5 text is ignored.
+   * ------------------------------------------------------------------ */
+  --ywc--section--5__backgroundColor:  #10243E ;
+  --ywc--section--5__textColor: var(--ywc--color--primary--contrast--on-light);
+  --ywc--section--5__accentColor: var(--ywc--color--primary--contrast--on-light);
+  --ywc--section--5__captionColor:  #f5f5f5 ;
+  --ywc--section--5--blockquote__textColor:  #fefeff ;
+  --ywc--section--5--blockquote__backgroundColor:  #10243E ;
+  --ywc--section--5--blockquote__accentColor: #00B8A9;
+
+    
+      
+    
+
+  --ywc--section--5--link__fontColor:  #10243E ;
+
+    
+    --ywc--section--5--link__textDecoration: none;
+    --ywc--section--5--link__textDecorationColor: transparent;
+    
+
+  --ywc--section--5--link__hover--fontColor:  #10243E ;
+    
+    --ywc--section--5--link__hover--textDecoration: underline;
+    --ywc--section--5--link__hover--textDecorationColor:  #10243E ;
+    
+
+  /* ------------------------------------------------------------------
+   * Section 6 — Complementary
+   *
+   * Differentiation from Section 4 (Emphasis) in single-brand themes.
+   * Field defaults point Section 6 bg at color_4 (same as Emphasis), which
+   * collapses the two slots. Override emission so the slot earns a
+   * distinct visual:
+   *
+   *   Complementary set → full second-brand surface.
+   *   Complementary unset → softened dark panel (85% color_4 + 15%
+   *     canvas), distinct from Emphasis's full color_4.
+   *
+   * Field-level overrides for the section-6 bg no longer apply in this
+   * path. Child themes needing a bespoke Section 6 should re-declare
+   * the token directly.
+   * ------------------------------------------------------------------ */
+    
+    --ywc--section--6__backgroundColor:  #00B8A9 ;
+    --ywc--section--6__textColor: var(--ywc--color--complementary--contrast--on-light);
+    --ywc--section--6__accentColor: var(--ywc--color--complementary--contrast--on-light);
+    
+  --ywc--section--6__captionColor:  #f5f5f5 ;
+  --ywc--section--6--blockquote__textColor:  #fefeff ;
+  --ywc--section--6--blockquote__backgroundColor:  #071421 ;
+  --ywc--section--6--blockquote__accentColor: #10243E;
+
+    
+      
+    
+
+  --ywc--section--6--link__fontColor:  #10243E ;
+
+    
+    --ywc--section--6--link__textDecoration: none;
+    --ywc--section--6--link__textDecorationColor: transparent;
+    
+
+  --ywc--section--6--link__hover--fontColor:  #10243E ;
+    
+    --ywc--section--6--link__hover--textDecoration: underline;
+    --ywc--section--6--link__hover--textDecorationColor:  #10243E ;
+    
+}
+
+/* ---------------------------------------------------------------------------
+ * Surface-aware token cascade (DEV-107).
+ *
+ * A "surface" is any element that introduces its own background colour: a
+ * section, a card, a tag, an icon wrapper, a form input, a section-extras
+ * inset, etc. Every surface is a new context for resolving foreground tokens
+ * (text, accent, link, caption, border) AND for re-styling components whose
+ * colour-relevant tokens were resolved against the page's default surface
+ * (primary button, link decorations, focus ring).
+ *
+ * Attribute values:
+ *   `section-1` .. `section-6` — canonical indexed slot (preferred)
+ *   `light` / `lightSection--1/2/3` / `dark` / `darkSection--1` — legacy
+ *   aliases kept for backwards compatibility with runtime emissions (the
+ *   theme renderer's body-level toggle) and any child-theme code that
+ *   references the old names. Safe to delete once every emitter is on the
+ *   new names (Phase 4 of the theme-modes refactor).
+ *
+ * Modules read `--ywc--surface__*` tokens, never `--ywc--section--N__*`
+ * directly — that's the abstraction layer that lets this cascade re-bind
+ * without touching the 40+ downstream module CSS files.
+ * ------------------------------------------------------------------------ */
+
+:root,
+[data-ywc-surface="light"],
+[data-ywc-surface="lightSection--1"],
+[data-ywc-surface="section-1"] {
+  --ywc--surface__backgroundColor: var(--ywc--section--1__backgroundColor);
+  --ywc--surface__textColor: var(--ywc--section--1__textColor);
+  --ywc--surface__accentColor: var(--ywc--section--1__accentColor);
+  --ywc--surface__captionColor: var(--ywc--section--1__captionColor);
+  --ywc--surface__mutedTextColor: var(--ywc--section--1__captionColor);
+  --ywc--surface__subtleSurfaceColor: var(--ywc--section--2__backgroundColor);
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--section--1__textColor) 14%, transparent);
+  --ywc--surface__linkColor: var(--ywc--section--1--link__fontColor);
+  --ywc--surface__linkHoverColor: var(--ywc--section--1--link__hover--fontColor);
+  --ywc--surface__linkDecoration: var(--ywc--section--1--link__textDecoration);
+  --ywc--surface__linkDecorationColor: var(--ywc--section--1--link__textDecorationColor);
+  --ywc--surface__linkHoverDecoration: var(--ywc--section--1--link__hover--textDecoration);
+  --ywc--surface__linkHoverDecorationColor: var(--ywc--section--1--link__hover--textDecorationColor);
+
+  /* Body-copy link tokens (RichText, blog post body) follow the section's
+     own link palette. Button tokens are NOT set here — they read from
+     `--ywc--surface__*` at :root in `_button.hubl.css`, so rebinding the
+     surface tokens above is sufficient for buttons to auto-adapt. */
+  --ywc--link--primary__fontColor: var(--ywc--section--1--link__fontColor);
+  --ywc--link--primary__hover--fontColor: var(--ywc--section--1--link__hover--fontColor);
+  --ywc--link--secondary__fontColor: var(--ywc--section--1--link__fontColor);
+  --ywc--link--secondary__hover--fontColor: var(--ywc--section--1--link__hover--fontColor);
+}
+
+[data-ywc-surface="lightSection--2"],
+[data-ywc-surface="section-2"] {
+  --ywc--surface__backgroundColor: var(--ywc--section--2__backgroundColor);
+  --ywc--surface__textColor: var(--ywc--section--2__textColor);
+  --ywc--surface__accentColor: var(--ywc--section--2__accentColor);
+  --ywc--surface__captionColor: var(--ywc--section--2__captionColor);
+  --ywc--surface__mutedTextColor: var(--ywc--section--2__captionColor);
+  /* Subtle lift from section-2's own colours (same pattern as sections 3–6).
+     Previously read section-3 bg which is dark/accent at the baseline —
+     producing a black chip with dark text (same bug section-3 fixed earlier). */
+  --ywc--surface__subtleSurfaceColor:
+    color-mix(in srgb, var(--ywc--section--2__textColor) 8%, var(--ywc--section--2__backgroundColor));
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--section--2__textColor) 14%, transparent);
+  --ywc--surface__linkColor: var(--ywc--section--2--link__fontColor);
+  --ywc--surface__linkHoverColor: var(--ywc--section--2--link__hover--fontColor);
+  --ywc--surface__linkDecoration: var(--ywc--section--2--link__textDecoration);
+  --ywc--surface__linkDecorationColor: var(--ywc--section--2--link__textDecorationColor);
+  --ywc--surface__linkHoverDecoration: var(--ywc--section--2--link__hover--textDecoration);
+  --ywc--surface__linkHoverDecorationColor: var(--ywc--section--2--link__hover--textDecorationColor);
+
+  --ywc--link--primary__fontColor: var(--ywc--section--2--link__fontColor);
+  --ywc--link--primary__hover--fontColor: var(--ywc--section--2--link__hover--fontColor);
+  --ywc--link--secondary__fontColor: var(--ywc--section--2--link__fontColor);
+  --ywc--link--secondary__hover--fontColor: var(--ywc--section--2--link__hover--fontColor);
+
+  color: var(--ywc--surface__textColor);
+}
+
+[data-ywc-surface="lightSection--3"],
+[data-ywc-surface="section-3"] {
+  --ywc--surface__backgroundColor: var(--ywc--section--3__backgroundColor);
+  --ywc--surface__textColor: var(--ywc--section--3__textColor);
+  --ywc--surface__accentColor: var(--ywc--section--3__accentColor);
+  --ywc--surface__captionColor: var(--ywc--section--3__captionColor);
+  --ywc--surface__mutedTextColor: var(--ywc--section--3__captionColor);
+  /* Subtle surface = a slight lift from the section bg using text-color
+     alpha (same pattern as section 4/5/6). Previously read section-2 bg
+     which produced a near-white chip on a dark Accent section —
+     invisible-on-white text. */
+  --ywc--surface__subtleSurfaceColor:
+    color-mix(in srgb, var(--ywc--section--3__textColor) 8%, var(--ywc--section--3__backgroundColor));
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--section--3__textColor) 14%, transparent);
+  /*
+   * Mono baseline guard (mirrors section 4).
+   * Section 3 (Accent) defaults to a dark/coloured background derived from
+   * `accent_colors.tertiary`. The `primary_links` field it reads its link
+   * colour from defaults to near-black (intended for light sections), which
+   * becomes invisible on a dark Accent background. Fall back to the
+   * section's own text colour so link contrast always tracks text contrast.
+   * A child theme that populates `section_3 > link_colors` with a custom
+   * colour wins by re-declaring the variable in its own surface selector.
+   */
+  --ywc--surface__linkColor: var(--ywc--section--3__textColor);
+  --ywc--surface__linkHoverColor: var(--ywc--section--3__textColor);
+  --ywc--surface__linkDecoration: underline;
+  --ywc--surface__linkDecorationColor: var(--ywc--section--3__textColor);
+  --ywc--surface__linkHoverDecoration: underline;
+  --ywc--surface__linkHoverDecorationColor: var(--ywc--section--3__textColor);
+
+  --ywc--link--primary__fontColor: var(--ywc--section--3__textColor);
+  --ywc--link--primary__hover--fontColor: var(--ywc--section--3__textColor);
+  --ywc--link--secondary__fontColor: var(--ywc--section--3__textColor);
+  --ywc--link--secondary__hover--fontColor: var(--ywc--section--3__textColor);
+
+  color: var(--ywc--surface__textColor);
+}
+
+/*
+ * NOTE: Previously a `[data-ywc-surface=...]` block flipped
+ * `--ywc--color--primary--active` to its `--on-dark` sibling on dark
+ * surfaces. That was mono-baseline compensation — when primary was unset
+ * and fell back to near-black, a primary button on a dark section became
+ * near-black-on-near-black (invisible). With primary always set to a real
+ * brand colour (parent default #0D9488), the compensation produced the
+ * opposite bug: primary buttons changed visual identity across surfaces.
+ * Removed deliberately. A primary button should render with the exact
+ * bg/text pairing the brand defined, everywhere — except on the two
+ * surfaces whose bg IS brand primary (section 5 always, section 3 by
+ * default / always in dark mode). Those collisions are handled by the
+ * dedicated override further down this file: complementary swap when
+ * available, surface-invert fallback otherwise.
+ */
+
+[data-ywc-surface="dark"],
+[data-ywc-surface="darkSection--1"],
+[data-ywc-surface="section-4"] {
+  --ywc--surface__backgroundColor: var(--ywc--section--4__backgroundColor);
+  --ywc--surface__textColor: var(--ywc--section--4__textColor);
+  --ywc--surface__accentColor: var(--ywc--section--4__accentColor);
+  --ywc--surface__captionColor: var(--ywc--section--4__captionColor);
+  --ywc--surface__mutedTextColor: var(--ywc--section--4__captionColor);
+  /* On dark, the "subtle" elevated surface lifts up via additive transparency
+     of the surface text colour. This keeps the elevated surface dark while
+     still being readable above the base, and avoids depending on a child
+     theme having a separate dark-surface-2 slot. */
+  --ywc--surface__subtleSurfaceColor: color-mix(in srgb, var(--ywc--section--4__textColor) 8%, var(--ywc--section--4__backgroundColor));
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--section--4__textColor) 18%, transparent);
+  /*
+   * Link colour fallback (mono baseline guard).
+   * Primary/secondary links inherit `color_4` (near-black text) by default,
+   * so an unmodified dark section ends up with near-black-on-near-black
+   * inline links. We default to the surface text colour and let child
+   * themes that populate a dark link colour win by re-declaring the
+   * variable in their own surface selector. The mono-baseline accent/text
+   * equivalence means inline links stay readable; the underline still
+   * draws via the surface link decoration tokens to differentiate them
+   * from body copy.
+   */
+  --ywc--surface__linkColor: var(--ywc--section--4__textColor);
+  --ywc--surface__linkHoverColor: var(--ywc--section--4__textColor);
+  --ywc--surface__linkDecoration: underline;
+  --ywc--surface__linkDecorationColor: var(--ywc--section--4__textColor);
+  --ywc--surface__linkHoverDecoration: underline;
+  --ywc--surface__linkHoverDecorationColor: var(--ywc--section--4__textColor);
+  color: var(--ywc--surface__textColor);
+
+  --ywc--link--primary__fontColor: var(--ywc--section--4__textColor);
+  --ywc--link--primary__hover--fontColor: var(--ywc--section--4__textColor);
+  --ywc--link--secondary__fontColor: var(--ywc--section--4__textColor);
+  --ywc--link--secondary__hover--fontColor: var(--ywc--section--4__textColor);
+}
+
+[data-ywc-surface="section-5"] {
+  --ywc--surface__backgroundColor: var(--ywc--section--5__backgroundColor);
+  --ywc--surface__textColor: var(--ywc--section--5__textColor);
+  --ywc--surface__accentColor: var(--ywc--section--5__accentColor);
+  --ywc--surface__captionColor: var(--ywc--section--5__captionColor);
+  --ywc--surface__mutedTextColor: var(--ywc--section--5__captionColor);
+  --ywc--surface__subtleSurfaceColor: color-mix(in srgb, var(--ywc--section--5__textColor) 8%, var(--ywc--section--5__backgroundColor));
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--section--5__textColor) 18%, transparent);
+  /* Mono baseline guard — see section 4 comment. Section 5 (Primary accent)
+     uses a dark/brand-coloured background and `primary_links` defaults to
+     near-black. Fall back to surface text colour for guaranteed contrast. */
+  --ywc--surface__linkColor: var(--ywc--section--5__textColor);
+  --ywc--surface__linkHoverColor: var(--ywc--section--5__textColor);
+  --ywc--surface__linkDecoration: underline;
+  --ywc--surface__linkDecorationColor: var(--ywc--section--5__textColor);
+  --ywc--surface__linkHoverDecoration: underline;
+  --ywc--surface__linkHoverDecorationColor: var(--ywc--section--5__textColor);
+
+  --ywc--link--primary__fontColor: var(--ywc--section--5__textColor);
+  --ywc--link--primary__hover--fontColor: var(--ywc--section--5__textColor);
+  --ywc--link--secondary__fontColor: var(--ywc--section--5__textColor);
+  --ywc--link--secondary__hover--fontColor: var(--ywc--section--5__textColor);
+
+  color: var(--ywc--surface__textColor);
+}
+
+[data-ywc-surface="section-6"] {
+  --ywc--surface__backgroundColor: var(--ywc--section--6__backgroundColor);
+  --ywc--surface__textColor: var(--ywc--section--6__textColor);
+  --ywc--surface__accentColor: var(--ywc--section--6__accentColor);
+  --ywc--surface__captionColor: var(--ywc--section--6__captionColor);
+  --ywc--surface__mutedTextColor: var(--ywc--section--6__captionColor);
+  --ywc--surface__subtleSurfaceColor: color-mix(in srgb, var(--ywc--section--6__textColor) 8%, var(--ywc--section--6__backgroundColor));
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--section--6__textColor) 18%, transparent);
+  /* Mono baseline guard — see section 4 comment. */
+  --ywc--surface__linkColor: var(--ywc--section--6__textColor);
+  --ywc--surface__linkHoverColor: var(--ywc--section--6__textColor);
+  --ywc--surface__linkDecoration: underline;
+  --ywc--surface__linkDecorationColor: var(--ywc--section--6__textColor);
+  --ywc--surface__linkHoverDecoration: underline;
+  --ywc--surface__linkHoverDecorationColor: var(--ywc--section--6__textColor);
+
+  --ywc--link--primary__fontColor: var(--ywc--section--6__textColor);
+  --ywc--link--primary__hover--fontColor: var(--ywc--section--6__textColor);
+  --ywc--link--secondary__fontColor: var(--ywc--section--6__textColor);
+  --ywc--link--secondary__hover--fontColor: var(--ywc--section--6__textColor);
+
+  color: var(--ywc--surface__textColor);
+}
+
+/*
+ * Card-variant surface scopes (DEV-107).
+ *
+ * Card variants (`.ywc-card--white`, `--grey`, `--black`, `--primary`,
+ * `--accent1/2`) paint their own background, so they ARE new surfaces.
+ * Re-bind the surface tokens on each variant so descendants of the card
+ * (icons, eyebrows, links, buttons) read text/accent/link tokens that
+ * match the card's painted background, not the surrounding section.
+ *
+ * The card variant tokens (`--ywc--card--variantN__*`) are themselves
+ * declared in `_cards.hubl.css` and resolve from the theme's per-variant
+ * fields, so a child theme that re-tunes those still wins.
+ *
+ * Note: these don't override `--ywc--surface__backgroundColor` because
+ * the card already paints its own background; we only need foreground
+ * tokens to re-resolve.
+ */
+
+/*
+ * Card variants only rebind surface-level foreground tokens now.
+ * Buttons, links, captions, accents etc. all read from `--ywc--surface__*`
+ * which cascades automatically. Re-declaring button tokens per variant
+ * was the old pattern — surface-awareness makes it redundant.
+ */
+
+.ywc-card--white {
+  --ywc--surface__textColor: var(--ywc--card--variant1__textColor);
+  --ywc--surface__linkColor: var(--ywc--card--variant1--link__fontColor);
+  --ywc--surface__linkHoverColor: var(--ywc--card--variant1--link__hover--fontColor);
+  --ywc--surface__linkDecoration: var(--ywc--card--variant1--link__textDecoration);
+  --ywc--surface__linkDecorationColor: var(--ywc--card--variant1--link__textDecorationColor);
+  --ywc--surface__linkHoverDecoration: var(--ywc--card--variant1--link__hover--textDecoration);
+  --ywc--surface__linkHoverDecorationColor: var(--ywc--card--variant1--link__hover--textDecorationColor);
+  --ywc--surface__captionColor: var(--ywc--card--variant1__textColor);
+  --ywc--surface__accentColor: var(--ywc--card--variant1__textColor);
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--card--variant1__textColor) 14%, transparent);
+}
+
+.ywc-card--grey {
+  --ywc--surface__textColor: var(--ywc--card--variant2__textColor);
+  --ywc--surface__linkColor: var(--ywc--card--variant2--link__fontColor);
+  --ywc--surface__linkHoverColor: var(--ywc--card--variant2--link__hover--fontColor);
+  --ywc--surface__captionColor: var(--ywc--card--variant2__textColor);
+  --ywc--surface__accentColor: var(--ywc--card--variant2__textColor);
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--card--variant2__textColor) 14%, transparent);
+
+  /* Grey card paints its own bg; override surface__backgroundColor so
+     secondary buttons (which compute hover from `--ywc--surface__backgroundColor`)
+     use the actual card bg, not the outer section's. */
+  --ywc--surface__backgroundColor: var(--ywc--card--variant2__backgroundColor);
+}
+
+.ywc-card--black {
+  --ywc--surface__textColor: var(--ywc--card--variant3__textColor);
+  --ywc--surface__backgroundColor: var(--ywc--card--variant3__backgroundColor);
+  --ywc--surface__linkColor: var(--ywc--card--variant3__textColor);
+  --ywc--surface__linkHoverColor: var(--ywc--card--variant3__textColor);
+  --ywc--surface__captionColor: var(--ywc--card--variant3__textColor);
+  --ywc--surface__accentColor: var(--ywc--card--variant3__textColor);
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--card--variant3__textColor) 18%, transparent);
+}
+
+.ywc-card--primary {
+  --ywc--surface__textColor: var(--ywc--card--variant4__textColor);
+  --ywc--surface__backgroundColor: var(--ywc--card--variant4__backgroundColor);
+  --ywc--surface__linkColor: var(--ywc--card--variant4--link__fontColor);
+  --ywc--surface__linkHoverColor: var(--ywc--card--variant4--link__hover--fontColor);
+  --ywc--surface__captionColor: var(--ywc--card--variant4__textColor);
+  --ywc--surface__accentColor: var(--ywc--card--variant4__textColor);
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--card--variant4__textColor) 18%, transparent);
+}
+
+.ywc-card--accent1 {
+  --ywc--surface__textColor: var(--ywc--card--variant5__textColor);
+  --ywc--surface__backgroundColor: var(--ywc--card--variant5__backgroundColor);
+  --ywc--surface__linkColor: var(--ywc--card--variant5--link__fontColor);
+  --ywc--surface__linkHoverColor: var(--ywc--card--variant5--link__hover--fontColor);
+  --ywc--surface__captionColor: var(--ywc--card--variant5__textColor);
+  --ywc--surface__accentColor: var(--ywc--card--variant5__textColor);
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--card--variant5__textColor) 18%, transparent);
+}
+
+.ywc-card--accent2 {
+  --ywc--surface__textColor: var(--ywc--card--variant6__textColor);
+  --ywc--surface__backgroundColor: var(--ywc--card--variant6__backgroundColor);
+  --ywc--surface__linkColor: var(--ywc--card--variant6--link__fontColor);
+  --ywc--surface__linkHoverColor: var(--ywc--card--variant6--link__hover--fontColor);
+  --ywc--surface__captionColor: var(--ywc--card--variant6__textColor);
+  --ywc--surface__accentColor: var(--ywc--card--variant6__textColor);
+  --ywc--surface__borderColor: color-mix(in srgb, var(--ywc--card--variant6__textColor) 18%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+ * Surface-aware button token rebind.
+ *
+ * Custom properties substitute their `var()` references at the scope where
+ * they are declared — the computed value then inherits as a literal. Declaring
+ * surface-dependent button tokens at `:root` in `_button.hubl.css` alone
+ * therefore bakes in section-1's surface values everywhere; descendants of a
+ * different surface get the section-1 literal, not their own surface colours.
+ *
+ * Redeclare each surface-dependent button token at every surface scope so the
+ * `var(--ywc--surface__*)` references resolve against that scope's own
+ * tokens. The `:root` declarations in `_button.hubl.css` remain as the
+ * fallback for unsurfaced content.
+ * ------------------------------------------------------------------------ */
+
+:root,
+[data-ywc-surface="light"],
+[data-ywc-surface="lightSection--1"],
+[data-ywc-surface="lightSection--2"],
+[data-ywc-surface="lightSection--3"],
+[data-ywc-surface="dark"],
+[data-ywc-surface="darkSection--1"],
+[data-ywc-surface="section-1"],
+[data-ywc-surface="section-2"],
+[data-ywc-surface="section-3"],
+[data-ywc-surface="section-4"],
+[data-ywc-surface="section-5"],
+[data-ywc-surface="section-6"],
+.ywc-card--white,
+.ywc-card--grey,
+.ywc-card--black,
+.ywc-card--primary,
+.ywc-card--accent1,
+.ywc-card--accent2 {
+  --ywc--button--primary__backgroundColor:
+    var(--ywc--color--primary--active, var(--ywc--surface__textColor));
+    
+    --ywc--button--primary__textColor:  #fefeff ;
+    
+  --ywc--button--primary__hover--backgroundColor:
+    color-mix(in srgb, var(--ywc--button--primary__backgroundColor) 88%, var(--ywc--surface__backgroundColor));
+    
+    --ywc--button--primary__hover--textColor:  #fefeff ;
+    
+  --ywc--button--primary__active--backgroundColor:
+    color-mix(in srgb, var(--ywc--button--primary__hover--backgroundColor) 80%, var(--ywc--surface__backgroundColor));
+
+    
+    
+    --ywc--button--secondary__backgroundColor: var(--ywc--surface__textColor);
+      
+      
+    --ywc--button--secondary__hover--backgroundColor:
+      color-mix(in srgb, var(--ywc--surface__textColor) 88%, var(--ywc--surface__backgroundColor));
+      
+      
+    
+}
+
+@supports (color: color-mix(in lch, red, blue)) {
+:root,
+[data-ywc-surface="light"],
+[data-ywc-surface="lightSection--1"],
+[data-ywc-surface="lightSection--2"],
+[data-ywc-surface="lightSection--3"],
+[data-ywc-surface="dark"],
+[data-ywc-surface="darkSection--1"],
+[data-ywc-surface="section-1"],
+[data-ywc-surface="section-2"],
+[data-ywc-surface="section-3"],
+[data-ywc-surface="section-4"],
+[data-ywc-surface="section-5"],
+[data-ywc-surface="section-6"],
+.ywc-card--white,
+.ywc-card--grey,
+.ywc-card--black,
+.ywc-card--primary,
+.ywc-card--accent1,
+.ywc-card--accent2 {
+    --ywc--button--secondary__hover--backgroundColor:
+      color-mix(in srgb, var(--ywc--surface__textColor) 8%, transparent);
+}
+}
+
+/* ---------------------------------------------------------------------------
+ * Primary button collision override on brand-primary surfaces.
+ *
+ * Section 5 (Primary accent) is always backed by brand primary, so a
+ * default primary-button pairing (primary bg + primary contrast text)
+ * would collide with the surface and lose all hierarchy.
+ *
+ * Resolution branches on whether a complementary brand colour exists:
+ *   - Complementary set → primary button swaps to complementary. Keeps a
+ *     brand-colour identity (just the other one) that contrasts against
+ *     the primary-coloured surface.
+ *   - Complementary unset → primary button goes ink (color_5, near-black).
+ *     Neutral ink gives the highest value contrast against any saturated
+ *     brand surface, and reads as the primary CTA regardless of hue.
+ *     Child themes that prefer a white-on-brand (Apple/Stripe-style)
+ *     treatment can re-declare these tokens on their own selector.
+ *
+ * The branch is CSS-only: `--ywc--color--complementary--active` is declared
+ * only when `accent_colors.complementary` is populated (_colors.hubl.css),
+ * so `var(..., fallback)` selects the right arm automatically.
+ *
+ * Section 3 (Accent) used to share this collision — it defaulted to brand
+ * primary too. With Section 3 now emitting a soft tinted surface (or
+ * complementary when set), the collision no longer exists there and the
+ * default primary button reads fine, so it's excluded from this override.
+ * ------------------------------------------------------------------------ */
+
+[data-ywc-surface="section-5"],
+.ywc-card--primary {
+  --ywc--button--primary__backgroundColor:
+    var(--ywc--color--complementary--active, #071421);
+    
+    --ywc--button--primary__textColor:  #fefeff ;
+    
+  --ywc--button--primary__hover--backgroundColor:
+    color-mix(in srgb, var(--ywc--button--primary__backgroundColor) 88%, var(--ywc--surface__backgroundColor));
+    
+    --ywc--button--primary__hover--textColor:  #fefeff ;
+    
+  --ywc--button--primary__active--backgroundColor:
+    color-mix(in srgb, var(--ywc--button--primary__hover--backgroundColor) 80%, var(--ywc--surface__backgroundColor));
+}
+
+/*
+ * Body-level surface switching (runtime scheme flip).
+ *
+ * The renderer's preview toggles (theme-overlay + field-editor clients)
+ * set `data-ywc-surface` on <body> to flip the active scheme without
+ * rebuilding the page. These blocks extend the generic `[data-ywc-surface]`
+ * cascade above with body-specific CSS properties (`background-color`,
+ * `color`) and blockquote / caption tokens that aren't part of the surface
+ * family. Legacy `data-section-scheme` emissions are still supported via
+ * the selector list for backwards compat with pre-migration child themes;
+ * drop those selectors once every known emitter ships `data-ywc-surface`.
+ */
+
+body[data-ywc-surface="section-1"],
+body[data-ywc-surface="lightSection--1"],
+body[data-section-scheme="section-1"],
+body[data-section-scheme="lightSection--1"] {
+  background-color: var(--ywc--section--1__backgroundColor);
+  color: var(--ywc--section--1__textColor);
+  --ywc--blockquote__accentColor: var(--ywc--section--1--blockquote__accentColor);
+  --ywc--blockquote__backgroundColor: var(--ywc--section--1--blockquote__backgroundColor);
+  --ywc--blockquote__fontColor: var(--ywc--section--1--blockquote__textColor);
+  --ywc--captions__fontColor: var(--ywc--section--1__captionColor);
+}
+
+body[data-ywc-surface="section-2"],
+body[data-ywc-surface="lightSection--2"],
+body[data-section-scheme="section-2"],
+body[data-section-scheme="lightSection--2"] {
+  background-color: var(--ywc--section--2__backgroundColor);
+  color: var(--ywc--section--2__textColor);
+  --ywc--blockquote__accentColor: var(--ywc--section--2--blockquote__accentColor);
+  --ywc--blockquote__backgroundColor: var(--ywc--section--2--blockquote__backgroundColor);
+  --ywc--blockquote__fontColor: var(--ywc--section--2--blockquote__textColor);
+  --ywc--captions__fontColor: var(--ywc--section--2__captionColor);
+}
+
+body[data-ywc-surface="section-3"],
+body[data-ywc-surface="lightSection--3"],
+body[data-section-scheme="section-3"],
+body[data-section-scheme="lightSection--3"] {
+  background-color: var(--ywc--section--3__backgroundColor);
+  color: var(--ywc--section--3__textColor);
+  --ywc--blockquote__accentColor: var(--ywc--section--3--blockquote__accentColor);
+  --ywc--blockquote__backgroundColor: var(--ywc--section--3--blockquote__backgroundColor);
+  --ywc--blockquote__fontColor: var(--ywc--section--3--blockquote__textColor);
+  --ywc--captions__fontColor: var(--ywc--section--3__captionColor);
+}
+
+body[data-ywc-surface="section-4"],
+body[data-ywc-surface="dark"],
+body[data-ywc-surface="darkSection--1"],
+body[data-section-scheme="section-4"],
+body[data-section-scheme="darkSection--1"] {
+  background-color: var(--ywc--section--4__backgroundColor);
+  color: var(--ywc--section--4__textColor);
+  --ywc--blockquote__accentColor: var(--ywc--section--4--blockquote__accentColor);
+  --ywc--blockquote__backgroundColor: var(--ywc--section--4--blockquote__backgroundColor);
+  --ywc--blockquote__fontColor: var(--ywc--section--4--blockquote__textColor);
+  --ywc--captions__fontColor: var(--ywc--section--4__captionColor);
+}
+
+body[data-ywc-surface="section-5"] {
+  background-color: var(--ywc--section--5__backgroundColor);
+  color: var(--ywc--section--5__textColor);
+  --ywc--blockquote__accentColor: var(--ywc--section--5--blockquote__accentColor);
+  --ywc--blockquote__backgroundColor: var(--ywc--section--5--blockquote__backgroundColor);
+  --ywc--blockquote__fontColor: var(--ywc--section--5--blockquote__textColor);
+  --ywc--captions__fontColor: var(--ywc--section--5__captionColor);
+}
+
+body[data-ywc-surface="section-6"] {
+  background-color: var(--ywc--section--6__backgroundColor);
+  color: var(--ywc--section--6__textColor);
+  --ywc--blockquote__accentColor: var(--ywc--section--6--blockquote__accentColor);
+  --ywc--blockquote__backgroundColor: var(--ywc--section--6--blockquote__backgroundColor);
+  --ywc--blockquote__fontColor: var(--ywc--section--6--blockquote__textColor);
+  --ywc--captions__fontColor: var(--ywc--section--6__captionColor);
+}
+
+/* ===========================================================================
+ * THEME MODES — dark palette overrides
+ * ===========================================================================
+ *
+ * When the site is in dark mode (either `theme_mode = "dark"` site-wide or
+ * `user_selector` with the visitor opting in), each section slot re-emits
+ * with a dark palette computed from the base ramp + brand accents:
+ *
+ *   section_1 Canvas         → color_5 bg, color_2 text (inverse of light)
+ *   section_2 Subtle         → slightly-lifted near-black, color_2 text
+ *   section_3 Accent         → color_4 bg, color_2 text
+ *   section_4 Emphasis       → INVERTED: becomes LIGHT in dark mode so it
+ *                              still stands out as the high-contrast slot
+ *   section_5 Primary accent → --on-dark variant of brand primary
+ *   section_6 Complementary  → --on-dark variant of brand complementary
+ *
+ * This is a derivation-only implementation — no new fields in fields.json.
+ * Brands that need per-field dark overrides beyond this can either retune
+ * the base ramp (which cascades through all sections) or author a brand
+ * stylesheet. A future phase can add `group_dark_mode_palette` subgroups
+ * if brands report this limit.
+ *
+ * Selector is chosen by `theme_mode`: `:root` for site-wide dark, or
+ * `html[data-ywc-theme="dark"]` when the user toggle is wired up.
+ * ======================================================================= */
+
+  
+
+  
+
+  
+
+  
+
+ html[data-ywc-theme="dark"] 
+
+{
+  /* Section 1 — Canvas flipped to dark. */
+  --ywc--section--1__backgroundColor:  #071421 ;
+  --ywc--section--1__textColor:  #f5f5f5 ;
+  --ywc--section--1__accentColor: var(--ywc--color--primary--on-dark);
+  --ywc--section--1__captionColor: color-mix(in srgb, #f5f5f5 70%, #071421);
+  --ywc--section--1--blockquote__textColor:  #f5f5f5 ;
+  --ywc--section--1--blockquote__backgroundColor:  #10243E ;
+  --ywc--section--1--blockquote__accentColor: var(--ywc--color--primary--on-dark);
+  --ywc--section--1--link__fontColor:  #f5f5f5 ;
+  --ywc--section--1--link__hover--fontColor:  #f5f5f5 ;
+
+  /* Section 2 — Subtle: slight lift from Canvas. */
+  --ywc--section--2__backgroundColor: color-mix(in srgb, #071421 92%, #fefeff);
+  --ywc--section--2__textColor:  #f5f5f5 ;
+  --ywc--section--2__accentColor: var(--ywc--color--primary--on-dark);
+  --ywc--section--2__captionColor: color-mix(in srgb, #f5f5f5 70%, #071421);
+  --ywc--section--2--blockquote__textColor:  #f5f5f5 ;
+  --ywc--section--2--blockquote__backgroundColor:  #071421 ;
+  --ywc--section--2--blockquote__accentColor: var(--ywc--color--primary--on-dark);
+  --ywc--section--2--link__fontColor:  #f5f5f5 ;
+  --ywc--section--2--link__hover--fontColor:  #f5f5f5 ;
+
+  /* Section 3 — Accent in dark mode.
+     Priority chain mirrors the light-mode block:
+       Tertiary set → dedicated third-brand surface (--on-dark variant).
+       Tertiary unset, complementary set → fall back to complementary.
+       Both unset → soft tint of primary--on-dark over dark canvas
+         (differentiates from Section 5 which stays full primary). */
+    
+    --ywc--section--3__backgroundColor: var(--ywc--color--complementary--on-dark);
+    --ywc--section--3__textColor: var(--ywc--color--complementary--contrast--on-dark);
+    --ywc--section--3--blockquote__textColor: var(--ywc--color--complementary--contrast--on-dark);
+    --ywc--section--3--link__fontColor: var(--ywc--color--complementary--contrast--on-dark);
+    --ywc--section--3--link__hover--fontColor: var(--ywc--color--complementary--contrast--on-dark);
+    
+  --ywc--section--3--blockquote__backgroundColor:  #10243E ;
+
+  /* Section 4 — Emphasis INVERTED. Was dark in light mode (the standout
+     section); in dark mode it flips to light so it stays the highest-
+     contrast slot against the now-dark page. */
+  --ywc--section--4__backgroundColor:  #fefeff ;
+  --ywc--section--4__textColor:  #071421 ;
+  --ywc--section--4__accentColor: var(--ywc--color--primary);
+  --ywc--section--4__captionColor:  #667085 ;
+  --ywc--section--4--blockquote__textColor:  #071421 ;
+  --ywc--section--4--blockquote__backgroundColor:  #f5f5f5 ;
+  --ywc--section--4--blockquote__accentColor: var(--ywc--color--primary);
+  --ywc--section--4--link__fontColor:  #071421 ;
+  --ywc--section--4--link__hover--fontColor:  #071421 ;
+
+  /* Section 5 — Primary accent using the lightened `--on-dark` variant. */
+  --ywc--section--5__backgroundColor: var(--ywc--color--primary--on-dark);
+  --ywc--section--5__textColor: var(--ywc--color--primary--contrast--on-dark);
+  --ywc--section--5__accentColor: var(--ywc--color--complementary--on-dark);
+  --ywc--section--5__captionColor: color-mix(in srgb, #fefeff 70%, var(--ywc--color--primary--on-dark));
+  --ywc--section--5--blockquote__textColor: var(--ywc--color--primary--contrast--on-dark);
+  --ywc--section--5--blockquote__backgroundColor:  #10243E ;
+  --ywc--section--5--blockquote__accentColor: var(--ywc--color--complementary--on-dark);
+  --ywc--section--5--link__fontColor: var(--ywc--color--primary--contrast--on-dark);
+  --ywc--section--5--link__hover--fontColor: var(--ywc--color--primary--contrast--on-dark);
+
+  /* Section 6 — Complementary in dark mode.
+     Complementary set → full second-brand surface.
+     Complementary unset → softly tinted light panel (85% color_1 + 15%
+     color_4). Stays light (like Section 4 in dark mode) but softer, so
+     the two slots stop collapsing. */
+    
+    --ywc--section--6__backgroundColor: var(--ywc--color--complementary--on-dark);
+    --ywc--section--6__textColor: var(--ywc--color--complementary--contrast--on-dark);
+    --ywc--section--6__accentColor: var(--ywc--color--primary--on-dark);
+    --ywc--section--6__captionColor: color-mix(in srgb, #fefeff 70%, var(--ywc--color--complementary--on-dark));
+    --ywc--section--6--blockquote__textColor: var(--ywc--color--complementary--contrast--on-dark);
+    --ywc--section--6--blockquote__backgroundColor:  #10243E ;
+    --ywc--section--6--blockquote__accentColor: var(--ywc--color--primary--on-dark);
+    --ywc--section--6--link__fontColor: var(--ywc--color--complementary--contrast--on-dark);
+    --ywc--section--6--link__hover--fontColor: var(--ywc--color--complementary--contrast--on-dark);
+    
+
+    
+    
+    --ywc--button--secondary__backgroundColor: var(--ywc--surface__textColor);
+      
+      
+    --ywc--button--secondary__hover--backgroundColor:
+      color-mix(in srgb, var(--ywc--surface__textColor) 88%, var(--ywc--surface__backgroundColor));
+      
+      
+    
+}
+
+@supports (color: color-mix(in lch, red, blue)) {
+{
+    --ywc--section--3__captionColor: color-mix(in srgb, var(--ywc--color--complementary--contrast--on-dark) 70%, var(--ywc--color--complementary--on-dark));
+}
+}
+
+  
+
+  
+
+:root {
+  /* Font */
+  --ywc--tag__font: Inter, sans-serif;
+  --ywc--tag__fontColor:   ;
+  --ywc--tag__fontSize:  0.875rem ;
+  --ywc--tag__fontWeight:  500 ;
+  --ywc--tag__fontStyle:  normal ;
+
+  /* Text colors */
+  --ywc--tag__textColor:  #10243E ;
+
+  /* Background colors */
+    
+    --ywc--tag__backgroundColor:  #f5f5f5 ;
+    
+
+  /* Shape */
+    
+      
+    
+
+    
+    --ywc--tag__borderRadius: 50px;
+    
+
+  /* Border thickness */
+  --ywc--tag__borderThickness:  1px ;
+  --ywc--tag__borderColor:  #667085 ;
+
+  /* Case */
+  --ywc--tag__case:  none ;
+  --ywc--tag__letterSpacing:  0px ;
+
+  /*
+   * List module tokens (used by the List utility module + future list-style
+   * sections). Stubbed against the foundation palette so child themes can
+   * tune the list/pill appearance independently of generic tags.
+   */
+  --ywc--list__gap: var(--ywc--spacing--12, 12px);
+  --ywc--list__item--font: var(--ywc--body__font);
+  --ywc--list__item--fontSize: 0.875rem; /* 14px */
+  --ywc--list__item--fontWeight: 500;
+  --ywc--list__item--lineHeight: 1.43; /* 20px / 14px */
+  --ywc--list__item--iconSize: 14px;
+  --ywc--list__item--iconGap: 6px;
+
+  --ywc--list__pill--gap: 14px;
+  --ywc--list__pill--paddingBlock: 2px;
+  --ywc--list__pill--paddingInline: 8px;
+  --ywc--list__pill--paddingBlock--large: 8px;
+  --ywc--list__pill--paddingInline--large: 16px;
+  --ywc--list__pill--borderRadius: 9999px;
+  --ywc--list__pill--borderWidth: 1px;
+  --ywc--list__pill--fontSize: 0.75rem; /* 12px */
+  --ywc--list__pill--fontWeight: 600;
+  --ywc--list__pill--fontSize--large: 0.875rem;
+  --ywc--list__pill--fontWeight--large: 700;
+  --ywc--list__pill--lineHeight: 1.5;
+  --ywc--list__pill--letterSpacing: 0.5px;
+  --ywc--list__pill--iconSize: 16px;
+
+  --ywc--list__pill--white__backgroundColor: var(--ywc--color--surface--light);
+  --ywc--list__pill--white__borderColor: var(--ywc--color--border--subtle);
+  --ywc--list__pill--white__textColor: var(--ywc--color--onLight);
+  --ywc--list__pill--grey__backgroundColor: var(--ywc--color--surface--subtle);
+  --ywc--list__pill--grey__borderColor: var(--ywc--color--surface--subtle);
+  --ywc--list__pill--grey__textColor: var(--ywc--color--onLight);
+
+  --ywc--list__checkmark__color: var(--ywc--color--primary);
+}
+
+  
+
+:root {
+    /* Border radius based on shape.
+       --ywc-rounded--*  : container scale, opted into by the shape lever.
+       --ywc-rounded--full: stadium / pill — for elements that should ALWAYS
+                            be a full pill (buttons, tag chips, badges, dot
+                            navs). Does NOT scale with the shape lever, so
+                            cards/wrappers don't accidentally turn into ovals
+                            when the lever is set to "Pill".
+       --ywc-circle      : 50% — for true circles (avatars, icon buttons).
+
+       Values come from the Shape Foundation group in fields.json so the
+       child theme overlay can shift the entire rounded scale via theme
+       settings without touching component CSS. */
+    --ywc-sharp: 0;
+    --ywc-rounded--extra-small:  6px ;
+    --ywc-rounded--small:  6px ;
+    --ywc-rounded:  12px ;
+    --ywc-rounded--large:  12px ;
+    --ywc-rounded--extra-large:  18px ;
+    --ywc-rounded--full: 9999px;
+    --ywc-circle: 50%;
+}
+
+:root {
+    --ywc--icon--small__size: 16px;
+    --ywc--icon--medium__size: 24px;
+    --ywc--icon--large__size: 32px;
+}
+
+  
+
+:root {
+    /*
+     * Elevation primitives. All 7 steps are field-driven from the Elevation
+     * Foundation group in fields.json so child themes can re-tune the entire
+     * elevation feel from theme settings without editing component CSS.
+     * Defaults preserve the previous (mostly pure-black) baseline.
+     */
+
+    /* None - flat design or elements that shouldn't appear elevated */
+    --ywc--shadow--none: none;
+
+    /* Extra small - subtle hover states, very slight elevation */
+    --ywc--shadow--extraSmall:   ;
+
+    /* Small - cards, buttons, small interactive elements */
+    --ywc--shadow--small:   ;
+
+    /* Medium - raised cards, dropdowns, popovers */
+    --ywc--shadow--medium:   ;
+
+    /* Large - sticky headers, floating action buttons */
+    --ywc--shadow--large:   ;
+
+    /* Extra large - modals, drawers, dialogs */
+    --ywc--shadow--extraLarge:   ;
+
+    /* 2X large - high-priority overlays */
+    --ywc--shadow--2xLarge:   ;
+
+    /* Inner shadow - inset elements, pressed states */
+    --ywc--shadow--inner:   ;
+}
+
+  
+
+:root {
+    /*
+     * Motion primitives.
+     * Duration tokens come from the Motion Foundation group in fields.json
+     * so child themes can re-tune the entire animation feel from theme
+     * settings without touching component CSS. Other steps (extraFast,
+     * medium, extraSlow) are derived from the three primitive durations.
+     */
+
+    /* Instant - immediate state changes, no perceived animation */
+    --ywc--duration--instant: 0ms;
+
+    /* Extra fast - micro-interactions, very quick feedback */
+    --ywc--duration--extraFast:  75ms ;
+
+    /* Fast - button hover, simple state changes */
+    --ywc--duration--fast:  150ms ;
+
+    /* Base - default transition speed for most interactions */
+    --ywc--duration--base:  200ms ;
+
+    /* Medium - moderate animations, fades, slides */
+    --ywc--duration--medium:  350ms ;
+
+    /* Slow - complex animations, accordions, dropdowns */
+    --ywc--duration--slow:  500ms ;
+
+    /* Extra slow - page transitions, major state changes */
+    --ywc--duration--extraSlow:  700ms ;
+
+    /* Easing tokens - timing functions for natural motion */
+
+    /* Linear - constant speed, mechanical movement */
+    --ywc--ease--linear: linear;
+
+    /* Ease - default easing, slight acceleration and deceleration */
+    --ywc--ease--default: ease;
+
+    /* In - accelerating from zero velocity */
+    --ywc--ease--in: ease-in;
+
+    /* Out - decelerating to zero velocity */
+    --ywc--ease--out: ease-out;
+
+    /* In-out - accelerating and decelerating */
+    --ywc--ease--inOut: ease-in-out;
+
+    /* Cubic - precise cubic bezier for smooth, natural motion (Motion foundation) */
+    --ywc--ease--cubic:   ;
+
+    /* Sharp - quick, crisp movement */
+    --ywc--ease--sharp: cubic-bezier(0.4, 0, 0.6, 1);
+
+    /* Emphasized - emphasised easing (Motion foundation) */
+    --ywc--ease--emphasized:   ;
+
+    /* Bounce - playful, overshooting motion */
+    --ywc--ease--bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Composite transition tokens - pre-built transition properties */
+
+    /* Base transition - color and background changes */
+    --ywc--transition--base: all var(--ywc--duration--base) var(--ywc--ease--cubic);
+
+    /* Fast transition - quick hover states */
+    --ywc--transition--fast: all var(--ywc--duration--fast) var(--ywc--ease--cubic);
+
+    /* Color transition - optimized for color changes */
+    --ywc--transition--color: color var(--ywc--duration--base) var(--ywc--ease--cubic), background-color var(--ywc--duration--base) var(--ywc--ease--cubic);
+
+    /* Transform transition - optimized for transforms */
+    --ywc--transition--transform: transform var(--ywc--duration--base) var(--ywc--ease--cubic);
+
+    /* Opacity transition - fade effects */
+    --ywc--transition--opacity: opacity var(--ywc--duration--base) var(--ywc--ease--cubic);
+}
+
+/*
+ * Honour the user's prefers-reduced-motion preference at the primitive layer.
+ * Every component that reads a --ywc--duration-- or --ywc--transition-- token
+ * automatically collapses to instant when this media query matches, without
+ * needing per-component opt-in.
+ */
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --ywc--duration--instant: 0ms;
+        --ywc--duration--extraFast: 0ms;
+        --ywc--duration--fast: 0ms;
+        --ywc--duration--base: 0ms;
+        --ywc--duration--medium: 0ms;
+        --ywc--duration--slow: 0ms;
+        --ywc--duration--extraSlow: 0ms;
+
+        --ywc--transition--base: none;
+        --ywc--transition--fast: none;
+        --ywc--transition--color: none;
+        --ywc--transition--transform: none;
+        --ywc--transition--opacity: none;
+    }
+}
+
+:root {
+    /* Z-index scale - layering system for stacking contexts */
+    
+    /* Base layer - default document flow */
+    --ywc--zIndex--base: 0;
+    
+    /* Raised - slightly elevated content, dropdowns */
+    --ywc--zIndex--raised: 10;
+    
+    /* Dropdown - dropdown menus, select options */
+    --ywc--zIndex--dropdown: 100;
+    
+    /* Sticky - sticky headers, fixed navigation */
+    --ywc--zIndex--sticky: 200;
+    
+    /* Fixed - fixed position elements */
+    --ywc--zIndex--fixed: 300;
+    
+    /* Header - site header, navigation bar */
+    --ywc--zIndex--header: 400;
+    
+    /* Overlay backdrop - semi-transparent backgrounds */
+    --ywc--zIndex--overlay: 500;
+    
+    /* Drawer - side panels, navigation drawers */
+    --ywc--zIndex--drawer: 600;
+    
+    /* Modal - modal dialogs, lightboxes */
+    --ywc--zIndex--modal: 700;
+    
+    /* Popover - popovers, tooltips */
+    --ywc--zIndex--popover: 800;
+    
+    /* Tooltip - informational tooltips */
+    --ywc--zIndex--tooltip: 900;
+    
+    /* Notification - toast notifications, alerts */
+    --ywc--zIndex--notification: 1000;
+    
+    /* Max - highest priority elements */
+    --ywc--zIndex--max: 9999;
+}
+
+:root {
+    /* Focus ring tokens - accessibility-focused outline styles */
+    
+    /* Focus ring width */
+    --ywc--focus__width--thin: 1px;
+    --ywc--focus__width--base: 2px;
+    --ywc--focus__width--thick: 3px;
+    --ywc--focus__width--extraThick: 4px;
+    
+    /* Focus ring offset - space between element and focus ring */
+    --ywc--focus__offset--none: 0;
+    --ywc--focus__offset--tight: 1px;
+    --ywc--focus__offset--base: 2px;
+    --ywc--focus__offset--relaxed: 4px;
+    
+    /* Focus ring style */
+    --ywc--focus__style--solid: solid;
+    --ywc--focus__style--dashed: dashed;
+    --ywc--focus__style--dotted: dotted;
+    
+    /* Focus ring color - using CSS color-mix for adaptable contrast */
+    --ywc--focus__color--primary: var(--ywc--color--primary);
+    --ywc--focus__color--accent: var(--ywc--color--accent--1);
+    --ywc--focus__color--dark: color-mix(in srgb, var(--ywc--color--black) 80%, transparent);
+    --ywc--focus__color--light: color-mix(in srgb, var(--ywc--color--white) 80%, transparent);
+    
+    /* Composite focus tokens - pre-built focus styles */
+    
+    /* Default focus ring - primary color, medium width */
+    --ywc--focus--default: var(--ywc--focus__width--base) var(--ywc--focus__style--solid) var(--ywc--focus__color--primary);
+    
+    /* Subtle focus ring - thin outline for dense UIs */
+    --ywc--focus--subtle: var(--ywc--focus__width--thin) var(--ywc--focus__style--solid) var(--ywc--focus__color--primary);
+    
+    /* Strong focus ring - thick outline for high visibility */
+    --ywc--focus--strong: var(--ywc--focus__width--thick) var(--ywc--focus__style--solid) var(--ywc--focus__color--primary);
+    
+    /* Offset focus ring - separated from element */
+    --ywc--focus--offset: var(--ywc--focus__width--base) var(--ywc--focus__style--solid) var(--ywc--focus__color--primary);
+    --ywc--focus--offset__outlineOffset: var(--ywc--focus__offset--base);
+    
+    /* Dark background focus ring - light color for contrast */
+    --ywc--focus--onDark: var(--ywc--focus__width--base) var(--ywc--focus__style--solid) var(--ywc--focus__color--light);
+    
+    /* Light background focus ring - dark color for contrast */
+    --ywc--focus--onLight: var(--ywc--focus__width--base) var(--ywc--focus__style--solid) var(--ywc--focus__color--dark);
+    
+    /* Dashed focus ring - alternative visual style */
+    --ywc--focus--dashed: var(--ywc--focus__width--base) var(--ywc--focus__style--dashed) var(--ywc--focus__color--primary);
+    
+    /* Focus shadow - alternative to outline using box-shadow */
+    --ywc--focus__shadow--base: 0 0 0 var(--ywc--focus__width--base) var(--ywc--focus__color--primary);
+    --ywc--focus__shadow--strong: 0 0 0 var(--ywc--focus__width--thick) var(--ywc--focus__color--primary);
+    --ywc--focus__shadow--onDark: 0 0 0 var(--ywc--focus__width--base) var(--ywc--focus__color--light);
+    --ywc--focus__shadow--onLight: 0 0 0 var(--ywc--focus__width--base) var(--ywc--focus__color--dark);
+}
+
+/* Generic */
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ========================================================================== */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Add the correct box sizing in Firefox.
+ */
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+pre {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * 1. Remove the bottom border in Chrome 57-
+ * 2. Add the correct text decoration in Chrome, Edge, Opera, and Safari.
+ */
+
+abbr[title] {
+  border-bottom: none; /* 1 */
+  text-decoration: underline; /* 2 */
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted; /* 2 */
+}
+
+/**
+ * Add the correct font weight in Chrome, Edge, and Safari.
+ */
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+/**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/**
+ * Add the correct font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` elements from affecting the line height in
+ * all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * 1. Change the font styles in all browsers.
+ * 2. Remove the margin in Firefox and Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 */
+  font-size: 100%; /* 1 */
+  line-height: 1.15; /* 1 */
+  margin: 0; /* 2 */
+}
+
+/**
+ * Remove the inheritance of text transform in Edge and Firefox.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type='button'],
+[type='reset'],
+[type='submit'] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type='button']::-moz-focus-inner,
+[type='reset']::-moz-focus-inner,
+[type='submit']::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+
+button:-moz-focusring,
+[type='button']:-moz-focusring,
+[type='reset']:-moz-focusring,
+[type='submit']:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * Remove the padding so developers are not caught out when they zero out `fieldset` elements in all browsers.
+ */
+
+legend {
+  padding: 0;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type='search'] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type='search']::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Objects */
+
+.dnd-section {
+  padding: var(--ywc--section--large__verticalPadding)
+    var(--ywc--section--horizontalPadding);
+  /* Clip module content at section boundaries */
+  overflow: hidden;
+}
+
+.dnd-section > .row-fluid,
+.ywc-content-wrapper {
+  margin: 0 auto;
+  max-width: var(--ywc--contentWrapper--wide__maxWidth);
+}
+
+.ywc-content-wrapper {
+  padding: 0 var(--ywc--section--horizontalPadding);
+}
+
+/* Helper Classes */
+
+.ywc-content-wrapper--sm {
+  max-width: var(--ywc--contentWrapper--narrow__maxWidth);
+  padding: 0;
+}
+
+.ywc-content-wrapper--md {
+  max-width: var(--ywc--contentWrapper--medium__maxWidth);
+  padding: 0;
+}
+
+/* Padding for non DND sections */
+
+.ywc-content-padding {
+  padding-block: var(--ywc--section--large__verticalPadding);
+}
+
+.ywc-content-padding--extra-small {
+  padding-block: var(  --ywc--section--extraSmall__verticalPadding);
+}
+
+.ywc-content-padding--small {
+  padding-block: var(--ywc--section--small__verticalPadding);
+}
+
+.ywc-content-padding--large {
+  padding-block: var(--ywc--section--large__verticalPadding);
+}
+
+.ywc-content-padding--extra-large {
+  padding-block: var(--ywc--section--extraLarge__verticalPadding);
+}
+
+.row-fluid {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.row-fluid .span1,
+.row-fluid .span2,
+.row-fluid .span3,
+.row-fluid .span4,
+.row-fluid .span5,
+.row-fluid .span6,
+.row-fluid .span7,
+.row-fluid .span8,
+.row-fluid .span9,
+.row-fluid .span10,
+.row-fluid .span11,
+.row-fluid .span12 {
+  min-height: 1px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .row-fluid {
+    flex-wrap: nowrap;
+    justify-content: space-between;
+  }
+
+  .row-fluid .span1 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 1 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 11 / 100
+    );
+  }
+
+  .row-fluid .span2 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 2 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 10 / 100
+    );
+  }
+
+  .row-fluid .span3 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 3 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 9 / 100
+    );
+  }
+
+  .row-fluid .span4 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 4 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 8 / 100
+    );
+  }
+
+  .row-fluid .span5 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 5 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 7 / 100
+    );
+  }
+
+  .row-fluid .span6 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 6 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 6 / 100
+    );
+  }
+
+  .row-fluid .span7 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 7 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 5 / 100
+    );
+  }
+
+  .row-fluid .span8 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 8 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 4 / 100
+    );
+  }
+
+  .row-fluid .span9 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 9 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 3 / 100
+    );
+  }
+
+  .row-fluid .span10 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 10 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 2 / 100
+    );
+  }
+
+  .row-fluid .span11 {
+    width: calc(
+      var(--ywc--column__widthMultiplier) * 1% * 11 -
+        var(--ywc--column__gap) *
+        var(--ywc--column__widthMultiplier) * 1 / 100
+    );
+  }
+}
+
+/* Elements */
+
+html {
+  font-size: var(--ywc--baseText__fontSize);
+}
+
+body {
+  background-color: var(--ywc--section--1__backgroundColor);
+  color: var(--ywc--section--1__textColor);
+  font-family: var(--ywc--body__font);
+  font-size: var(--ywc--body__fontSize);
+  font-style: var(--ywc--body__fontStyle);
+  font-weight: var(--ywc--body__fontWeight);
+  line-height: var(--ywc--body__lineHeight);
+  letter-spacing: var(--ywc--body__letterSpacing);
+  text-transform: var(--ywc--body__textTransform);
+  overflow-wrap: break-word;
+}
+
+html[lang^='ja'] body,
+html[lang^='zh'] body,
+html[lang^='ko'] body {
+  line-break: strict;
+  overflow-wrap: normal;
+  word-break: break-all;
+}
+
+/* Paragraphs */
+
+p {
+  margin-block: var(--ywc--text__margin);
+}
+
+a:not(
+  .ywc-button,
+  .cta-primary,
+  .cta-secondary,
+  .cta-tertiary,
+  .cta-accent,
+  .cta-outline,
+  .ywc-blog-listing__pagination-link,
+  .ywc-card--blog__link
+),
+a.ywc-link--primary,
+.ywc-link--primary a,
+span.ywc-link--primary {
+  color: var(--ywc--link--primary__fontColor);
+  cursor: pointer;
+  -webkit-text-decoration: var(--ywc--link--primary__textDecoration);
+  text-decoration: var(--ywc--link--primary__textDecoration);
+  text-decoration-color: var(--ywc--link--primary__textDecorationColor);
+  letter-spacing: var(--ywc--link--primary__letterSpacing);
+  text-transform: var(--ywc--link--primary__textTransform);
+}
+
+a:not(
+  .ywc-button,
+  .cta-primary,
+  .cta-secondary,
+  .cta-tertiary,
+  .cta-accent,
+  .cta-outline,
+  .ywc-blog-listing__pagination-link,
+  .ywc-card--blog__link
+):hover,
+a:not(
+  .ywc-button,
+  .cta-primary,
+  .cta-secondary,
+  .cta-tertiary,
+  .cta-accent,
+  .cta-outline,
+  .ywc-blog-listing__pagination-link,
+  .ywc-card--blog__link
+):focus,
+a.ywc-link--primary:hover,
+.ywc-link--primary a:hover,
+a.ywc-link--primary:focus,
+.ywc-link--primary a:focus {
+  color: var(--ywc--link--primary__hover--fontColor);
+  -webkit-text-decoration: var(--ywc--link--primary__hover--textDecoration);
+  text-decoration: var(--ywc--link--primary__hover--textDecoration);
+  text-decoration-color: var(--ywc--link--primary__hover--textDecorationColor);
+}
+
+a.ywc-link--secondary,
+.ywc-link--secondary a,
+span.ywc-link--secondary {
+  color: var(--ywc--link--secondary__fontColor);
+  cursor: pointer;
+  -webkit-text-decoration: var(--ywc--link--secondary__textDecoration);
+  text-decoration: var(--ywc--link--secondary__textDecoration);
+  text-decoration-color: var(--ywc--link--secondary__textDecorationColor);
+  letter-spacing: var(--ywc--link--secondary__letterSpacing);
+  text-transform: var(--ywc--link--secondary__textTransform);
+}
+
+a.ywc-link--secondary:hover,
+.ywc-link--secondary a:hover,
+a.ywc-link--secondary:focus,
+.ywc-link--secondary a:focus {
+  color: var(--ywc--link--secondary__hover--fontColor);
+  -webkit-text-decoration: var(--ywc--link--secondary__hover--textDecoration);
+  text-decoration: var(--ywc--link--secondary__hover--textDecoration);
+  text-decoration-color: var(--ywc--link--secondary__hover--textDecorationColor);
+}
+
+/* Headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.ywc-display-1,
+.ywc-display-2 {
+  line-height: var(--ywc--heading__lineHeight);
+  margin-block: var(--ywc--text__margin);
+}
+
+.ywc-display-1 {
+  font-family: var(--ywc--display1__font);
+  font-size: calc(var(--ywc--display1__fontSize) * var(--ywc--heading__tablet-modifier));
+  font-style: normal;
+  font-weight: var(--ywc--display1__fontWeight, 800);
+  letter-spacing: var(--ywc--display1__letterSpacing);
+  text-transform: var(--ywc--display1__textTransform);
+}
+
+.ywc-display-2 {
+  font-family: var(--ywc--display2__font);
+  font-size: calc(var(--ywc--display2__fontSize) * var(--ywc--heading__tablet-modifier));
+  font-style: normal;
+  font-weight: var(--ywc--display2__fontWeight, 800);
+  letter-spacing: var(--ywc--display2__letterSpacing);
+  text-transform: var(--ywc--display2__textTransform);
+}
+
+h1,
+.ywc-h1 {
+  font-family: var(--ywc--h1__font);
+  font-size: calc(var(--ywc--h1__fontSize) * var(--ywc--heading__tablet-modifier));
+  font-style: var(--ywc--h1__fontStyle);
+  font-weight: var(--ywc--h1__fontWeight);
+  letter-spacing: var(--ywc--h1__letterSpacing);
+  text-transform: var(--ywc--h1__textTransform);
+}
+
+h2,
+.ywc-h2 {
+  font-family: var(--ywc--h2__font);
+  font-size: calc(var(--ywc--h2__fontSize) * var(--ywc--heading__tablet-modifier));
+  font-style: var(--ywc--h2__fontStyle);
+  font-weight: var(--ywc--h2__fontWeight);
+  letter-spacing: var(--ywc--h2__letterSpacing);
+  text-transform: var(--ywc--h2__textTransform);
+}
+
+h3,
+.ywc-h3 {
+  font-family: var(--ywc--h3__font);
+  font-size: calc(var(--ywc--h3__fontSize) * var(--ywc--heading__tablet-modifier));
+  font-style: var(--ywc--h3__fontStyle);
+  font-weight: var(--ywc--h3__fontWeight);
+  letter-spacing: var(--ywc--h3__letterSpacing);
+  text-transform: var(--ywc--h3__textTransform);
+}
+
+h4,
+.ywc-h4 {
+  font-family: var(--ywc--h4__font);
+  font-size: calc(var(--ywc--h4__fontSize) * var(--ywc--heading__tablet-modifier));
+  font-style: var(--ywc--h4__fontStyle);
+  font-weight: var(--ywc--h4__fontWeight);
+  letter-spacing: var(--ywc--h4__letterSpacing);
+  text-transform: var(--ywc--h4__textTransform);
+}
+
+h5,
+.ywc-h5 {
+  font-family: var(--ywc--h5__font);
+  font-size: calc(var(--ywc--h5__fontSize) * var(--ywc--heading__tablet-modifier));
+  font-style: var(--ywc--h5__fontStyle);
+  font-weight: var(--ywc--h5__fontWeight);
+  letter-spacing: var(--ywc--h5__letterSpacing);
+  text-transform: var(--ywc--h5__textTransform);
+}
+
+h6,
+.ywc-h6 {
+  font-family: var(--ywc--h6__font);
+  font-size: calc(var(--ywc--h6__fontSize) * var(--ywc--heading__tablet-modifier));
+  font-style: var(--ywc--h6__fontStyle);
+  font-weight: var(--ywc--h6__fontWeight);
+  letter-spacing: var(--ywc--h6__letterSpacing);
+  text-transform: var(--ywc--h6__textTransform);
+}
+
+@media (min-width: 767px) {
+  .ywc-display-1 {
+    font-size: var(--ywc--display1__fontSize);
+  }
+
+  .ywc-display-2 {
+    font-size: var(--ywc--display2__fontSize);
+  }
+
+  h1,
+  .ywc-h1 {
+    font-size: var(--ywc--h1__fontSize);
+  }
+
+  h2,
+  .ywc-h2 {
+    font-size: var(--ywc--h2__fontSize);
+  }
+
+  h3,
+  .ywc-h3 {
+    font-size: var(--ywc--h3__fontSize);
+  }
+
+  h4,
+  .ywc-h4 {
+    font-size: var(--ywc--h4__fontSize);
+  }
+
+  h5,
+  .ywc-h5 {
+    font-size: var(--ywc--h5__fontSize);
+  }
+
+  h6,
+  .ywc-h6 {
+    font-size: var(--ywc--h6__fontSize);
+  }
+}
+
+/* Lists */
+
+ul,
+ol {
+  margin-block: var(--ywc--list__marginBlock);
+  padding-inline-start: var(--ywc--list__paddingInlineStart);
+  font-family: var(--ywc--list__font);
+  font-size: var(--ywc--list__fontSize);
+  font-style: var(--ywc--list__fontStyle);
+  font-weight: var(--ywc--list__fontWeight);
+  line-height: var(--ywc--list__lineHeight);
+  letter-spacing: var(--ywc--list__letterSpacing);
+  text-transform: var(--ywc--list__textTransform);
+}
+
+ul {
+  list-style-type: var(--ywc--list__unorderedMarkerStyle);
+}
+
+ol {
+  list-style-type: var(--ywc--list__orderedMarkerStyle);
+}
+
+ul > li + li,
+ol > li + li {
+  margin-block-start: var(--ywc--list__itemGap);
+}
+
+ul > li::marker,
+ol > li::marker {
+  color: var(--ywc--list__markerColor);
+}
+
+/* Blockquotes */
+
+blockquote {
+  padding: var(--ywc--spacing--24, 24px);
+  border-radius: var(--ywc-rounded--extra-small);
+  border-left: 3px solid var(--ywc--blockquote__accentColor, var(--ywc--section--1--blockquote__accentColor));
+  background-color: var(--ywc--blockquote__backgroundColor, var(--ywc--section--1--blockquote__backgroundColor));
+  color: var(--ywc--blockquote__fontColor, var(--ywc--section--1--blockquote__textColor));
+  font-family: var(--ywc--quotes__font);
+  font-size: var(--ywc--quotes__fontSize);
+  font-style: var(--ywc--quotes__fontStyle);
+  font-weight: var(--ywc--quotes__fontWeight);
+  letter-spacing: var(--ywc--quotes__letterSpacing);
+  text-transform: var(--ywc--quotes__textTransform);
+  margin-block: var(--ywc--text__margin);
+}
+
+:is(.hs_cos_wrapper_type_rich_text, .hs_cos_wrapper_type_inline_richtext_field) blockquote {
+  padding: var(--ywc--spacing--24, 24px);
+  border-radius: var(--ywc-rounded--extra-small);
+  border-left: 3px solid var(--ywc--blockquote__accentColor, var(--ywc--section--1--blockquote__accentColor));
+  background-color: var(--ywc--blockquote__backgroundColor, var(--ywc--section--1--blockquote__backgroundColor));
+  color: var(--ywc--blockquote__fontColor, var(--ywc--section--1--blockquote__textColor));
+  font-family: var(--ywc--quotes__font);
+  font-size: var(--ywc--quotes__fontSize);
+  font-style: var(--ywc--quotes__fontStyle);
+  font-weight: var(--ywc--quotes__fontWeight);
+  letter-spacing: var(--ywc--quotes__letterSpacing);
+  text-transform: var(--ywc--quotes__textTransform);
+  margin-block: var(--ywc--text__margin);
+}
+
+@media (max-width: 767.98px) {
+  :is(.hs_cos_wrapper_type_rich_text, .hs_cos_wrapper_type_inline_richtext_field) blockquote {
+    font-size: calc(var(--ywc--body__fontSize) + 4px);
+    margin-inline: 0;
+  }
+}
+
+/* Captions */
+
+.ywc-caption {
+  color: var(--ywc--captions__fontColor, var(--ywc--section--1__captionColor));
+  font-family: var(--ywc--captions__font);
+  font-size: var(--ywc--captions__fontSize);
+  font-style: var(--ywc--captions__fontStyle);
+  font-weight: var(--ywc--captions__fontWeight);
+  letter-spacing: var(--ywc--captions__letterSpacing);
+  text-transform: var(--ywc--captions__case);
+}
+
+/* Tags */
+
+.ywc-tag {
+  padding: 2px 8px;
+  border-color: var(--ywc--tag__borderColor);
+  border-radius: var(--ywc--tag__borderRadius);
+  border-style: solid;
+  border-width: var(--ywc--tag__borderThickness);
+  background-color: var(--ywc--tag__backgroundColor);
+  color: var(--ywc--tag__textColor);
+  font-family: var(--ywc--tag__font);
+  font-size: var(--ywc--tag__fontSize);
+  font-style: var(--ywc--tag__fontStyle);
+  font-weight: var(--ywc--tag__fontWeight);
+  letter-spacing: var(--ywc--tag__letterSpacing);
+  text-transform: var(--ywc--tag__case);
+}
+
+/*
+ * Decorative inline emphasis (extension hooks for child themes).
+ *
+ * Sketch Dev shipped two hand-drawn inline emphasis treatments:
+ *   - .red-underline  (red SVG underline behind a word)
+ *   - .subtle-scribble / .subtle-scribble-2  (white scribble behind a word)
+ *
+ * Both were brand-baked Sketch glyphs (literal hex paint, hand-drawn paths)
+ * and have been removed from the parent. Child themes that want a comparable
+ * "decorated word inside a heading" treatment own this surface.
+ *
+ * Canonical extension path: the structured `.ywc-emphasis` markup contract
+ * documented on the SectionIntro module
+ * (src/theme/ywc-parent-theme/components/modules/SectionIntro/CONTEXT.md
+ * § "Heading accent ranges"). The parent emits `.ywc-emphasis` /
+ * `.ywc-emphasis--accent_N` / `.ywc-emphasis--<style>` (`underline`,
+ * `highlight`, `dot`, …). The child theme ships the decorative paint by
+ * defining matching `.ywc-emphasis--<style>` rules in a stylesheet loaded
+ * after the parent (e.g. `ywc-child--emphasis.css`). That keeps brand glyphs
+ * out of the parent while preserving the affordance.
+ */
+
+/* Images in rich text */
+
+:is(.hs_cos_wrapper_type_rich_text, .hs_cos_wrapper_type_inline_richtext_field) img {
+  max-width: 100%;
+  margin-block-end: var(--ywc--rteImages__margin);
+}
+
+/*
+ * Heading accent / emphasis ranges
+ *
+ * Generated by structured affordances on parent modules (e.g.
+ * `SectionIntro.headingAccentRanges`). The parent guarantees the markup
+ * contract:
+ *
+ *   <span class="ywc-emphasis ywc-emphasis--{accent_slot} ywc-emphasis--{emphasis_class}">…</span>
+ *
+ * The parent owns `.ywc-emphasis` (the inline wrapper) and the
+ * `.ywc-emphasis--accent_*` colour-axis bindings. The `--none` variant is the
+ * default colour-only emphasis; the `--underline`, `--highlight`, and `--dot`
+ * variants are intentionally empty hooks for child themes to populate via a
+ * decorative stylesheet (e.g. `ywc-child--emphasis.css`).
+ */
+
+.ywc-emphasis {
+  color: var(--ywc--emphasis__color, inherit);
+}
+
+.ywc-emphasis--accent_1 {
+  --ywc--emphasis__color: var(--ywc--color--accent--1);
+}
+
+.ywc-emphasis--accent_2 {
+  --ywc--emphasis__color: var(--ywc--color--accent--2);
+}
+
+.ywc-emphasis--accent_3 {
+  --ywc--emphasis__color: var(--ywc--color--accent--3);
+}
+
+.ywc-emphasis--none {
+  /* Colour-only emphasis. Intentionally empty — the accent slot binding
+     above already supplies the text colour. */
+}
+
+.ywc-emphasis--underline {
+  /* Child-theme decorative slot. */
+}
+
+.ywc-emphasis--highlight {
+  /* Child-theme decorative slot. */
+}
+
+.ywc-emphasis--dot {
+  /* Child-theme decorative slot. */
+}
+
+.ywc-button:focus {
+  outline: 2px solid var(--ywc--focus__color--primary);
+  outline-offset: 2px;
+}
+
+.cta-primary,
+.cta-secondary,
+.cta-tertiary,
+.cta-accent,
+.cta-outline {
+  display: inline-flex;
+  min-width: 108px;
+  padding: var(--ywc--button__padding);
+  font-size: 14px;
+  font-weight: 700;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  white-space: normal;
+  border-style: solid;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.cta-primary:focus,
+.cta-secondary:focus,
+.cta-tertiary:focus,
+.cta-accent:focus,
+.cta-outline:focus {
+  outline: 2px solid var(--ywc--focus__color--primary);
+  outline-offset: 2px;
+}
+
+.ywc-button--primary,
+.cta-primary {
+  font-family: var(--ywc--button--primary__font);
+  font-size: var(--ywc--button--primary__fontSize);
+  font-weight: var(--ywc--button--primary__fontWeight);
+  font-style: var(--ywc--button--primary__fontStyle);
+  letter-spacing: var(--ywc--button--primary__letterSpacing);
+  text-transform: var(--ywc--button--primary__textTransform);
+  color: var(--ywc--button--primary__textColor);
+  border-width: var(--ywc--button--primary__borderThickness);
+  background-color: var(--ywc--button--primary__backgroundColor);
+  border-style: solid;
+  border-color: var(--ywc--button--primary__borderColor);
+  border-radius: var(--ywc--button--primary__borderRadius);
+  text-decoration: none;
+}
+
+.ywc-button--primary:hover,
+.cta-primary:hover {
+  color: var(--ywc--button--primary__hover--textColor);
+  background-color: var(--ywc--button--primary__hover--backgroundColor);
+  border-color: var(--ywc--button--primary__hover--borderColor);
+  border-width: var(--ywc--button--primary__hover--borderThickness);
+  text-decoration: none;
+}
+
+.ywc-button--primary:active,
+.cta-primary:active {
+  color: var(--ywc--button--primary__hover--textColor);
+  background-color:  color-mix(in srgb, var(--ywc--button--primary__hover--backgroundColor) 80%, var(--ywc--surface__backgroundColor)) ;
+  border-color:  transparent ;
+  border-width: var(--ywc--button--primary__hover--borderThickness);
+  text-decoration: none;
+}
+
+.ywc-button--secondary,
+.cta-secondary {
+  font-family: var(--ywc--button--secondary__font);
+  font-size: var(--ywc--button--secondary__fontSize);
+  font-weight: var(--ywc--button--secondary__fontWeight);
+  font-style: var(--ywc--button--secondary__fontStyle);
+  letter-spacing: var(--ywc--button--secondary__letterSpacing);
+  text-transform: var(--ywc--button--secondary__textTransform);
+  color: var(--ywc--button--secondary__textColor);
+  border-width: var(--ywc--button--secondary__borderThickness);
+  background-color: var(--ywc--button--secondary__backgroundColor);
+  border-style: solid;
+  border-color: var(--ywc--button--secondary__borderColor);
+  border-radius: var(--ywc--button--secondary__borderRadius);
+  text-decoration: none;
+}
+
+.ywc-button--secondary:hover,
+.cta-secondary:hover {
+  color: var(--ywc--button--secondary__hover--textColor);
+  background-color: var(--ywc--button--secondary__hover--backgroundColor);
+  border-color: var(--ywc--button--secondary__hover--borderColor);
+  border-width: var(--ywc--button--secondary__hover--borderThickness);
+  text-decoration: none;
+}
+
+.ywc-button--secondary:active,
+.cta-secondary:active {
+  color: var(--ywc--button--secondary__hover--textColor);
+  background-color:  color-mix(in srgb, var(--ywc--surface__textColor) 20%, transparent) ;
+  border-color:  var(--ywc--surface__textColor) ;
+  border-width: var(--ywc--button--secondary__hover--borderThickness);
+  text-decoration: none;
+}
+
+.ywc-button--tertiary,
+.cta-tertiary {
+  font-family: var(--ywc--button--tertiary__font);
+  font-size: var(--ywc--button--tertiary__fontSize);
+  font-weight: var(--ywc--button--tertiary__fontWeight);
+  font-style: var(--ywc--button--tertiary__fontStyle);
+  letter-spacing: var(--ywc--button--tertiary__letterSpacing);
+  text-transform: var(--ywc--button--tertiary__textTransform);
+  color: var(--ywc--button--tertiary__textColor);
+  border-width: var(--ywc--button--tertiary__borderThickness);
+  background-color: var(--ywc--button--tertiary__backgroundColor);
+  border-style: solid;
+  border-color: var(--ywc--button--tertiary__borderColor);
+  border-radius: var(--ywc--button--tertiary__borderRadius);
+  text-decoration: none;
+}
+
+.ywc-button--tertiary:hover,
+.cta-tertiary:hover {
+  color: var(--ywc--button--tertiary__hover--textColor);
+  background-color: var(--ywc--button--tertiary__hover--backgroundColor);
+  border-color: var(--ywc--button--tertiary__hover--borderColor);
+  border-width: var(--ywc--button--tertiary__hover--borderThickness);
+  text-decoration: none;
+}
+
+.ywc-button--tertiary:active,
+.cta-tertiary:active {
+  color: var(--ywc--button--tertiary__hover--textColor);
+  background-color:  #000620 ;
+  border-color:   ;
+  border-width: var(--ywc--button--tertiary__hover--borderThickness);
+  text-decoration: none;
+}
+
+.ywc-button--accent,
+.cta-accent {
+  font-family: var(--ywc--button--accent__font);
+  font-size: var(--ywc--button--accent__fontSize);
+  font-weight: var(--ywc--button--accent__fontWeight);
+  font-style: var(--ywc--button--accent__fontStyle);
+  letter-spacing: var(--ywc--button--accent__letterSpacing);
+  text-transform: var(--ywc--button--accent__textTransform);
+  color: var(--ywc--button--accent__textColor);
+  border-width: var(--ywc--button--accent__borderThickness);
+  background-color: var(--ywc--button--accent__backgroundColor);
+  border-style: solid;
+  border-color: var(--ywc--button--accent__borderColor);
+  border-radius: var(--ywc--button--accent__borderRadius);
+  text-decoration: none;
+}
+
+.ywc-button--accent:hover,
+.cta-accent:hover {
+  color: var(--ywc--button--accent__hover--textColor);
+  background-color: var(--ywc--button--accent__hover--backgroundColor);
+  border-color: var(--ywc--button--accent__hover--borderColor);
+  border-width: var(--ywc--button--accent__hover--borderThickness);
+  text-decoration: none;
+}
+
+.ywc-button--accent:active,
+.cta-accent:active {
+  color: var(--ywc--button--accent__hover--textColor);
+  background-color:   ;
+  border-color:  transparent ;
+  border-width: var(--ywc--button--accent__hover--borderThickness);
+  text-decoration: none;
+}
+
+.ywc-button--outline,
+.cta-outline {
+  font-family: var(--ywc--button--outline__font);
+  font-size: var(--ywc--button--outline__fontSize);
+  font-weight: var(--ywc--button--outline__fontWeight);
+  font-style: var(--ywc--button--outline__fontStyle);
+  letter-spacing: var(--ywc--button--outline__letterSpacing);
+  text-transform: var(--ywc--button--outline__textTransform);
+  color: var(--ywc--button--outline__textColor);
+  border-width: var(--ywc--button--outline__borderThickness);
+  background-color: var(--ywc--button--outline__backgroundColor);
+  border-style: solid;
+  border-color: var(--ywc--button--outline__borderColor);
+  border-radius: var(--ywc--button--outline__borderRadius);
+  text-decoration: none;
+}
+
+.ywc-button--outline:hover,
+.cta-outline:hover {
+  color: var(--ywc--button--outline__hover--textColor);
+  background-color: var(--ywc--button--outline__hover--backgroundColor);
+  border-color: var(--ywc--button--outline__hover--borderColor);
+  border-width: var(--ywc--button--outline__hover--borderThickness);
+  text-decoration: none;
+}
+
+.ywc-button--outline:active,
+.cta-outline:active {
+  color: var(--ywc--button--outline__hover--textColor);
+  background-color:   ;
+  border-color:  #000620 ;
+  border-width: var(--ywc--button--outline__hover--borderThickness);
+  text-decoration: none;
+}
+
+/* Ghost button - first-class variant.
+   Transparent fill, label/border driven by the current text colour so it
+   reads correctly on whatever section surface it's placed on (light or
+   dark). Hover = subtle surface fill via color-mix on the current text
+   colour, again so the variant adapts to either scheme without per-scheme
+   overrides. Typography + radius reuse the primary-button tokens for
+   visual consistency with the rest of the variant set. Zero hardcoded
+   colours — all values resolve from theme tokens or `currentColor`. */
+
+.ywc-button--ghost,
+.cta-ghost {
+  font-family: var(--ywc--button--primary__font);
+  font-size: var(--ywc--button--primary__fontSize);
+  font-weight: var(--ywc--button--primary__fontWeight);
+  font-style: var(--ywc--button--primary__fontStyle);
+  letter-spacing: var(--ywc--button--primary__letterSpacing);
+  text-transform: var(--ywc--button--primary__textTransform);
+  color: currentColor;
+  background-color: transparent;
+  border-style: solid;
+  /* Ghost = "bordered transparent button" — the border is the variant's
+     defining feature, so a structural 1px width is fixed here rather than
+     borrowed from another variant's brand token (primary's borderThickness
+     is `0` for filled brands, which would erase the variant). */
+  border-width: 1px;
+  border-color: currentColor;
+  border-radius: var(--ywc--button--primary__borderRadius);
+  text-decoration: none;
+  transition: background-color var(--ywc--duration--fast, 150ms) var(--ywc--ease--cubic, ease),
+    color var(--ywc--duration--fast, 150ms) var(--ywc--ease--cubic, ease),
+    border-color var(--ywc--duration--fast, 150ms) var(--ywc--ease--cubic, ease);
+}
+
+.ywc-button--ghost:hover,
+.cta-ghost:hover,
+.ywc-button--ghost:active,
+.cta-ghost:active {
+  color: currentColor;
+  background-color: color-mix(in srgb, currentColor 10%, transparent);
+  border-color: currentColor;
+  text-decoration: none;
+}
+
+/* Custom button - all colors (base, hover, active) are injected as scoped
+   CSS by the component, so only structural styles belong here. */
+
+.ywc-button--custom {
+  font-family: var(--ywc--button--primary__font);
+  font-size: var(--ywc--button--primary__fontSize);
+  font-weight: var(--ywc--button--primary__fontWeight);
+  font-style: var(--ywc--button--primary__fontStyle);
+  letter-spacing: var(--ywc--button--primary__letterSpacing);
+  text-transform: var(--ywc--button--primary__textTransform);
+  border-style: solid;
+  border-radius: var(--ywc--button--primary__borderRadius);
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.ywc-button--custom:hover,
+.ywc-button--custom:active {
+  text-decoration: none;
+}
+
+.ywc-card--white {
+  border-radius: var(--ywc--card--variant1__borderRadius);
+  background-color: var(--ywc--card--variant1__backgroundColor);
+  color: var(--ywc--card--variant1__textColor);
+}
+
+.ywc-card--white a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ) {
+    color: var(--ywc--card--variant1--link__fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant1--link__textDecoration
+    );
+    text-decoration: var(--ywc--card--variant1--link__textDecoration);
+    text-decoration-color: var(
+      --ywc--card--variant1--link__textDecorationColor
+    );
+  }
+
+.ywc-card--white a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):hover,
+      .ywc-card--white a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):focus {
+    color: var(--ywc--card--variant1--link__hover--fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant1--link__hover--textDecoration
+    );
+    text-decoration: var(
+      --ywc--card--variant1--link__hover--textDecoration
+    );
+    text-decoration-color: var(
+      --ywc--card--variant1--link__hover--textDecorationColor
+    );
+  }
+
+.ywc-card--grey {
+  border-radius: var(--ywc--card--variant2__borderRadius);
+  background-color: var(--ywc--card--variant2__backgroundColor);
+  color: var(--ywc--card--variant2__textColor);
+}
+
+.ywc-card--grey a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ) {
+    color: var(--ywc--card--variant2--link__fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant2--link__textDecoration
+    );
+    text-decoration: var(--ywc--card--variant2--link__textDecoration);
+    text-decoration-color: var(
+      --ywc--card--variant2--link__textDecorationColor
+    );
+  }
+
+.ywc-card--grey a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):hover,
+      .ywc-card--grey a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):focus {
+    color: var(--ywc--card--variant2--link__hover--fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant2--link__hover--textDecoration
+    );
+    text-decoration: var(
+      --ywc--card--variant2--link__hover--textDecoration
+    );
+    text-decoration-color: var(
+      --ywc--card--variant2--link__hover--textDecorationColor
+    );
+  }
+
+.ywc-card--black {
+  border-radius: var(--ywc--card--variant3__borderRadius);
+  background-color: var(--ywc--card--variant3__backgroundColor);
+  color: var(--ywc--card--variant3__textColor);
+}
+
+.ywc-card--black a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ) {
+    color: var(--ywc--card--variant3--link__fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant3--link__textDecoration
+    );
+    text-decoration: var(--ywc--card--variant3--link__textDecoration);
+    text-decoration-color: var(
+      --ywc--card--variant3--link__textDecorationColor
+    );
+  }
+
+.ywc-card--black a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):hover,
+      .ywc-card--black a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):focus {
+    color: var(--ywc--card--variant3--link__hover--fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant3--link__hover--textDecoration
+    );
+    text-decoration: var(
+      --ywc--card--variant3--link__hover--textDecoration
+    );
+    text-decoration-color: var(
+      --ywc--card--variant3--link__hover--textDecorationColor
+    );
+  }
+
+.ywc-card--primary {
+  border-radius: var(--ywc--card--variant4__borderRadius);
+  background-color: var(--ywc--card--variant4__backgroundColor);
+  color: var(--ywc--card--variant4__textColor);
+}
+
+.ywc-card--primary a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ) {
+    color: var(--ywc--card--variant4--link__fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant4--link__textDecoration
+    );
+    text-decoration: var(--ywc--card--variant4--link__textDecoration);
+    text-decoration-color: var(
+      --ywc--card--variant4--link__textDecorationColor
+    );
+  }
+
+.ywc-card--primary a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):hover,
+      .ywc-card--primary a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):focus {
+    color: var(--ywc--card--variant4--link__hover--fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant4--link__hover--textDecoration
+    );
+    text-decoration: var(
+      --ywc--card--variant4--link__hover--textDecoration
+    );
+    text-decoration-color: var(
+      --ywc--card--variant4--link__hover--textDecorationColor
+    );
+  }
+
+.ywc-card--accent1 {
+  border-radius: var(--ywc--card--variant5__borderRadius);
+  background-color: var(--ywc--card--variant5__backgroundColor);
+  color: var(--ywc--card--variant5__textColor);
+}
+
+.ywc-card--accent1 a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ) {
+    color: var(--ywc--card--variant5--link__fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant5--link__textDecoration
+    );
+    text-decoration: var(--ywc--card--variant5--link__textDecoration);
+    text-decoration-color: var(
+      --ywc--card--variant5--link__textDecorationColor
+    );
+  }
+
+.ywc-card--accent1 a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):hover,
+      .ywc-card--accent1 a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):focus {
+    color: var(--ywc--card--variant5--link__hover--fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant5--link__hover--textDecoration
+    );
+    text-decoration: var(
+      --ywc--card--variant5--link__hover--textDecoration
+    );
+    text-decoration-color: var(
+      --ywc--card--variant5--link__hover--textDecorationColor
+    );
+  }
+
+.ywc-card--accent2 {
+  border-radius: var(--ywc--card--variant6__borderRadius);
+  background-color: var(--ywc--card--variant6__backgroundColor);
+  color: var(--ywc--card--variant6__textColor);
+}
+
+.ywc-card--accent2 a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ) {
+    color: var(--ywc--card--variant6--link__fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant6--link__textDecoration
+    );
+    text-decoration: var(--ywc--card--variant6--link__textDecoration);
+    text-decoration-color: var(
+      --ywc--card--variant6--link__textDecorationColor
+    );
+  }
+
+.ywc-card--accent2 a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):hover,
+      .ywc-card--accent2 a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):focus {
+    color: var(--ywc--card--variant6--link__hover--fontColor);
+    -webkit-text-decoration: var(
+      --ywc--card--variant6--link__hover--textDecoration
+    );
+    text-decoration: var(
+      --ywc--card--variant6--link__hover--textDecoration
+    );
+    text-decoration-color: var(
+      --ywc--card--variant6--link__hover--textDecorationColor
+    );
+  }
+
+.ywc-card--custom {
+  border-radius: var(--ywc--card__borderRadius);
+  background-color: var(--ywc--card--custom__backgroundColor, var(--ywc--color--white));
+  color: var(--ywc--card--custom__textColor, inherit);
+}
+
+.ywc-card--custom h1,
+  .ywc-card--custom h2,
+  .ywc-card--custom h3,
+  .ywc-card--custom h4,
+  .ywc-card--custom h5,
+  .ywc-card--custom h6 {
+    color: var(--ywc--card--custom__headingColor, inherit);
+  }
+
+.ywc-card--custom a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ) {
+    color: var(--ywc--card--custom__textColor, inherit);
+    -webkit-text-decoration: underline;
+    text-decoration: underline;
+  }
+
+.ywc-card--custom a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):hover,
+      .ywc-card--custom a:not(
+      .ywc-button,
+      .cta-primary,
+      .cta-secondary,
+      .cta-tertiary,
+      .cta-accent,
+      .cta-outline,
+      .ywc-blog-listing__pagination-link,
+      .ywc-card--blog__link
+    ):focus {
+    opacity: 0.8;
+  }
+
+/* Form */
+
+.hs-form,
+.ywc-system-form form,
+.ywc-system-form--subscription-preferences form .email-prefs {
+  padding: var(--ywc--form__padding);
+  border-color: var(--ywc--form__borderColor);
+  border-radius: var(--ywc--form__borderRadius);
+  border-style: solid;
+  border-width: var(--ywc--form__borderThickness);
+  background: var(--ywc--form__backgroundColor);
+}
+
+/* Form labels */
+
+:is(.hs-form, .ywc-system-form) label,
+.ywc-system-form--subscription-preferences .fakelabel {
+  display: block;
+  color: var(--ywc--formLabel__textColor);
+  font-family: var(--ywc--formLabel__font);
+  font-size: var(--ywc--formLabel__fontSize);
+  font-weight: var(--ywc--formLabel__fontWeight);
+  letter-spacing: var(--ywc--formLabel__letterSpacing);
+  text-transform: var(--ywc--formLabel__textTransform);
+  margin-block-end: var(--ywc--formLabel__marginBottom);
+}
+
+/* Form fields */
+
+.hs-form .hs-form-field {
+  margin-block-end: var(--ywc--formField__marginBottom);
+}
+
+:is(.hs-form, .ywc-system-form) input[type='text'],
+:is(.hs-form, .ywc-system-form) input[type='email'],
+:is(.hs-form, .ywc-system-form) input[type='password'],
+:is(.hs-form, .ywc-system-form) input[type='tel'],
+:is(.hs-form, .ywc-system-form) input[type='number'],
+:is(.hs-form, .ywc-system-form) input[type='search'],
+:is(.hs-form, .ywc-system-form) select,
+:is(.hs-form, .ywc-system-form) textarea {
+  width: 100% !important;
+  border-radius: var(--ywc--formField__borderRadius);
+  border-top: var(--ywc--formField__borderTop);
+  border-right: var(--ywc--formField__borderRight);
+  border-bottom: var(--ywc--formField__borderBottom);
+  border-left: var(--ywc--formField__borderLeft);
+  background-color: var(--ywc--formField__backgroundColor);
+  color: var(--ywc--formFieldInput__textColor);
+  padding-block: var(--ywc--spacing--16);
+  padding-inline: var(--ywc--spacing--12);
+}
+
+.hs-input.hs-fieldtype-intl-phone {
+  display: flex;
+  width: 100% !important;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px; /* matches column margins from form injection */
+}
+
+.hs-input.hs-fieldtype-intl-phone > input {
+  flex: 1 0 calc(70% - 8px) !important;
+}
+
+.hs-input.hs-fieldtype-intl-phone > select {
+  flex: 1 0 30% !important;
+}
+
+@media (max-width: 600px) {
+  .hs-input.hs-fieldtype-intl-phone {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .hs-input.hs-fieldtype-intl-phone > select,
+  .hs-input.hs-fieldtype-intl-phone > input {
+    min-width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .hs-input.hs-fieldtype-intl-phone > select {
+    padding-inline: var(--ywc--spacing--16);
+  }
+}
+
+.hs-form-field.hs-fieldtype-file .hs-input,
+.hs-form fieldset {
+  max-width: 100% !important;
+}
+
+/* Form fields - textarea */
+
+.hs-form textarea {
+  position: relative;
+  height: 160px;
+  border-radius: var(--ywc--formFieldTextArea__borderRadius);
+}
+
+.hs-form textarea::-webkit-resizer {
+  display: none;
+}
+
+.hs-form .hs_multi_line_field .input {
+  position: relative;
+}
+
+.hs-form .hs_multi_line_field .input:after {
+  position: absolute;
+  right: var(--ywc--spacing--8);
+  bottom: var(--ywc--spacing--8);
+  content: var(--ywc--formField__dragIcon);
+  pointer-events: none;
+}
+
+/* Form fields - select */
+
+.hs-form .hs-fieldtype-select .input {
+  position: relative;
+}
+
+.hs-form select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.hs-form .hs-fieldtype-select .input:after {
+  position: absolute;
+  top: 50%;
+  right: var(--ywc--spacing--32);
+  content: var(--ywc--formField__selectIcon);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+/* Form fields - datepicker */
+
+.hs-form .hs-dateinput {
+  position: relative;
+}
+
+.hs-form .hs-dateinput:before {
+  position: absolute;
+  top: 50%;
+  right: var(--ywc--spacing--32);
+  content: var(--ywc--formField__datepickerIcon);
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+/* Form fields - placeholders */
+
+::-moz-placeholder {
+  color: var(--ywc--formFieldPlaceholder__textColor);
+}
+
+::placeholder {
+  color: var(--ywc--formFieldPlaceholder__textColor);
+}
+
+/* Form fields - checkbox/radio */
+
+.hs-form .inputs-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.hs-form .inputs-list li {
+  display: block;
+  margin-block-end: var(--ywc--spacing--16);
+}
+
+.hs-form .inputs-list li:last-of-type {
+  margin-block-end: 0;
+}
+
+.hs-form .inputs-list :is(input, span) {
+  vertical-align: middle;
+}
+
+:is(.hs-form, .ywc-system-form) input[type='checkbox'],
+:is(.hs-form, .ywc-system-form) input[type='radio'] {
+  height: var(--ywc--formFieldCheckboxRadio__size);
+  width: var(--ywc--formFieldCheckboxRadio__size) !important;
+  accent-color: var(--ywc--formFieldCheckboxRadio__fillColor);
+  cursor: pointer;
+  margin-inline-end: var(--ywc--spacing--12);
+}
+
+/* Radio buttons - pill style (new form system) */
+
+.hsfc-RadioFieldGroup__Options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hsfc-RadioFieldGroup__Options .hsfc-FieldLabel {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--ywc--surface__borderColor);
+  background-color: var(--ywc--surface__backgroundColor);
+  color: var(--ywc--surface__textColor);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  cursor: pointer;
+  transition: background-color 0.15s linear, border-color 0.15s linear;
+  white-space: nowrap;
+  margin-block-end: 0;
+}
+
+.hsfc-RadioFieldGroup__Options .hsfc-RadioInput {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+}
+
+.hsfc-RadioFieldGroup__Options .hsfc-FieldLabel:hover {
+  background-color: var(--ywc--surface__subtleSurfaceColor);
+}
+
+.hsfc-RadioFieldGroup__Options .hsfc-FieldLabel:has(.hsfc-RadioInput:checked) {
+  background-color: var(--ywc--surface__subtleSurfaceColor);
+  border-color: var(--ywc--surface__subtleSurfaceColor);
+}
+
+/* Radio buttons - pill style (legacy form system) */
+
+.hs-form .hs-fieldtype-radio .inputs-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hs-form .hs-fieldtype-radio .inputs-list li {
+  margin-block-end: 0;
+}
+
+.hs-form .hs-fieldtype-radio .inputs-list li label {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 9999px;
+  border: 1px solid var(--ywc--surface__borderColor);
+  background-color: var(--ywc--surface__backgroundColor);
+  color: var(--ywc--surface__textColor);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 18px;
+  cursor: pointer;
+  transition: background-color 0.15s linear, border-color 0.15s linear;
+  white-space: nowrap;
+}
+
+.hs-form .hs-fieldtype-radio .inputs-list li label input[type='radio'] {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  border: 0 !important;
+}
+
+.hs-form .hs-fieldtype-radio .inputs-list li label:hover {
+  background-color: var(--ywc--surface__subtleSurfaceColor);
+}
+
+.hs-form .hs-fieldtype-radio .inputs-list li label:has(input[type='radio']:checked) {
+  background-color: var(--ywc--surface__subtleSurfaceColor);
+  border-color: var(--ywc--surface__subtleSurfaceColor);
+}
+
+/* Form help text */
+
+.hs-form legend {
+  /* To do: figure out where we should pull this from */
+  color: var(--ywc--formHelpText__textColor);
+  margin-block-end: var(--ywc--spacing--8);
+}
+
+/* Form rich text */
+
+.hs-form .hs-richtext {
+  color: var(--ywc--formLabel__textColor);
+}
+
+.hs-form .hs-richtext img {
+  height: auto;
+  max-width: 100% !important;
+}
+
+/* Form error messages */
+
+.hs-form .hs-input.error {
+  border-color: var(--ywc--formRequired__color);
+}
+
+.hs-form .hs-error-msg,
+.hs-form .hs-error-msgs {
+  color: var(--ywc--formRequired__color);
+  margin-block-start: var(--ywc--spacing--4);
+}
+
+/* Form button */
+
+:is(.hs-form, .ywc-system-form) .hs-button,
+:is(.hs-form, .ywc-system-form) input[type='submit'] {
+  display: inline-block;
+  width: 100%;
+  border-color: var(--ywc--button--primary__borderColor);
+  border-radius: var(--ywc--button--primary__borderRadius);
+  border-style: solid;
+  border-width: var(--ywc--button--primary__borderThickness);
+  background-color: var(--ywc--button--primary__backgroundColor);
+  color: var(--ywc--button--primary__textColor);
+  cursor: pointer;
+  font-family: var(--ywc--button--primary__font);
+  font-size: var(--ywc--button--primary__fontSize);
+  font-style: var(--ywc--button--primary__fontStyle);
+  font-weight: var(--ywc--button--primary__fontWeight);
+  padding-block: var(--ywc--spacing--20);
+  padding-inline: var(--ywc--spacing--24);
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.15s linear;
+  white-space: normal !important;
+}
+
+:is(.hs-form, .ywc-system-form) .hs-button:hover,
+:is(.hs-form, .ywc-system-form) .hs-button:focus,
+:is(.hs-form, .ywc-system-form) input[type='submit']:hover,
+:is(.hs-form, .ywc-system-form) input[type='submit']:focus {
+  border-color: var(--ywc--button--primary__hover--borderColor);
+  border-width: var(--ywc--button--primary__hover--borderThickness);
+  background-color: var(--ywc--button--primary__hover--backgroundColor);
+  color: var(--ywc--button--primary__hover--textColor);
+  text-decoration: none;
+}
+
+/* Captcha */
+
+.grecaptcha-badge {
+  margin-block: 0;
+  margin-inline: auto;
+}
+
+/* Components */
+
+/* Header wrapper - no height so first section shows under navbar */
+
+.ywc-header {
+  position: relative;
+  z-index: 1000;
+  height: 0;
+  overflow: visible;
+  pointer-events: none; /* Allow clicks to pass through to content below */
+}
+
+.ywc-header > * {
+  pointer-events: auto; /* Re-enable pointer events on children */
+}
+
+/*
+ * Keep the global header on the same horizontal contract as body sections.
+ * The DnD wrapper supplies the theme gutter; SiteHeader itself keeps its
+ * non-floating inner inline padding at 0 so content edges line up.
+ */
+
+.ywc-header .dnd-section {
+  background-color: transparent !important;
+  padding-block: 0 !important;
+  padding-inline: var(--ywc--section--horizontalPadding, 0) !important;
+  overflow: visible !important;
+}
+
+.ywc-header .dnd-column {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+
+/* Landing page header variant - static positioning, centered logo, transparent */
+
+.ywc-header--landing {
+  height: auto;
+  padding: 0;
+}
+
+.ywc-header--landing .row-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ywc-header--landing .row-fluid > * {
+  float: none;
+  width: auto;
+}
+
+/* Navigation skipper */
+
+.ywc-header__skip {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  text-align: left;
+}
+
+.ywc-header__skip:hover,
+.ywc-header__skip:focus,
+.ywc-header__skip:active {
+  z-index: 2;
+  top: 0;
+  left: 0;
+  overflow: visible;
+  height: auto;
+  width: auto;
+}
+
+/*
+  TODO: Move this code to the MenuComponent styled-component code -- keeping it here to prevent conflicts with open Menu PRs
+  TODO: Remove this file and its references from main.hubl.css
+*/
+
+@media (max-width: 767px) {
+  .ywc-footer .ywc-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/*
+  Spacing variables are:
+  --ywc--menuItem__padding
+  --ywc--menuItem__margin
+  --ywc--menu--topLevel__gap
+  --ywc--flyoutSubMenu__top
+  --ywc--flyoutSubMenu__left
+  --ywc--flyoutSubMenu__right
+  --ywc--flyoutSubMenu__bottom
+  --ywc--firstFlyoutMenu__top
+  --ywc--firstFlyoutMenu__left
+  --ywc--firstFlyoutMenu__right
+  --ywc--firstFlyoutMenu__bottom
+ */
+
+.ywc-menu {
+  display: flex;
+}
+
+.ywc-menu,
+.ywc-menu ul {
+  list-style: none;
+}
+
+.ywc-menu li {
+  position: relative;
+}
+
+/* Reset global prose spacing (`ul > li + li { margin-block-start }`) on
+   horizontal menus only — items sit on a single row, so the prose margin
+   would shift non-first items down the cross axis and make the first item
+   look raised. Vertical and submenu lists keep the prose margin for their
+   inter-item spacing. */
+
+.ywc-menu--horizontal > li {
+  margin-block-start: 0;
+}
+
+.ywc-menu--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.ywc-menu--vertical {
+  flex-direction: column;
+}
+
+.ywc-menu {
+  gap: var(--ywc--menu--topLevel__gap, 0);
+}
+
+.ywc-menu--desktop {
+  margin: 0;
+}
+
+.ywc-menu__flyout-submenu {
+  min-width: -moz-max-content;
+  min-width: max-content;
+  max-width: 250px;
+  white-space: nowrap;
+  overflow-wrap: break-word;
+  padding: 20px;
+  border: 1px solid var(--ywc--surface__borderColor);
+  border-radius: 8px;
+  background-color: var(--ywc--surface__backgroundColor);
+}
+
+.logo-company-name {
+  margin-block: 0;
+}
+
+/* Offsets margin on ul element inside default image grid */
+
+.hs-image__grid__list {
+  margin-block: 0;
+}
+
+/* Logo responsive styling */
+
+.widget-type-logo img {
+  height: auto;
+  max-width: 100%;
+}
+
+/* Preset-specific styles */
+
+/* Onyx preset specific styles */
+
+  
+
+ 
